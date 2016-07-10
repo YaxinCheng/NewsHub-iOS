@@ -6,10 +6,10 @@
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum NewsSource: String {
-	case All
+	case All = ""
 	case Metro = "metro"
 	case Chronicle = "chronicle"
 	
@@ -22,5 +22,16 @@ enum NewsSource: String {
 		default:
 			return ""
 		}
+	}
+	
+	static var available: [NewsSource] {
+		return [.Metro, .Chronicle]
+	}
+	
+	var logo: UIImage {
+		if self == .All {
+			return UIImage()
+		}
+		return UIImage(named: self.rawValue)!
 	}
 }

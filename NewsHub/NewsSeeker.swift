@@ -22,15 +22,13 @@ struct NewsSeeker: NewsLoader	{
 		let normal = json["normal"] as? [NSDictionary] ?? []
 		NewsHub.sharedHub.headlines = headline.map { News(with: $0) }
 		NewsHub.sharedHub.normalNews = normal.map { News(with: $0) }
+		let centre = NSNotificationCenter.defaultCenter()
+		let notification = NSNotification(name: Common.newsRefreshDidFinish, object: nil)
+		centre.postNotification(notification)
 	}
 	
-	func loadNews(from source: NewsSource) {
-		switch source {
-		case .All:
-			sendRequest()
-		default:
-			sendRequest(with: ["endPoint": "/\(source.rawValue)"])
-		}
+	func loadNews(from source: NewsSource = .All) {
+		sendRequest(from: source)
 	}
 }
 

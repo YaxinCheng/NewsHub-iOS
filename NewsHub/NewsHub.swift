@@ -23,7 +23,4 @@ struct NewsHub {
 		normalNews = []
 	}
 	
-	func filter(from source: NewsSource) -> [News] {
-		return news.filter { $0.source == source }
-	}
 }

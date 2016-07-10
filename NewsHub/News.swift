@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct News: Hashable, Equatable {
 	var title: String
@@ -15,6 +15,9 @@ struct News: Hashable, Equatable {
 	let source: NewsSource
 	var date: NSDate?
 	var imageLink: String?
+	var image: UIImage?
+	private var imageLoaded = false
+	static var imageLoader = NewsImageLoader()
 	
 	var hashValue: Int {
 		return contentLink.hash
@@ -30,6 +33,27 @@ struct News: Hashable, Equatable {
 			let dateFmt = NSDateFormatter()
 			dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
 			self.date = dateFmt.dateFromString(date)
+		}
+	}
+	
+	var hasImage: Bool {
+		return imageLink?.isEmpty ?? false
+	}
+	
+	func downloadImage(completion: (news: News?) -> Void) {
+		if imageLoaded == true {
+			completion(news: self)
+		} else {
+			News.imageLoader.loadThumbnail(from: self) { (image, error) in
+				if error != nil {
+					completion(news: nil)
+				} else {
+					var loadedNews = self
+					loadedNews.image = image
+					loadedNews.imageLoaded = true
+					completion(news: loadedNews)
+				}
+			}
 		}
 	}
 }

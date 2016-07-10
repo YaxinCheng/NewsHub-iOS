@@ -12,18 +12,22 @@ class NewsHeadlineCell: UITableViewCell {
 
 	@IBOutlet weak var collectionView: UICollectionView!
 	
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-			
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		// Initialization code
+		let centre = NSNotificationCenter.defaultCenter()
+		centre.addObserver(self, selector: #selector(newsDidRefresh), name: Common.newsRefreshDidFinish, object: nil)
+	}
+	
+	override func setSelected(selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
+		
+		// Configure the view for the selected state
+	}
+	
+	func newsDidRefresh(notification: NSNotification) {
+		collectionView.reloadData()
+	}
 }
 
 extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -32,14 +36,20 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 3
+		return NewsHub.sharedHub.headlines.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Common.headCollectionCellIdentifier, forIndexPath: indexPath) as? NewsHeadlineContentCell {
-			cell.titleLabel.text = "Whatever"
-			cell.sourceLabel.text = "None"
-			cell.imageView.image = UIImage(named: "example.jpg")
+			let news = NewsHub.sharedHub.headlines[indexPath.row]
+			cell.titleLabel.text = news.title
+			cell.sourceLabel.text = news.source.rawValue
+			news.downloadImage { (news) in
+				if let loadedNews = news {
+					NewsHub.sharedHub.headlines[indexPath.row] = loadedNews
+					cell.imageView.image = loadedNews.image
+				}
+			}
 			return cell
 		}
 		return UICollectionViewCell()

@@ -12,6 +12,7 @@ class NewsHeadlineContentCell: UICollectionViewCell {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var sourceLabel: UILabel!
 	@IBOutlet weak var imageView: UIImageView!
+	var loadedImage: Bool = false
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()

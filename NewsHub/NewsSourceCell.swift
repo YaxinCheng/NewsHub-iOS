@@ -30,12 +30,12 @@ extension NewsSourceCell: UICollectionViewDataSource, UICollectionViewDelegate, 
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 4
+		return NewsSource.available.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Common.sourceCollectionCellIdentifier, forIndexPath: indexPath) as? NewsSourceContentCell {
-			cell.imageView.image = UIImage(named: "metro")
+			cell.imageView.image = NewsSource.available[indexPath.row].logo
 			return cell
 		}
 		return UICollectionViewCell()

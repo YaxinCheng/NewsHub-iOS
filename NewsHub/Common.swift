@@ -23,4 +23,10 @@ struct Common {
 	static let headCollectionCellIdentifier = "headlineContentCell"
 	static let sourceIdentifier = "sourceCell"
 	static let sourceCollectionCellIdentifier = "sourceContentCell"
+	static let FnewsNormalIdentifier = "NewsNormalCellF"
+	static let newsNormalIdentifier = "NewsNormalCell"
+	static let FnewsNoImageIdentifier = "NewsNoImageCellF"
+	static let newsNoImageIdentifier = "NewsNoImageCell"
+	static let segueNewsDetailsIdentifier = "showNewsDetails"
+	static let newsRefreshDidFinish = "NewsRefreshDidFinish"
 }

@@ -13,7 +13,7 @@ protocol NewsLoader {
 	var api: String { get }
 	var endPoint: String { get }
 	
-	func sendRequest(method: Alamofire.Method, with parameters: [String: String])
+	func sendRequest(method: Alamofire.Method, with parameters: [String: String],from source: NewsSource)
 	func process(json: NSDictionary, error: NSError?)
 }
 
@@ -22,14 +22,12 @@ extension NewsLoader {
 		return "https://hubnews.herokuapp.com"
 	}
 	
-	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:]) {
+	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All) {
 		let request: Request
-		if parameters.isEmpty {
-			request = Alamofire.request(method, api + endPoint)
-		} else if method == .POST {
-			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON)
+		if method == .GET {
+			request = Alamofire.request(method, api + endPoint + source.rawValue)
 		} else {
-			request = Alamofire.request(method, api + endPoint + parameters["endPoint"]!)
+			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON)
 		}
 		request.responseJSON { (response) in
 			switch response.result {
