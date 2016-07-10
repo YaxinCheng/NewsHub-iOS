@@ -64,43 +64,54 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		case 0, 1, 2:
 			return 1
 		default:
-			return 2
+			return NewsHub.sharedHub.normalNews.count
 		}
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		switch (indexPath.section, indexPath.row) {
-		case (0, _):
+		switch indexPath.section  {
+		case 0:
 			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
 				return UITableViewCell()
 			}
 			cell.dateLabel.text = NSDate().formatDate().uppercaseString
 			cell.titleLabel.text = "News"
 			return cell
-		case (1, _):
+		case 1:
 			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headlinesIdentifier) as? NewsHeadlineCell else {
 				return UITableViewCell()
 			}
 			return cell
-		case (2, _):
+		case 2:
 			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.sourceIdentifier) as? NewsSourceCell else {
 				return UITableViewCell()
 			}
 			return cell
-		case (3, 0):
+		case 3:
 			let news = NewsHub.sharedHub.normalNews[indexPath.row]
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.FnewsNormalIdentifier) as? NewsNormalCell else {
+			news.downloadImage { [unowned self] (news) in
+				if let loadedNews = news {
+					if NewsHub.sharedHub.normalNews[indexPath.row] != loadedNews {
+						NewsHub.sharedHub.normalNews[indexPath.row] = loadedNews
+						self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+					}
+				}
+			}
+			let identifier: String
+			if indexPath.row == 0 {
+				identifier = news.image == nil ? Common.FnewsNoImageIdentifier : Common.FnewsNormalIdentifier
+			} else {
+				identifier = news.image == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
+			}
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) else {
 				return UITableViewCell()
 			}
-			cell.newsImageView.image = UIImage(named: "example.jpg")
-			cell.titleLabel.text = "Justin Trudau"
-			return cell
-		case (3,_):
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else {
-				return UITableViewCell()
+			if let image = news.image {
+				(cell as! NewsNormalCell).newsImageView.image = image
+				(cell as! NewsNormalCell).titleLabel.text = news.title
+			} else {
+				(cell as! NewsNoImageCell).titleLabel.text = news.title
 			}
-			cell.newsImageView.image = UIImage(named: "example.jpg")
-			cell.titleLabel.text = "Justin Trudau"
 			return cell
 		default:
 			return UITableViewCell()
@@ -108,17 +119,15 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		switch (indexPath.section, indexPath.row) {
-		case (0, _):
+		switch indexPath.section  {
+		case 0:
 			return 70
-		case (1, _):
+		case 1:
 			return 300
-		case (2, _):
+		case 2:
 			return 162
-		case (3, 0):
-			return 143
-		case (3, _):
-			return 119
+		case 3:
+			return indexPath.row == 0 ? 134 : 110
 		default:
 			return UITableViewAutomaticDimension
 		}

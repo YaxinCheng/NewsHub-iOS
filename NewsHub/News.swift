@@ -59,5 +59,5 @@ struct News: Hashable, Equatable {
 }
 
 func == (lhs: News, rhs: News) -> Bool {
-	return lhs.contentLink == rhs.contentLink
+	return lhs.contentLink == rhs.contentLink && lhs.imageLoaded == rhs.imageLoaded && lhs.image == rhs.image
 }
