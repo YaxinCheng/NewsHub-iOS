@@ -63,13 +63,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIGHLIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-5N-vpo">
-                                                    <rect key="frame" x="20" y="8" width="80" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="20" y="8" width="131" height="29"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rwY-Ew-xhE">
-                                                    <rect key="frame" x="0.0" y="33" width="600" height="266"/>
+                                                    <rect key="frame" x="0.0" y="45" width="600" height="254"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rBe-bn-cLW">
                                                         <size key="itemSize" width="474" height="258"/>
@@ -79,26 +78,26 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headlineContentCell" id="4hv-7M-Bkr" customClass="NewsHeadlineContentCell" customModule="NewsHub" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="4" width="474" height="258"/>
+                                                            <rect key="frame" x="0.0" y="-2" width="474" height="258"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="474" height="258"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqH-cq-Mu4">
-                                                                        <rect key="frame" x="20" y="0.0" width="450" height="30"/>
-                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                                        <rect key="frame" x="20" y="0.0" width="450" height="24"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-TA-0Pj">
-                                                                        <rect key="frame" x="20" y="30" width="450" height="24"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <rect key="frame" x="20" y="24" width="450" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K2i-Ru-wAr">
-                                                                        <rect key="frame" x="20" y="54" width="450" height="196"/>
+                                                                        <rect key="frame" x="20" y="42" width="450" height="208"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -155,21 +154,21 @@
                                             <outlet property="collectionView" destination="rwY-Ew-xhE" id="nEj-FJ-MdS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="162" id="hzQ-io-IxU" customClass="NewsSourceCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="403" width="600" height="162"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="178" id="hzQ-io-IxU" customClass="NewsSourceCell" customModule="NewsHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="403" width="600" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hzQ-io-IxU" id="MvE-u0-fVZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="161"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="177"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOURCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3k-Wr-wDn">
-                                                    <rect key="frame" x="20" y="8" width="60" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="20" y="8" width="99" height="29"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="004-ie-VKE">
-                                                    <rect key="frame" x="0.0" y="33" width="600" height="120"/>
+                                                    <rect key="frame" x="0.0" y="45" width="600" height="124"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bv2-ka-u7G">
                                                         <size key="itemSize" width="235" height="119"/>
@@ -179,7 +178,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sourceContentCell" id="q6z-mS-lY5" customClass="NewsSourceContentCell" customModule="NewsHub" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="1" width="235" height="119"/>
+                                                            <rect key="frame" x="0.0" y="3" width="235" height="119"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="235" height="119"/>
@@ -222,7 +221,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NewsNoImageCellF" rowHeight="105" id="ph6-pz-jil" customClass="NewsNoImageCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="565" width="600" height="105"/>
+                                        <rect key="frame" x="0.0" y="581" width="600" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ph6-pz-jil" id="Xk8-fP-MX2">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="104"/>
@@ -260,7 +259,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NewsNormalCellF" rowHeight="134" id="9IY-id-0hL" customClass="NewsNormalCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="670" width="600" height="134"/>
+                                        <rect key="frame" x="0.0" y="686" width="600" height="134"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9IY-id-0hL" id="kjc-lP-OZx">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
@@ -320,7 +319,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NewsNormalCell" rowHeight="110" id="NoR-xP-zMa" customClass="NewsNormalCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="804" width="600" height="110"/>
+                                        <rect key="frame" x="0.0" y="820" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NoR-xP-zMa" id="Rzg-Aa-vFf">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
@@ -369,7 +368,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NewsNoImageCell" rowHeight="94" id="tEc-4s-u2T" customClass="NewsNoImageCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="914" width="600" height="94"/>
+                                        <rect key="frame" x="0.0" y="930" width="600" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tEc-4s-u2T" id="wRb-Pe-lal">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
@@ -397,6 +396,26 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="7aM-mK-4tS" id="1R4-Bh-3jX"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="moreHeaderCell" rowHeight="36" id="tfb-Ha-4oj" customClass="moreHeaderCell" customModule="NewsHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1024" width="600" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfb-Ha-4oj" id="fdm-kj-RmD">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30f-DZ-L2a">
+                                                    <rect key="frame" x="20" y="8" width="73" height="30"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="topMargin" secondItem="30f-DZ-L2a" secondAttribute="top" id="VkD-bd-FrV"/>
+                                                <constraint firstItem="30f-DZ-L2a" firstAttribute="leading" secondItem="fdm-kj-RmD" secondAttribute="leadingMargin" constant="12" id="jwc-gp-Uyy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

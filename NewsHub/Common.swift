@@ -29,4 +29,5 @@ struct Common {
 	static let newsNoImageIdentifier = "NewsNoImageCell"
 	static let segueNewsDetailsIdentifier = "showNewsDetails"
 	static let newsRefreshDidFinish = "NewsRefreshDidFinish"
+	static let moreHeaderCellIdentifier = "moreHeaderCell"
 }

@@ -1,24 +1,19 @@
 //
-//  NewsNormalCell.swift
+//  moreHeaderCell.swift
 //  NewsHub
 //
-//  Created by Yaxin Cheng on 2016-07-08.
+//  Created by Yaxin Cheng on 2016-07-12.
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
 import UIKit
 
-class NewsNormalCell: UITableViewCell, NewsCell {
+class moreHeaderCell: UITableViewCell {
 
-	@IBOutlet weak var newsImageView: UIImageView!
-	@IBOutlet weak var titleLabel: UILabel!
-	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-			newsImageView.layer.cornerRadius = 5
-			newsImageView.layer.masksToBounds = true
-			newsImageView.clipsToBounds = true
+			separatorInset = UIEdgeInsets(top: 0, left: self.bounds.size.width, bottom: 0, right: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

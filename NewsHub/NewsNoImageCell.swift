@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsNoImageCell: UITableViewCell {
+class NewsNoImageCell: UITableViewCell, NewsCell {
 
 	@IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {

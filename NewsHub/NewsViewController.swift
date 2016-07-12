@@ -56,12 +56,12 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 4
+		return 5
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
-		case 0, 1, 2:
+		case 0, 1, 2, 3:
 			return 1
 		default:
 			return NewsHub.sharedHub.normalNews.count
@@ -77,17 +77,14 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			cell.dateLabel.text = NSDate().formatDate().uppercaseString
 			cell.titleLabel.text = "News"
 			return cell
-		case 1:
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headlinesIdentifier) as? NewsHeadlineCell else {
+		case 1, 2, 3:
+			let identifiers = [Common.headlinesIdentifier, Common.sourceIdentifier, Common.moreHeaderCellIdentifier]
+			let identifier: String = identifiers[indexPath.section - 1]
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) else {
 				return UITableViewCell()
 			}
 			return cell
-		case 2:
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.sourceIdentifier) as? NewsSourceCell else {
-				return UITableViewCell()
-			}
-			return cell
-		case 3:
+		case 4:
 			let news = NewsHub.sharedHub.normalNews[indexPath.row]
 			news.downloadImage { [unowned self] (news) in
 				if let loadedNews = news {
@@ -108,10 +105,8 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			}
 			if let image = news.image {
 				(cell as! NewsNormalCell).newsImageView.image = image
-				(cell as! NewsNormalCell).titleLabel.text = news.title
-			} else {
-				(cell as! NewsNoImageCell).titleLabel.text = news.title
 			}
+			(cell as! NewsCell).titleLabel.text = news.title
 			return cell
 		default:
 			return UITableViewCell()
@@ -125,8 +120,10 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		case 1:
 			return 300
 		case 2:
-			return 162
+			return 178
 		case 3:
+			return 36
+		case 4:
 			return indexPath.row == 0 ? 134 : 110
 		default:
 			return UITableViewAutomaticDimension
@@ -134,7 +131,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if indexPath.section == 3 {
+		if indexPath.section == 4 {
 			performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: self)
 		}
 	}
