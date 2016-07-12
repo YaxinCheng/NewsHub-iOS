@@ -18,6 +18,7 @@ class NewsNormalCell: UITableViewCell {
         // Initialization code
 			newsImageView.layer.cornerRadius = 5
 			newsImageView.layer.masksToBounds = true
+			newsImageView.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
