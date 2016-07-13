@@ -44,6 +44,7 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 			let news = NewsHub.sharedHub.headlines[indexPath.row]
 			cell.titleLabel.text = news.title
 			cell.sourceLabel.text = news.source.rawValue
+			cell.imageView.image = news.source.placeHolder
 			news.downloadImage { (news) in
 				if let loadedNews = news {
 					NewsHub.sharedHub.headlines[indexPath.row] = loadedNews
@@ -56,7 +57,7 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		return CGSize(width: UIScreen.mainScreen().bounds.width * 46 / 50, height: collectionView.bounds.height - 6)
+		return CGSize(width: 294.4, height: collectionView.bounds.height - 6)
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

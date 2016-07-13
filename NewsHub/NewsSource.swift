@@ -34,4 +34,8 @@ enum NewsSource: String {
 		}
 		return UIImage(named: self.rawValue)!
 	}
+	
+	var placeHolder: UIImage {
+		return UIImage(named: self.rawValue + "Placeholder")!
+	}
 }

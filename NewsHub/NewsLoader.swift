@@ -13,21 +13,22 @@ protocol NewsLoader {
 	var api: String { get }
 	var endPoint: String { get }
 	
-	func sendRequest(method: Alamofire.Method, with parameters: [String: String],from source: NewsSource)
+	func sendRequest(method: Alamofire.Method, with parameters: [String: String],from source: NewsSource, at page: Int)
 	func process(json: NSDictionary, error: NSError?)
 }
 
 extension NewsLoader {
 	var api: String {
-		return "https://hubnews.herokuapp.com"
+//		return "https://hubnews.herokuapp.com"
+		return "http://localhost:8000"
 	}
 	
-	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All) {
+	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
 		let request: Request
 		if method == .GET {
-			request = Alamofire.request(method, api + endPoint + source.rawValue)
+			request = Alamofire.request(method, api + endPoint + source.rawValue, headers: ["page": "\(page)"])
 		} else {
-			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON)
+			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON, headers: ["page": "\(page)"])
 		}
 		request.responseJSON { (response) in
 			switch response.result {

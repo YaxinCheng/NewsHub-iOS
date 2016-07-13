@@ -12,6 +12,7 @@ class headerCell: UITableViewCell {
 	
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var settingButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +25,14 @@ class headerCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+	@IBAction func settingPressed(sender: AnyObject) {
+		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+		animation.duration = 0.2
+		animation.repeatCount = 1
+		animation.fromValue = 0
+		animation.toValue = M_PI / 2
+		animation.removedOnCompletion = false
+		animation.fillMode = kCAFillModeForwards
+		(sender as! UIButton).layer.addAnimation(animation, forKey: "rotate")
+	}
 }

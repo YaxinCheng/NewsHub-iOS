@@ -12,15 +12,10 @@ struct NewsHub {
 	static var sharedHub = NewsHub()
 	
 	var headlines: [News]
-	var normalNews: [News]
-	
-	var news: [News] {
-		return headlines + normalNews
-	}
+	var taggedNews: NewsList
 	
 	private init() {
 		headlines = []
-		normalNews = []
+		taggedNews = NewsList()
 	}
-	
 }

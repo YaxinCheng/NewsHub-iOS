@@ -16,6 +16,7 @@ struct News: Hashable, Equatable {
 	var date: NSDate?
 	var imageLink: String?
 	var image: UIImage?
+	let tag: String
 	private var imageLoaded = false
 	static var imageLoader = NewsImageLoader()
 	
@@ -29,6 +30,7 @@ struct News: Hashable, Equatable {
 		contentLink = json["_id"] as! String
 		source = NewsSource(rawValue: json["source"] as! String)!
 		imageLink = json["img"] as? String
+		tag = json["tag"] as! String
 		if let date = json["date"] as? String {
 			let dateFmt = NSDateFormatter()
 			dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
