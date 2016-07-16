@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--News Content View Controller-->
         <scene sceneID="7w6-ci-jcS">
             <objects>
-                <viewController storyboardIdentifier="News" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xJd-kn-O9r" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="News" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xJd-kn-O9r" customClass="NewsContentViewController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bKW-b6-ztc"/>
                         <viewControllerLayoutGuide type="bottom" id="ziy-xT-uiB"/>

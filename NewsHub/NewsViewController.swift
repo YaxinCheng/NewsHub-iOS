@@ -36,22 +36,6 @@ class NewsViewController: UIViewController {
 		navigationController?.navigationBarHidden = true
 	}
 	
-	
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		// Get the new view controller using segue.destinationViewController.
-		// Pass the selected object to the new view controller.
-		guard let identifier = segue.identifier else { return }
-		switch identifier {
-		case Common.segueNewsDetailsIdentifier:
-			navigationController?.navigationBarHidden = false
-		default:
-			break
-		}
-	}
-	
 	func newsDidRefresh(notification: NSNotification) {
 		pageCounter += 1
 		tableView.reloadData()
@@ -80,7 +64,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 				return UITableViewCell()
 			}
 			cell.dateLabel.text = NSDate().formatDate().uppercaseString
-			cell.titleLabel.text = "News"
+			cell.titleLabel.text = "NEWS"
 			return cell
 		case 1, 2, 3:
 			let identifiers = [Common.headlinesIdentifier, Common.sourceIdentifier, Common.moreHeaderCellIdentifier]
