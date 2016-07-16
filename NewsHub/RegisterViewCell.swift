@@ -13,28 +13,16 @@ class RegisterViewCell: LoginCells {
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var userNameField: UITextField!
 	
-	@IBOutlet weak var confirmButton: UIButton!
-	
 	@IBOutlet weak var emailIndicator: UIImageView!
 	@IBOutlet weak var passwordIndicator: UIImageView!
 	@IBOutlet weak var userNameIndicator: UIImageView!
 	
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		
-		confirmButton.layer.borderWidth = 1
-		confirmButton.layer.borderColor = UIColor.blackColor().CGColor
-		confirmButton.layer.cornerRadius = 17
-		confirmButton.layer.masksToBounds	= true
 		
 		emailIndicator.layer.opacity = 0
 		passwordIndicator.layer.opacity = 0
 		userNameIndicator.layer.opacity = 0
-		
-		activityIndicator.hidesWhenStopped = true
-		activityIndicator.hidden = true
 	}
 	
 	@IBAction func registerButtonPressed(sender: AnyObject) {
@@ -60,8 +48,22 @@ class RegisterViewCell: LoginCells {
 			}
 			let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .Alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-			alert.view.tintColor = UIColor.blackColor()
+			alert.view.tintColor = self.tintColor
 			self.delegate?.present(alert)
 		}
+	}
+}
+
+extension RegisterViewCell: UITextFieldDelegate {
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if textField === emailField {
+			passwordField.becomeFirstResponder()
+		} else if textField === passwordField {
+			userNameField.becomeFirstResponder()
+		} else {
+			textField.resignFirstResponder()
+			registerButtonPressed(textField)
+		}
+		return true
 	}
 }

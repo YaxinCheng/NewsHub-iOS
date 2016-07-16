@@ -10,4 +10,26 @@ import UIKit
 
 class LoginCells: UICollectionViewCell {
 	weak var delegate: LoginCellsDelegate?
+	@IBOutlet weak var actionButton: UIButton!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		let control = UIControl(frame: self.contentView.frame)
+		control.addTarget(self, action: #selector(backgrounTouched), forControlEvents: .TouchUpInside)
+		self.contentView.insertSubview(control, atIndex: 0)
+		
+		actionButton.layer.cornerRadius = 17
+		actionButton.layer.borderColor = tintColor.CGColor
+		actionButton.layer.borderWidth = 1
+		actionButton.layer.masksToBounds = true
+		
+		activityIndicator.hidesWhenStopped = true
+		activityIndicator.hidden =  true
+	}
+	
+	func backgrounTouched(sender: UIControl) {
+		self.contentView.endEditing(true)
+	}
 }

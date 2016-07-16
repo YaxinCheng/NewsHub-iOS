@@ -12,21 +12,6 @@ class LoginViewCell: LoginCells {
     
 	@IBOutlet weak var emailField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
-	@IBOutlet weak var loginButton: UIButton!
-	
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-		loginButton.layer.cornerRadius = 17
-		loginButton.layer.borderColor = UIColor.blackColor().CGColor
-		loginButton.layer.borderWidth = 1
-		loginButton.layer.masksToBounds = true
-		
-		activityIndicator.hidesWhenStopped = true
-		activityIndicator.hidden =  true
-	}
 	
 	@IBAction func dismissButtonPressed(sender: AnyObject) {
 		delegate?.dismiss()
@@ -49,8 +34,20 @@ class LoginViewCell: LoginCells {
 			}
 			let alert = UIAlertController(title: "Fail", message: error, preferredStyle: .Alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-			alert.view.tintColor = UIColor.blackColor()
+			alert.view.tintColor = self.tintColor
 			self.delegate?.present(alert)
 		}
+	}
+}
+
+extension LoginViewCell: UITextFieldDelegate {
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if textField === emailField {
+			passwordField.becomeFirstResponder()
+		} else {
+			textField.resignFirstResponder()
+			loginButtonPressed(textField)
+		}
+		return true
 	}
 }

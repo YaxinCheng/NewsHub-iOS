@@ -10,6 +10,7 @@ import UIKit
 
 class UserViewController: UIViewController {
 	
+	@IBOutlet weak var tableView: UITableView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -23,7 +24,14 @@ class UserViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		if let user = UserManager.sharedManager.currentUser {
+			let headCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! headerCell
+			headCell.titleLabel.text = "HI, " + user.name.componentsSeparatedByString(" ")[0]
+		}
+	}
 	/*
 	// MARK: - Navigation
 	

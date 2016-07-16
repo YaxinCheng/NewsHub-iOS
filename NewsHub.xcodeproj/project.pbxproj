@@ -200,6 +200,8 @@
 		E3D1B80E1D380EB900421744 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				E3D1B80C1D37DA4F00421744 /* NewsContentViewController.swift */,
+				E33ED9981D3008CC00AB989E /* headerCell.swift */,
 				E33ED9881D2EF20100AB989E /* NewsViewController.swift */,
 				E33ED9781D2AE91E00AB989E /* News.swift */,
 				E33ED97A1D2AEA8100AB989E /* NewsLoader.swift */,
@@ -251,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				E3EC37C21D2AE803009714AF /* AppDelegate.swift */,
-				E3D1B80C1D37DA4F00421744 /* NewsContentViewController.swift */,
 				E33ED98E1D2FE65700AB989E /* Common.swift */,
 				E3D1B8261D396A6300421744 /* formatChecker.swift */,
 				E3D1B8271D396A6300421744 /* Regex.swift */,
@@ -267,7 +268,6 @@
 				E33ED99A1D30198B00AB989E /* Headlines */,
 				E33ED99B1D30199400AB989E /* Source */,
 				E3D1B7DC1D32B9A500421744 /* Normal */,
-				E33ED9981D3008CC00AB989E /* headerCell.swift */,
 				E3EC37C61D2AE803009714AF /* Main.storyboard */,
 				E33ED9A01D303E1B00AB989E /* News.storyboard */,
 				E3EC37C91D2AE803009714AF /* Assets.xcassets */,
