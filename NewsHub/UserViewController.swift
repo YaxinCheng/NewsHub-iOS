@@ -16,7 +16,9 @@ class UserViewController: UIViewController {
 		
 		// Do any additional setup after loading the view.
 		navigationController?.navigationBarHidden = true
-		parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
+		if UserManager.sharedManager.userStatus == false {
+			parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
