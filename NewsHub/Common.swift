@@ -40,6 +40,7 @@ struct Common {
 	static let loginViewIndentifier = "showLoginView"
 	static let loginCellIdentifier = "loginCell"
 	static let registerCellIdentifier = "registerCell"
+	static let titleCellIdentifier = "titleCell"
 }
 
 func SHA256(info: String) -> String? {

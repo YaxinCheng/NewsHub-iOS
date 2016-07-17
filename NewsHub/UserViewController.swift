@@ -29,9 +29,8 @@ class UserViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		if let user = UserManager.sharedManager.currentUser {
-			let headCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! headerCell
-			headCell.titleLabel.text = "HI, " + user.name.componentsSeparatedByString(" ")[0]
+		if UserManager.sharedManager.currentUser != nil {
+			tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
 		}
 	}
 	/*
@@ -58,6 +57,11 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
 			return UITableViewCell()
+		}
+		if let currentUser = UserManager.sharedManager.currentUser {
+			cell.titleLabel.text = "HI " + currentUser.firstName
+		} else {
+			cell.titleLabel.text = "User"
 		}
 		return cell
 	}

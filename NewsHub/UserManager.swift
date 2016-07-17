@@ -16,8 +16,10 @@ struct UserManager {
 	private init() {
 		if let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "https://hubnews.herokuapp.com")!) where !cookies.isEmpty {
 			userStatus = true
+			currentUser = User.currentUser()
 		} else {
 			userStatus = false
+			currentUser = nil
 		}
 	}
 }
