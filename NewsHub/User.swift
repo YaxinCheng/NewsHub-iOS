@@ -2,55 +2,65 @@
 //  User.swift
 //  NewsHub
 //
-//  Created by Yaxin Cheng on 2016-07-17.
+//  Created by Yaxin Cheng on 2016-07-15.
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import CoreData
 
-
-class User: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+struct User {
+	let email: String
+	var name: String
+	var status: Bool
 	
-	class func initialize(with JSON: Dictionary<String, AnyObject>) throws -> User {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		let context = appDelegate.managedObjectContext
-		guard let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as? User else {
-			throw UserError.InitializeError
-		}
-		user.email = JSON["_id"] as! String
-		user.name = JSON["name"] as! String
-		appDelegate.saveContext()
-		return user
+	init?(with JSON: [String: AnyObject]) {
+		guard
+			let email = JSON["_id"] as? String,
+			let name = JSON["name"] as? String,
+			let status = JSON["status"] as? Bool
+			else { return nil }
+		
+		self.email = email
+		self.name = name
+		self.status = status
 	}
 	
-	class func currentUser() -> User? {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		let context = appDelegate.managedObjectContext
-		
-		let fetch = NSFetchRequest(entityName: "User")
+	static func currentUser() -> User? {
 		do {
-			guard let onlyUser = try context.executeFetchRequest(fetch) as? [User] where onlyUser.count == 1 else {
-				return nil
-			}
-			return onlyUser[0]
+			return try restoreFromCache().first
 		} catch {
 			return nil
 		}
 	}
 	
-	class func save() {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		appDelegate.saveContext()
-	}
-	
 	var firstName: String {
-		return name.componentsSeparatedByString(" ").first ?? name
+		return name.componentsSeparatedByString(" ")[0]
 	}
 }
 
-enum UserError: ErrorType {
-	case InitializeError
+extension User: PropertySerializable {	
+	var properties: [String: AnyObject] {
+		var properties = Dictionary<String, AnyObject>()
+		properties["email"] = email
+		properties["name"] = name
+		properties["status"] = status
+		return properties
+	}
+	
+	init(with managedObject: NSManagedObject) {
+		self.email = managedObject.valueForKey("email") as! String
+		self.name = managedObject.valueForKey("name") as! String
+		self.status = managedObject.valueForKey("status") as! Bool
+	}
+}
+
+extension User: Cacheable {
+	var primaryKeyAttribute: String {
+		return "email"
+	}
+	
+	var primaryKeyValue: AnyObject {
+		return email
+	}
 }

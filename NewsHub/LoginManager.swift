@@ -20,14 +20,12 @@ struct LoginManager: UserSideManager, formatChecker {
 			completion?(error?.localizedDescription)
 		} else if let errorInfo = JSON?["ERROR"] as? String {
 			completion?(errorInfo)
+		} else if let user = User(with: JSON!) {
+			UserManager.sharedManager.currentUser = user
+			try! user.saveToCache()
+			completion?("SUCCESS")
 		} else {
-			do {
-				let user = try User.initialize(with: JSON!)
-				UserManager.sharedManager.currentUser = user
-				completion?("SUCCESS")
-			} catch {
-				completion?("\(error)")
-			}
+			completion?("Unknown Error Happened, Please Try Again")
 		}
 	}
 	
@@ -49,4 +47,6 @@ struct LoginManager: UserSideManager, formatChecker {
 		self.completion = completion
 		sendRequest(with: ["email": email, "password": password])
 	}
+	
+	
 }
