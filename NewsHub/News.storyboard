@@ -33,9 +33,9 @@
                                                     <rect key="frame" x="0.0" y="-8" width="600" height="129"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-DO-x69">
-                                                            <rect key="frame" x="12" y="0.0" width="588" height="49"/>
+                                                            <rect key="frame" x="20" y="0.0" width="580" height="49"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -43,6 +43,7 @@
                                                     <constraints>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="12" id="7OK-hj-6q5"/>
                                                         <constraint firstAttribute="trailing" secondItem="C8S-DO-x69" secondAttribute="trailing" id="BJS-rx-3Iu"/>
+                                                        <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="20" id="GDj-tX-tjR"/>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="12" id="Izw-3D-jCD"/>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="top" secondItem="9bc-AF-zXK" secondAttribute="top" id="ly1-q2-jLJ"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="C8S-DO-x69" secondAttribute="bottom" constant="8" id="nCw-uX-4Hb"/>
@@ -52,6 +53,7 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="7OK-hj-6q5"/>
+                                                            <exclude reference="Izw-3D-jCD"/>
                                                             <exclude reference="te6-Gw-Z3K"/>
                                                         </mask>
                                                     </variation>
@@ -67,6 +69,31 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="C8S-DO-x69" id="f8e-ia-BcZ"/>
                                             <outlet property="view" destination="9bc-AF-zXK" id="jLK-hr-TZ5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" id="Z1g-Ms-KI6" customClass="contentCell" customModule="NewsHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="150" width="600" height="122"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1g-Ms-KI6" id="sYP-be-WAu">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="121"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lag-K8-ret">
+                                                    <rect key="frame" x="20" y="8" width="564" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lag-K8-ret" secondAttribute="trailing" constant="8" id="Ie4-Iy-9Bq"/>
+                                                <constraint firstAttribute="topMargin" secondItem="lag-K8-ret" secondAttribute="top" id="Rxu-M1-8TO"/>
+                                                <constraint firstItem="lag-K8-ret" firstAttribute="leading" secondItem="sYP-be-WAu" secondAttribute="leadingMargin" constant="12" id="cNr-Yt-hNS"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lag-K8-ret" secondAttribute="bottom" constant="8" id="uhT-X2-66P"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="lag-K8-ret" id="EwL-oJ-LXc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

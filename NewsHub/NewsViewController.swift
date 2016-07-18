@@ -41,6 +41,16 @@ class NewsViewController: UIViewController {
 		tableView.reloadData()
 		(tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
 	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		guard let identifier = segue.identifier,
+			let indexPath = tableView.indexPathForSelectedRow else { return }
+		if identifier == Common.segueNewsDetailsIdentifier {
+			let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
+			let destinationVC = segue.destinationViewController as! NewsContentViewController
+			destinationVC.dataSource = news
+		}
+	}
 }
 
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {

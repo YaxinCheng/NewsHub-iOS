@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewsDetailsLoader: NewsLoader {
+struct NewsDetailsLoader: NewsLoader {
 	
 	var endPoint: String {
 		return "/api/details"
@@ -26,8 +26,8 @@ class NewsDetailsLoader: NewsLoader {
 		}
 	}
 	
-	func loadDetails(from news: News, completion: (News?, NSError?)->()) {
+	mutating func loadDetails(from news: News, completion: (News?, NSError?)->()) {
 		handler = completion
-		sendRequest(with: ["url": news.contentLink, "source": news.source.rawValue])
+		sendRequest(.POST, with: ["url": news.contentLink, "source": news.source.rawValue])
 	}
 }

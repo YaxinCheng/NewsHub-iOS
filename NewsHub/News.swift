@@ -18,7 +18,9 @@ struct News: Hashable, Equatable {
 	var image: UIImage?
 	let tag: String
 	private var imageLoaded = false
-	static var imageLoader = NewsImageLoader()
+	private static var imageLoader = NewsImageLoader()
+	private var detailsLoaded = false
+	private static var detailsLoader = NewsDetailsLoader()
 	
 	var hashValue: Int {
 		return contentLink.hash
@@ -58,8 +60,24 @@ struct News: Hashable, Equatable {
 			}
 		}
 	}
+	
+	func downloadDetails(completion: (news: News?) -> Void) {
+		if detailsLoaded == true {
+			completion(news: self)
+		} else {
+			News.detailsLoader.loadDetails(from: self) { (news, error) in
+				if var loadedNews = news {
+					loadedNews.detailsLoaded = true
+					completion(news: loadedNews)
+				} else {
+					completion(news: nil)
+				}
+			}
+		}
+	}
 }
 
 func == (lhs: News, rhs: News) -> Bool {
-	return lhs.contentLink == rhs.contentLink && lhs.imageLoaded == rhs.imageLoaded && lhs.image == rhs.image
+	return lhs.contentLink == rhs.contentLink && lhs.imageLoaded == rhs.imageLoaded
+		&& lhs.image == rhs.image && lhs.content == rhs.content
 }

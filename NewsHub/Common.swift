@@ -41,13 +41,5 @@ struct Common {
 	static let loginCellIdentifier = "loginCell"
 	static let registerCellIdentifier = "registerCell"
 	static let titleCellIdentifier = "titleCell"
-}
-
-func SHA256(info: String) -> String? {
-	guard let data = info.dataUsingEncoding(NSUTF8StringEncoding) else { return nil }
-	var hash = [UInt8](count: Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
-	_ = CC_SHA256(data.bytes, CC_LONG(data.length), &hash)
-	return hash.reduce("") {
-		$0!.stringByAppendingFormat("%02x", $1)
-	}
+	static let contentCellIdentifier = "contentCell"
 }

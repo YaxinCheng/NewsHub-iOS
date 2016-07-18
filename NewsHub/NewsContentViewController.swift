@@ -10,6 +10,7 @@ import UIKit
 
 class NewsContentViewController: UIViewController {
 	
+	var dataSource: News!
 	@IBOutlet weak var tableView: UITableView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -53,13 +54,26 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(Common.titleCellIdentifier)
+		let identifier = indexPath.section == 0 ? Common.titleCellIdentifier : Common.contentCellIdentifier
+		let cell = tableView.dequeueReusableCellWithIdentifier(identifier)
 		if indexPath.section == 0 {
-			(cell as! titleCell).titleLabel.text = "Long long word I wanna see what will happen here"
-			(cell as! titleCell).view.sizeToFit()
-			cell?.contentView.sizeToFit()
+			(cell as! titleCell).titleLabel.text = dataSource.title
 		} else {
-			
+			dataSource.downloadDetails { [unowned self] (news) in
+				if let loadedNews = news {
+					(cell as! contentCell).contentLabel.text = loadedNews.content
+					self.dataSource = loadedNews
+					tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Automatic)
+				} else {
+					let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .Alert)
+					let action = UIAlertAction(title: "OK", style: .Cancel) { [unowned self] _ in
+						self.navigationController?.popToRootViewControllerAnimated(true)
+					}
+					alert.addAction(action)
+					alert.view.tintColor = self.view.tintColor
+					self.presentViewController(alert, animated: true, completion: nil)
+				}
+			}
 		}
 		return cell!
 	}
