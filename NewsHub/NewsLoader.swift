@@ -19,8 +19,7 @@ protocol NewsLoader {
 
 extension NewsLoader {
 	var api: String {
-//		return "https://hubnews.herokuapp.com"
-		return "http://localhost:8000"
+		return "https://hubnews.herokuapp.com"
 	}
 	
 	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
