@@ -30,10 +30,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bc-AF-zXK">
-                                                    <rect key="frame" x="0.0" y="-8" width="600" height="129"/>
+                                                    <rect key="frame" x="0.0" y="-8" width="584" height="129"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-DO-x69">
-                                                            <rect key="frame" x="20" y="0.0" width="580" height="49"/>
+                                                            <rect key="frame" x="20" y="0.0" width="556" height="49"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="12" id="7OK-hj-6q5"/>
-                                                        <constraint firstAttribute="trailing" secondItem="C8S-DO-x69" secondAttribute="trailing" id="BJS-rx-3Iu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="C8S-DO-x69" secondAttribute="trailing" constant="8" id="BJS-rx-3Iu"/>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="20" id="GDj-tX-tjR"/>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="leading" secondItem="9bc-AF-zXK" secondAttribute="leading" constant="12" id="Izw-3D-jCD"/>
                                                         <constraint firstItem="C8S-DO-x69" firstAttribute="top" secondItem="9bc-AF-zXK" secondAttribute="top" id="ly1-q2-jLJ"/>
@@ -61,7 +61,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="9bc-AF-zXK" firstAttribute="leading" secondItem="7HH-rH-sH0" secondAttribute="leadingMargin" constant="-8" id="XNN-Ma-FVK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9bc-AF-zXK" secondAttribute="trailing" constant="-8" id="ZK8-CB-TI4"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9bc-AF-zXK" secondAttribute="trailing" constant="8" id="ZK8-CB-TI4"/>
                                                 <constraint firstItem="9bc-AF-zXK" firstAttribute="top" secondItem="7HH-rH-sH0" secondAttribute="topMargin" constant="-16" id="pnp-Ah-pD2"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9bc-AF-zXK" secondAttribute="bottom" constant="-8" id="qbq-lU-Dw7"/>
                                             </constraints>
@@ -78,7 +78,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="02O-gO-Tfk">
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="02O-gO-Tfk">
                                                     <rect key="frame" x="290" y="51" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVA-bB-Dwg">

@@ -9,18 +9,9 @@
 import UIKit
 
 class NewsSourceCell: UITableViewCell {
-
+	
 	@IBOutlet weak var collectionView: UICollectionView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+	weak var delegate: NewsViewDelegate?
 
 }
 
@@ -51,5 +42,9 @@ extension NewsSourceCell: UICollectionViewDataSource, UICollectionViewDelegate, 
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+	}
+	
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		delegate?.showCategoryView(at: indexPath.row)
 	}
 }

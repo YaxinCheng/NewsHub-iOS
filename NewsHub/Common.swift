@@ -42,4 +42,5 @@ struct Common {
 	static let registerCellIdentifier = "registerCell"
 	static let titleCellIdentifier = "titleCell"
 	static let contentCellIdentifier = "contentCell"
+	static let userTypeCellIdentifier = "userTypeCell"
 }

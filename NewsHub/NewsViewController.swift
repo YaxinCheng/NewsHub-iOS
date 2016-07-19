@@ -43,12 +43,18 @@ class NewsViewController: UIViewController {
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		guard let identifier = segue.identifier,
-			let indexPath = tableView.indexPathForSelectedRow else { return }
+		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueNewsDetailsIdentifier {
-			let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
-			let destinationVC = segue.destinationViewController as! NewsContentViewController
-			destinationVC.dataSource = news
+			if let indexPath = tableView.indexPathForSelectedRow {
+				let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
+				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				destinationVC.dataSource = news
+			} else {
+				let index = sender as! Int
+				let news = NewsHub.sharedHub.headlines[index]
+				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				destinationVC.dataSource = news
+			}
 		}
 	}
 }
@@ -79,7 +85,15 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		case 1, 2, 3:
 			let identifiers = [Common.headlinesIdentifier, Common.sourceIdentifier, Common.moreHeaderCellIdentifier]
 			let identifier: String = identifiers[indexPath.section - 1]
-			return tableView.dequeueReusableCellWithIdentifier(identifier) ?? UITableViewCell()
+			if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsHeadlineCell {
+				cell.delegate = self
+				return cell
+			} else if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsSourceCell {
+				cell.delegate = self
+				return cell
+			} else {
+				return tableView.dequeueReusableCellWithIdentifier(identifier) ?? UITableViewCell()
+			}
 		default:
 			if indexPath.row == 0 {
 				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.tagHeaderCellIdentifier) as? tagHeaderCell else {
@@ -113,7 +127,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		switch indexPath.section  {
 		case 0:
-			return 70
+			return 90
 		case 1:
 			return 300
 		case 2:
@@ -126,9 +140,10 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if indexPath.section >= 4 {
+		if indexPath.section >= 4 && indexPath.row != 0 {
 			performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: self)
 		}
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
 	func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -136,5 +151,15 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			(tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
 			seeker.loadMore(at: pageCounter)
 		}
+	}
+}
+
+extension NewsViewController: NewsViewDelegate {
+	func showContentView(at index: Int) {
+		performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: index)
+	}
+	
+	func showCategoryView(at index: Int) {
+		
 	}
 }

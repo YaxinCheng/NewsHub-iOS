@@ -11,18 +11,13 @@ import UIKit
 class NewsHeadlineCell: UITableViewCell {
 
 	@IBOutlet weak var collectionView: UICollectionView!
+	weak var delegate: NewsViewDelegate?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		// Initialization code
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(newsDidRefresh), name: Common.newsRefreshDidFinish, object: nil)
-	}
-	
-	override func setSelected(selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-		
-		// Configure the view for the selected state
 	}
 	
 	func newsDidRefresh(notification: NSNotification) {
@@ -66,5 +61,9 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+	}
+	
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		delegate?.showContentView(at: indexPath.row)
 	}
 }

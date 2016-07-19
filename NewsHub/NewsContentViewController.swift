@@ -19,9 +19,6 @@ class NewsContentViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// Do any additional setup after loading the view.
-		navigationController?.navigationBarHidden = false
-		
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.view.backgroundColor = UIColor.clearColor()
@@ -36,7 +33,7 @@ class NewsContentViewController: UIViewController {
 		
 		dataSource.downloadDetails { [unowned self] (news) in
 			defer {
-				self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Automatic)
+				self.tableView.reloadData()
 				self.loadNewsImage()
 				self.topConstraint.constant = -130
 			}
@@ -54,6 +51,12 @@ class NewsContentViewController: UIViewController {
 		}
 
 	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		navigationController?.navigationBarHidden = false
+	}
 
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
@@ -62,7 +65,13 @@ class NewsContentViewController: UIViewController {
 			let imageView = UIImageView(image: image)
 			imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 200)
 			imageView.contentMode = .ScaleToFill
-			self.tableView.tableHeaderView = imageView
+			
+			let headerView = UIView()
+			headerView.backgroundColor = .whiteColor()
+			headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 220)
+			headerView.addSubview(imageView)
+			
+			self.tableView.tableHeaderView = headerView
 			self.imageLoaded = true
 		}
 	}
@@ -95,7 +104,9 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 			(cell as! titleCell).titleLabel.text = dataSource.title
 		} else {
 			(cell as! contentCell).contentTextView.text = dataSource.content
-			(cell as! contentCell).activityIndicator.startAnimating()
+			if imageLoaded == true {
+				(cell as! contentCell).activityIndicator.stopAnimating()
+			}
 		}
 		return cell!
 	}

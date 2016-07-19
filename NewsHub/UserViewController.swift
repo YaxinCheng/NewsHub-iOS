@@ -19,6 +19,7 @@ class UserViewController: UIViewController {
 		if UserManager.sharedManager.userStatus == false {
 			parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
 		}
+		tableView.estimatedRowHeight = 100
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -47,7 +48,7 @@ class UserViewController: UIViewController {
 
 extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 1
+		return 2
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,21 +56,28 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
-			return UITableViewCell()
-		}
-		if let currentUser = UserManager.sharedManager.currentUser {
-			cell.titleLabel.text = "HI " + currentUser.firstName
+		if indexPath.section == 0 {
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
+				return UITableViewCell()
+			}
+			if let currentUser = UserManager.sharedManager.currentUser {
+				cell.titleLabel.text = "HI " + currentUser.firstName
+			} else {
+				cell.titleLabel.text = "User"
+			}
+			return cell
 		} else {
-			cell.titleLabel.text = "User"
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.userTypeCellIdentifier) else {
+				return UITableViewCell()
+			}
+			return cell
 		}
-		return cell
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		switch indexPath.section {
 		case 0:
-			return 70
+			return 90
 		default:
 			return UITableViewAutomaticDimension
 		}

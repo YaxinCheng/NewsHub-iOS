@@ -26,13 +26,13 @@ class headerCell: UITableViewCell {
     }
 
 	@IBAction func settingPressed(sender: AnyObject) {
-		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+		let animation = CABasicAnimation(keyPath: "transform")
 		animation.duration = 0.2
 		animation.repeatCount = 1
-		animation.fromValue = 0
-		animation.toValue = M_PI / 2
-		animation.removedOnCompletion = false
+		animation.autoreverses = true
+		animation.removedOnCompletion = true
+		animation.toValue = NSValue(CATransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0))
 		animation.fillMode = kCAFillModeForwards
-		(sender as! UIButton).layer.addAnimation(animation, forKey: "rotate")
+		(sender as! UIButton).layer.addAnimation(animation, forKey: "scale")
 	}
 }
