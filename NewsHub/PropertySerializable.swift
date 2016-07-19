@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreData
+import CoreData.NSManagedObject
 
 protocol PropertySerializable {
 	var properties: [String: AnyObject] { get }

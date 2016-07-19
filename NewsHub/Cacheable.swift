@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIApplication
 import CoreData
 
 protocol Cacheable: PropertySerializable {

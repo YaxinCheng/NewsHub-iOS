@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Swift
 
 struct Regex: StringLiteralConvertible {
   private let pattern: String!

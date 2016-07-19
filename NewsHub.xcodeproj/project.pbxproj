@@ -55,6 +55,7 @@
 		E3EC37CD1D2AE803009714AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3EC37CB1D2AE803009714AF /* LaunchScreen.storyboard */; };
 		E3EC37D81D2AE803009714AF /* NewsHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC37D71D2AE803009714AF /* NewsHubTests.swift */; };
 		E3EC37E31D2AE803009714AF /* NewsHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC37E21D2AE803009714AF /* NewsHubUITests.swift */; };
+		E3F86DA01D3E588400EA57C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F86D9F1D3E588400EA57C5 /* Login.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		E3EC37DE1D2AE803009714AF /* NewsHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3EC37E21D2AE803009714AF /* NewsHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHubUITests.swift; sourceTree = "<group>"; };
 		E3EC37E41D2AE803009714AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3F86D9F1D3E588400EA57C5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +301,7 @@
 				E3D1B7DC1D32B9A500421744 /* Normal */,
 				E3EC37C61D2AE803009714AF /* Main.storyboard */,
 				E33ED9A01D303E1B00AB989E /* News.storyboard */,
+				E3F86D9F1D3E588400EA57C5 /* Login.storyboard */,
 				E3EC37C91D2AE803009714AF /* Assets.xcassets */,
 				E3EC37CB1D2AE803009714AF /* LaunchScreen.storyboard */,
 				E3EC37CE1D2AE803009714AF /* Info.plist */,
@@ -435,6 +438,7 @@
 				E3EC37CD1D2AE803009714AF /* LaunchScreen.storyboard in Resources */,
 				E3EC37CA1D2AE803009714AF /* Assets.xcassets in Resources */,
 				E3EC37C81D2AE803009714AF /* Main.storyboard in Resources */,
+				E3F86DA01D3E588400EA57C5 /* Login.storyboard in Resources */,
 				E33ED9A11D303E1B00AB989E /* News.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

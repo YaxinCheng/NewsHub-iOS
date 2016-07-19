@@ -6,7 +6,8 @@
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import UIKit.UIImage
 
 struct NewsImageLoader: NewsLoader {
 	var endPoint: String {

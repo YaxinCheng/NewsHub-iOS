@@ -9,8 +9,8 @@
 import UIKit
 
 class contentCell: UITableViewCell {
-
-	@IBOutlet weak var contentLabel: UILabel!
+	
+	@IBOutlet weak var contentTextView: UITextView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func awakeFromNib() {
         super.awakeFromNib()

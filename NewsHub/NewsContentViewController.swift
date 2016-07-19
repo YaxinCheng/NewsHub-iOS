@@ -13,6 +13,9 @@ class NewsContentViewController: UIViewController {
 	var dataSource: News!
 	@IBOutlet weak var tableView: UITableView!
 	private var imageLoaded: Bool = false
+	private var backgroundImage: UIView!
+	@IBOutlet weak var topConstraint: NSLayoutConstraint!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -21,8 +24,13 @@ class NewsContentViewController: UIViewController {
 		
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
-		self.navigationController?.navigationBar.translucent = true
-		self.navigationController?.view.backgroundColor = .clearColor()
+		self.navigationController?.view.backgroundColor = UIColor.clearColor()
+		
+		backgroundImage = UIView()
+		backgroundImage.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 64)
+		backgroundImage.backgroundColor = .whiteColor()
+		backgroundImage.layer.opacity = 0
+		view.addSubview(backgroundImage)
 	
 		tableView.rowHeight = UITableViewAutomaticDimension
 		
@@ -30,6 +38,7 @@ class NewsContentViewController: UIViewController {
 			defer {
 				self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Automatic)
 				self.loadNewsImage()
+				self.topConstraint.constant = -130
 			}
 			if let loadedNews = news {
 				self.dataSource = loadedNews
@@ -45,19 +54,14 @@ class NewsContentViewController: UIViewController {
 		}
 
 	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-	
+
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
 		dataSource.downloadImage { [unowned self] in
 			guard let image = $0 else { return }
 			let imageView = UIImageView(image: image)
 			imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 200)
-			imageView.contentMode = .Bottom
+			imageView.contentMode = .ScaleToFill
 			self.tableView.tableHeaderView = imageView
 			self.imageLoaded = true
 		}
@@ -90,7 +94,7 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		if indexPath.section == 0 {
 			(cell as! titleCell).titleLabel.text = dataSource.title
 		} else {
-			(cell as! contentCell).contentLabel.text = dataSource.content
+			(cell as! contentCell).contentTextView.text = dataSource.content
 			(cell as! contentCell).activityIndicator.startAnimating()
 		}
 		return cell!
@@ -104,5 +108,16 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		}
 	}
 	
-	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		let alpha = Float(scrollView.contentOffset.y / 50)
+		if alpha >= 1 {
+			navigationItem.title = dataSource.title
+			backgroundImage.layer.opacity = 1
+		} else if alpha > 0 {
+			backgroundImage.layer.opacity = alpha
+		} else {
+			navigationItem.title = ""
+			backgroundImage.layer.opacity = 0
+		}
+	}
 }

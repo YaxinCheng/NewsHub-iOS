@@ -18,12 +18,6 @@ class LoginViewController: UIViewController {
 		navigationController?.navigationBarHidden = true
 	}
 	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-	
-	
 }
 
 extension LoginViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -43,7 +37,7 @@ extension LoginViewController: UICollectionViewDelegate, UICollectionViewDataSou
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		return CGSize(width: collectionView.bounds.width * 9 / 10, height: collectionView.bounds.height)
+		return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -62,5 +56,14 @@ extension LoginViewController: LoginCellsDelegate {
 	
 	func present(alert: UIAlertController) {
 		self.presentViewController(alert, animated: true, completion: nil)
+	}
+	
+	func switchView() {
+		guard let visibleCell = collectionView.visibleCells().first else { return }
+		if visibleCell is LoginViewCell {
+			collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Right, animated: true)
+		} else if visibleCell is RegisterViewCell {
+			collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Left, animated: true)
+		}
 	}
 }

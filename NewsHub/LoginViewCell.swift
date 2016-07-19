@@ -38,6 +38,11 @@ class LoginViewCell: LoginCells {
 			self.delegate?.present(alert)
 		}
 	}
+	
+	@IBAction func registerButtonPressed(sender: AnyObject) {
+		delegate?.switchView()
+	}
+	
 }
 
 extension LoginViewCell: UITextFieldDelegate {

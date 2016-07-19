@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreData
+import CoreData.NSManagedObject
 
 struct User {
 	let email: String
@@ -28,7 +28,7 @@ struct User {
 	
 	static func currentUser() -> User? {
 		do {
-			return try restoreFromCache().first
+			return try restoreFromCache().last
 		} catch {
 			return nil
 		}
