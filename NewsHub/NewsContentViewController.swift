@@ -12,6 +12,7 @@ class NewsContentViewController: UIViewController {
 	
 	var dataSource: News!
 	@IBOutlet weak var tableView: UITableView!
+	private var imageLoaded: Bool = false
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -21,9 +22,28 @@ class NewsContentViewController: UIViewController {
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.navigationBar.translucent = true
-		self.navigationController?.view.backgroundColor = UIColor.clearColor()
+		self.navigationController?.view.backgroundColor = .clearColor()
 	
 		tableView.rowHeight = UITableViewAutomaticDimension
+		
+		dataSource.downloadDetails { [unowned self] (news) in
+			defer {
+				self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Automatic)
+				self.loadNewsImage()
+			}
+			if let loadedNews = news {
+				self.dataSource = loadedNews
+			} else {
+				let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .Alert)
+				let action = UIAlertAction(title: "OK", style: .Cancel) { [unowned self] _ in
+					self.navigationController?.popToRootViewControllerAnimated(true)
+				}
+				alert.addAction(action)
+				alert.view.tintColor = self.view.tintColor
+				self.presentViewController(alert, animated: true, completion: nil)
+			}
+		}
+
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -31,6 +51,17 @@ class NewsContentViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
+	private func loadNewsImage() {
+		guard imageLoaded == false else { return }
+		dataSource.downloadImage { [unowned self] in
+			guard let image = $0 else { return }
+			let imageView = UIImageView(image: image)
+			imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 200)
+			imageView.contentMode = .Bottom
+			self.tableView.tableHeaderView = imageView
+			self.imageLoaded = true
+		}
+	}
 	
 	/*
 	// MARK: - Navigation
@@ -59,21 +90,8 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		if indexPath.section == 0 {
 			(cell as! titleCell).titleLabel.text = dataSource.title
 		} else {
-			dataSource.downloadDetails { [unowned self] (news) in
-				if let loadedNews = news {
-					(cell as! contentCell).contentLabel.text = loadedNews.content
-					self.dataSource = loadedNews
-					tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: .Automatic)
-				} else {
-					let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .Alert)
-					let action = UIAlertAction(title: "OK", style: .Cancel) { [unowned self] _ in
-						self.navigationController?.popToRootViewControllerAnimated(true)
-					}
-					alert.addAction(action)
-					alert.view.tintColor = self.view.tintColor
-					self.presentViewController(alert, animated: true, completion: nil)
-				}
-			}
+			(cell as! contentCell).contentLabel.text = dataSource.content
+			(cell as! contentCell).activityIndicator.startAnimating()
 		}
 		return cell!
 	}
@@ -85,4 +103,6 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 			return 170
 		}
 	}
+	
+	
 }

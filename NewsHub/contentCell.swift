@@ -11,9 +11,11 @@ import UIKit
 class contentCell: UITableViewCell {
 
 	@IBOutlet weak var contentLabel: UILabel!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+			activityIndicator.hidesWhenStopped = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

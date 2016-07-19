@@ -90,7 +90,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			}
 			
 			let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
-			news.downloadImage { [unowned self] (news) in
+			news.downloadThumbnail { [unowned self] (news) in
 				if let loadedNews = news {
 					if NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1] != loadedNews {
 						NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1] = loadedNews

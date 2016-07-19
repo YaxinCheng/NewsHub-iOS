@@ -520,6 +520,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Ru-Xh-Kir">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

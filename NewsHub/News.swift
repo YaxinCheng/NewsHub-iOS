@@ -44,7 +44,7 @@ struct News: Hashable, Equatable {
 		return imageLink?.isEmpty ?? false
 	}
 	
-	func downloadImage(completion: (news: News?) -> Void) {
+	func downloadThumbnail(completion: (news: News?) -> Void) {
 		if imageLoaded == true {
 			completion(news: self)
 		} else {
@@ -58,6 +58,12 @@ struct News: Hashable, Equatable {
 					completion(news: loadedNews)
 				}
 			}
+		}
+	}
+	
+	func downloadImage(completion: (image: UIImage?) -> Void) {
+		News.imageLoader.loadImage(from: self) {
+			completion(image: $0)
 		}
 	}
 	

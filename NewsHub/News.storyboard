@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PQA-Ly-QPm">
-                                <rect key="frame" x="0.0" y="-20" width="600" height="620"/>
+                                <rect key="frame" x="0.0" y="-44" width="600" height="644"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="titleCell" rowHeight="122" id="7To-nt-Pfk" customClass="titleCell" customModule="NewsHub" customModuleProvider="target">
@@ -78,21 +78,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lag-K8-ret">
-                                                    <rect key="frame" x="20" y="8" width="564" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lag-K8-ret">
+                                                    <rect key="frame" x="20" y="8" width="564" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="02O-gO-Tfk">
+                                                    <rect key="frame" x="290" y="51" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lag-K8-ret" secondAttribute="trailing" constant="8" id="Ie4-Iy-9Bq"/>
+                                                <constraint firstItem="02O-gO-Tfk" firstAttribute="centerY" secondItem="sYP-be-WAu" secondAttribute="centerY" id="JQw-ZN-ma0"/>
                                                 <constraint firstAttribute="topMargin" secondItem="lag-K8-ret" secondAttribute="top" id="Rxu-M1-8TO"/>
                                                 <constraint firstItem="lag-K8-ret" firstAttribute="leading" secondItem="sYP-be-WAu" secondAttribute="leadingMargin" constant="12" id="cNr-Yt-hNS"/>
+                                                <constraint firstItem="02O-gO-Tfk" firstAttribute="centerX" secondItem="sYP-be-WAu" secondAttribute="centerX" id="eP9-eD-cVD"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lag-K8-ret" secondAttribute="bottom" constant="8" id="uhT-X2-66P"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="02O-gO-Tfk" id="6ef-mX-Oz9"/>
                                             <outlet property="contentLabel" destination="lag-K8-ret" id="EwL-oJ-LXc"/>
                                         </connections>
                                     </tableViewCell>
@@ -108,7 +114,7 @@
                             <constraint firstItem="PQA-Ly-QPm" firstAttribute="leading" secondItem="GmG-qu-pMa" secondAttribute="leadingMargin" constant="-20" id="1Br-UY-oK2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PQA-Ly-QPm" secondAttribute="trailing" constant="-20" id="B7X-af-Ysr"/>
                             <constraint firstItem="ziy-xT-uiB" firstAttribute="top" secondItem="PQA-Ly-QPm" secondAttribute="bottom" id="KrH-ld-cL1"/>
-                            <constraint firstItem="PQA-Ly-QPm" firstAttribute="top" secondItem="bKW-b6-ztc" secondAttribute="bottom" constant="-40" id="YxW-d2-0Xt"/>
+                            <constraint firstItem="PQA-Ly-QPm" firstAttribute="top" secondItem="bKW-b6-ztc" secondAttribute="bottom" constant="-64" id="YxW-d2-0Xt"/>
                         </constraints>
                     </view>
                     <connections>
