@@ -228,7 +228,6 @@
 				E3D1B8411D3BCD2600421744 /* Content */,
 				E33ED9781D2AE91E00AB989E /* News.swift */,
 				E33ED97A1D2AEA8100AB989E /* NewsLoader.swift */,
-				E33ED9841D2D79D100AB989E /* NewsDetailsLoader.swift */,
 				E33ED97C1D2AEDE500AB989E /* NewsSeeker.swift */,
 				E3D1B8001D3699C700421744 /* NewsList.swift */,
 				E33ED9861D2D7B4F00AB989E /* NewsSource.swift */,
@@ -267,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D1B80C1D37DA4F00421744 /* NewsContentViewController.swift */,
+				E33ED9841D2D79D100AB989E /* NewsDetailsLoader.swift */,
 				E3D1B8421D3BD0B600421744 /* titleCell.swift */,
 				E3D7889E1D3D5D2100782F31 /* contentCell.swift */,
 			);

@@ -10,7 +10,7 @@ import Foundation
 
 struct LocationLoader: NewsLoader {
 	var endPoint: String {
-		return "/locations"
+		return "/api/locations"
 	}
 	
 	var completion: (([String]) -> Void)?

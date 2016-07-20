@@ -38,7 +38,7 @@ class LocationController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
-		cell.textLabel?.text = locations[indexPath.row]
+		cell.textLabel?.text = capitalizeFirst(locations[indexPath.row])
 		
 		return cell
 	}
@@ -48,4 +48,10 @@ class LocationController: UITableViewController {
 		delegate?.pick(location)
 		dismissViewControllerAnimated(true, completion: nil)
 	}
+}
+
+private func capitalizeFirst(string: String) -> String {
+	if string.isEmpty { return "" }
+	let first = String(string.characters.first!).uppercaseString
+	return first + String(string.characters.dropFirst())
 }

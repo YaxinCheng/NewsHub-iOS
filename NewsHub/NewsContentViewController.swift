@@ -15,11 +15,13 @@ class NewsContentViewController: UIViewController {
 	private var imageLoaded: Bool = false
 	private var backgroundImage: UIView!
 	@IBOutlet weak var topConstraint: NSLayoutConstraint!
+	var shadow: UIImage?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+		shadow = self.navigationController?.navigationBar.shadowImage
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.view.backgroundColor = UIColor.clearColor()
 		
@@ -30,12 +32,18 @@ class NewsContentViewController: UIViewController {
 		view.addSubview(backgroundImage)
 	
 		tableView.rowHeight = UITableViewAutomaticDimension
+
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		navigationController?.navigationBarHidden = false
 		
 		dataSource.downloadDetails { [unowned self] (news) in
 			defer {
 				self.tableView.reloadData()
 				self.loadNewsImage()
-				self.topConstraint.constant = -130
 			}
 			if let loadedNews = news {
 				self.dataSource = loadedNews
@@ -49,19 +57,13 @@ class NewsContentViewController: UIViewController {
 				self.presentViewController(alert, animated: true, completion: nil)
 			}
 		}
-
-	}
-	
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		navigationController?.navigationBarHidden = false
 	}
 
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
 		dataSource.downloadImage { [unowned self] in
 			guard let image = $0 else { return }
+			self.topConstraint.constant = -130
 			let imageView = UIImageView(image: image)
 			imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 200)
 			imageView.contentMode = .ScaleToFill
@@ -124,11 +126,13 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		if alpha >= 1 {
 			navigationItem.title = dataSource.title
 			backgroundImage.layer.opacity = 1
+			navigationController?.navigationBar.shadowImage = shadow
 		} else if alpha > 0 {
 			backgroundImage.layer.opacity = alpha
 		} else {
 			navigationItem.title = ""
 			backgroundImage.layer.opacity = 0
+			navigationController?.navigationBar.shadowImage = UIImage()
 		}
 	}
 }

@@ -89,7 +89,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 				return UITableViewCell()
 			}
 			cell.dateLabel.text = NSDate().formatDate().uppercaseString
-			cell.titleLabel.text = "News"
+			cell.titleLabel.text = Common.location.uppercaseString
 			return cell
 		case 1, 2, 3:
 			let identifiers = [Common.headlinesIdentifier, Common.sourceIdentifier, Common.moreHeaderCellIdentifier]
