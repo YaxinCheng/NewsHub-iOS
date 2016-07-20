@@ -18,4 +18,9 @@ struct NewsHub {
 		headlines = []
 		taggedNews = NewsList()
 	}
+	
+	mutating func clear() {
+		headlines = []
+		taggedNews = NewsList()
+	}
 }

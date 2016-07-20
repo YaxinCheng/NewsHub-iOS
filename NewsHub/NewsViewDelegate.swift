@@ -11,4 +11,5 @@ import Foundation
 protocol NewsViewDelegate: class {
 	func showContentView(at index: Int)
 	func showCategoryView(at index: Int)
+	func pick(location: String)
 }

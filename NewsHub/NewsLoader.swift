@@ -25,9 +25,9 @@ extension NewsLoader {
 	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
 		let request: Request
 		if method == .GET {
-			request = Alamofire.request(method, api + endPoint + source.rawValue, headers: ["page": "\(page)"])
+			request = Alamofire.request(method, api + endPoint + source.rawValue, headers: ["page": "\(page)", "location": Common.location])
 		} else {
-			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON, headers: ["page": "\(page)"])
+			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON, headers: ["page": "\(page)", "location": Common.location])
 		}
 		request.responseJSON { (response) in
 			switch response.result {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6TW-ac-2it">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6TW-ac-2it">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -51,6 +51,7 @@
                                                     <state key="normal" image="globe"/>
                                                     <connections>
                                                         <action selector="settingPressed:" destination="D2J-gw-rRE" eventType="touchUpInside" id="bfS-8r-MKg"/>
+                                                        <segue destination="tWN-QA-WmJ" kind="presentation" identifier="presentLocationPicker" id="ef5-MQ-E1b"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -403,6 +404,28 @@
             </objects>
             <point key="canvasLocation" x="1739" y="-135"/>
         </scene>
+        <!--Location Controller-->
+        <scene sceneID="fzH-xB-2Kb">
+            <objects>
+                <tableViewController id="tWN-QA-WmJ" customClass="LocationController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0TC-90-SXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="tWN-QA-WmJ" id="4JU-v7-pfI"/>
+                            <outlet property="delegate" destination="tWN-QA-WmJ" id="ak8-kU-C3G"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="400"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYZ-XX-u19" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2424" y="-666"/>
+        </scene>
         <!--News-->
         <scene sceneID="g7G-uF-gMR">
             <objects>
@@ -484,7 +507,7 @@
                                                         <constraint firstItem="4aY-qw-ISd" firstAttribute="top" secondItem="e52-o6-b3F" secondAttribute="top" constant="34" id="bqA-n1-PEA"/>
                                                         <constraint firstItem="4aY-qw-ISd" firstAttribute="centerY" secondItem="e52-o6-b3F" secondAttribute="centerY" id="f4E-vh-aA0"/>
                                                         <constraint firstItem="4aY-qw-ISd" firstAttribute="top" secondItem="e52-o6-b3F" secondAttribute="top" constant="25" id="iDk-Qh-f5y"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="itm-Lm-vxL"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="itm-Lm-vxL"/>
                                                         <constraint firstItem="4aY-qw-ISd" firstAttribute="centerX" secondItem="e52-o6-b3F" secondAttribute="centerX" constant="12" id="jsO-XM-twC"/>
                                                         <constraint firstItem="4aY-qw-ISd" firstAttribute="leading" secondItem="e52-o6-b3F" secondAttribute="leading" constant="21" id="tBg-b7-Zn7"/>
                                                         <constraint firstItem="YGD-gO-cC6" firstAttribute="leading" secondItem="4aY-qw-ISd" secondAttribute="trailing" constant="12" id="vbk-hb-1N0"/>
@@ -549,7 +572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15L-83-uOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889" y="988"/>
+            <point key="canvasLocation" x="1725" y="1079"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="DmK-bv-kgo">
@@ -604,7 +627,7 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="LoginView" id="aA1-5C-wRz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YmG-UG-HeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="705.5" y="896"/>
+            <point key="canvasLocation" x="305" y="914"/>
         </scene>
         <!--User-->
         <scene sceneID="BVB-bz-g6K">
@@ -623,7 +646,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7w-Jo-24i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1235" y="988"/>
+            <point key="canvasLocation" x="1037" y="1079"/>
         </scene>
     </scenes>
     <resources>

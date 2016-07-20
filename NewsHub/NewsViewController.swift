@@ -23,6 +23,9 @@ class NewsViewController: UIViewController {
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(newsDidRefresh), name: Common.newsRefreshDidFinish, object: nil)
 		tableView.tableFooterView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+		if Common.location.isEmpty {
+			Common.location = "halifax"
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -55,6 +58,12 @@ class NewsViewController: UIViewController {
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
 				destinationVC.dataSource = news
 			}
+		} else if identifier == Common.popOverIdentifier {
+			let destinationVC = segue.destinationViewController as! LocationController
+			destinationVC.delegate = self
+			destinationVC.modalPresentationStyle = .Popover
+			destinationVC.popoverPresentationController?.sourceView = sender as! UIButton
+			destinationVC.popoverPresentationController?.delegate = self
 		}
 	}
 }
@@ -161,5 +170,18 @@ extension NewsViewController: NewsViewDelegate {
 	
 	func showCategoryView(at index: Int) {
 		
+	}
+	
+	func pick(location: String) {
+		Common.location = location
+		NewsHub.sharedHub.clear()
+		pageCounter = 1
+		seeker.loadNews()
+	}
+}
+
+extension NewsViewController: UIPopoverPresentationControllerDelegate {
+	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .None
 	}
 }

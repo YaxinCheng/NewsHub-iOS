@@ -43,4 +43,15 @@ struct Common {
 	static let titleCellIdentifier = "titleCell"
 	static let contentCellIdentifier = "contentCell"
 	static let userTypeCellIdentifier = "userTypeCell"
+	static let popOverIdentifier = "presentLocationPicker"
+	
+	static var location: String {
+		get {
+			let userDefault = NSUserDefaults.standardUserDefaults()
+			return userDefault.stringForKey("preferedLocation") ?? ""
+		} set {
+			let userDefault = NSUserDefaults.standardUserDefaults()
+			userDefault.setObject(newValue, forKey: "preferedLocation")
+		}
+	}
 }
