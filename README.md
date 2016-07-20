@@ -14,20 +14,20 @@ Beautiful Complexion Reduction UI makes the app more function-oriented<br>
 **Main**<br>
 Main screen with a bold font titles and news<br>
 Readers should not be distracted by colourful headers, and they should be concentrating on their news<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/0.png)<br>
+
 Scroll down a little bit, readers can read from only their favourite source of news (Ongoing)<br>
 Non-headline news will be put under the sources, and they will be grouped by their topics<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/5.png)<br>
+
 **Login & Register**<br>
 Simple and concise view makes sure readers have the best experience<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/1.png)<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/2.png)<br>
+
+
 **Content view**<br>
 Bold big font helps readers to better focus on the content<br>
 Images will be put on the header<br>
 With scrolling down, navigationBar will show to indicates the title of the news<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/3.png)<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/4.png)<br>
+
+
 <br>
 ##Coming functions:
 Change password<br>
