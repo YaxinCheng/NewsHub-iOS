@@ -12,7 +12,7 @@ class NewsViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-	let seeker = NewsSeeker()
+	var seeker = NewsSeeker()
 	var pageCounter = 1
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -49,12 +49,12 @@ class NewsViewController: UIViewController {
 		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueNewsDetailsIdentifier {
 			if let indexPath = tableView.indexPathForSelectedRow {
-				let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
+				let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
 				destinationVC.dataSource = news
 			} else {
 				let index = sender as! Int
-				let news = NewsHub.sharedHub.headlines[index]
+				let news = NewsHub.hub().headlines[index]
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
 				destinationVC.dataSource = news
 			}
@@ -64,13 +64,17 @@ class NewsViewController: UIViewController {
 			destinationVC.modalPresentationStyle = .Popover
 			destinationVC.popoverPresentationController?.sourceView = sender as! UIButton
 			destinationVC.popoverPresentationController?.delegate = self
+		} else if identifier == Common.segueNewsSourceIdentifier {
+			let destinationVC = segue.destinationViewController as! NewsSourceController
+			let source = NewsSource.available[sender as! Int]
+			destinationVC.source = source
 		}
 	}
 }
 
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 4 + NewsHub.sharedHub.taggedNews.count
+		return 4 + NewsHub.hub().taggedNews.count
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +82,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		case 0, 1, 2, 3:
 			return 1
 		default:
-			return NewsHub.sharedHub.taggedNews[section - 4].count + 1
+			return NewsHub.hub().taggedNews[section - 4].count + 1
 		}
 	}
 	
@@ -96,6 +100,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			let identifier: String = identifiers[indexPath.section - 1]
 			if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsHeadlineCell {
 				cell.delegate = self
+				cell.source = .All
 				return cell
 			} else if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsSourceCell {
 				cell.delegate = self
@@ -108,15 +113,15 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.tagHeaderCellIdentifier) as? tagHeaderCell else {
 					return UITableViewCell()
 				}
-				cell.tagLabel.text = NewsHub.sharedHub.taggedNews.tag(for: indexPath.section - 4).uppercaseString
+				cell.tagLabel.text = NewsHub.hub().taggedNews.tag(for: indexPath.section - 4).uppercaseString
 				return cell
 			}
 			
-			let news = NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1]
+			let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
 			news.downloadThumbnail { [unowned self] (news) in
 				if let loadedNews = news {
-					if NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1] != loadedNews {
-						NewsHub.sharedHub.taggedNews[indexPath.section - 4][indexPath.row - 1] = loadedNews
+					if NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] != loadedNews {
+						NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] = loadedNews
 						self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 					}
 				}
@@ -169,12 +174,12 @@ extension NewsViewController: NewsViewDelegate {
 	}
 	
 	func showCategoryView(at index: Int) {
-		
+		performSegueWithIdentifier(Common.segueNewsSourceIdentifier, sender: index)
 	}
 	
 	func pick(location: String) {
 		Common.location = location
-		NewsHub.sharedHub.clear()
+		NewsHub.hub().clear()
 		pageCounter = 1
 		seeker.loadNews()
 	}

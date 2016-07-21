@@ -12,6 +12,7 @@ class NewsHeadlineCell: UITableViewCell {
 
 	@IBOutlet weak var collectionView: UICollectionView!
 	weak var delegate: NewsViewDelegate?
+	var source: NewsSource!
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -31,18 +32,18 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return NewsHub.sharedHub.headlines.count
+		return NewsHub.hub(for: source).headlines.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Common.headCollectionCellIdentifier, forIndexPath: indexPath) as? NewsHeadlineContentCell {
-			let news = NewsHub.sharedHub.headlines[indexPath.row]
+			let news = NewsHub.hub(for: self.source).headlines[indexPath.row]
 			cell.titleLabel.text = news.title
 			cell.sourceLabel.text = news.source.rawValue
 			cell.imageView.image = news.source.placeHolder
-			news.downloadThumbnail { (news) in
+			news.downloadThumbnail { [unowned self] (news) in
 				if let loadedNews = news {
-					NewsHub.sharedHub.headlines[indexPath.row] = loadedNews
+					NewsHub.hub(for: self.source).headlines[indexPath.row] = loadedNews
 					cell.imageView.image = loadedNews.image
 				}
 			}

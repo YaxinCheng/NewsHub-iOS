@@ -408,11 +408,12 @@
                     <connections>
                         <outlet property="tableView" destination="uRy-1Z-wxh" id="jbd-4Q-6Ll"/>
                         <segue destination="7YT-uP-og8" kind="show" identifier="showNewsDetails" id="EYf-d5-tus"/>
+                        <segue destination="yVH-Lz-laM" kind="show" identifier="showNewsSource" id="9YL-ZS-5Mv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1739" y="-135"/>
+            <point key="canvasLocation" x="1725" y="-23"/>
         </scene>
         <!--Location Controller-->
         <scene sceneID="fzH-xB-2Kb">
@@ -443,6 +444,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3Y-Mw-26C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2234" y="-111"/>
+        </scene>
+        <!--NewsSource-->
+        <scene sceneID="m5G-m6-Cu0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Source" referencedIdentifier="NewsSource" id="yVH-Lz-laM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8rh-GW-tUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2243.5" y="39"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="R7a-jl-rFn">

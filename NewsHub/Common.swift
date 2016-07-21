@@ -44,6 +44,7 @@ struct Common {
 	static let contentCellIdentifier = "contentCell"
 	static let userTypeCellIdentifier = "userTypeCell"
 	static let popOverIdentifier = "presentLocationPicker"
+	static let segueNewsSourceIdentifier = "showNewsSource"
 	
 	static var location: String {
 		get {

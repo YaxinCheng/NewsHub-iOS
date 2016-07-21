@@ -13,6 +13,8 @@ struct NewsSeeker: NewsLoader	{
 		return "/api/news"
 	}
 	
+	var source: NewsSource = .All
+	
 	func process(json: NSDictionary, error: NSError?) {
 		if error != nil {
 			print(error?.localizedDescription)
@@ -20,8 +22,8 @@ struct NewsSeeker: NewsLoader	{
 		}
 		let headline = json["headlines"] as? [NSDictionary] ?? []
 		let normal = json["normal"] as? [NSDictionary] ?? []
-		NewsHub.sharedHub.headlines += headline.map { News(with: $0) }
-		NewsHub.sharedHub.taggedNews += normal.map { News(with: $0) }
+		NewsHub.hub(for: source).headlines += headline.map { News(with: $0) }
+		NewsHub.hub(for: source).taggedNews += normal.map { News(with: $0) }
 		let centre = NSNotificationCenter.defaultCenter()
 		let notification = NSNotification(name: Common.newsRefreshDidFinish, object: nil)
 		centre.postNotification(notification)
@@ -31,7 +33,8 @@ struct NewsSeeker: NewsLoader	{
 		sendRequest(from: source)
 	}
 	
-	func loadMore(from source: NewsSource = .All, at page: Int) {
+	mutating func loadMore(from source: NewsSource = .All, at page: Int) {
+		self.source = source
 		sendRequest(from: source, at: page)
 	}
 }

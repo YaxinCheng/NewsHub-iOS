@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct NewsHub {
-	static var sharedHub = NewsHub()
+final class NewsHub {
+	static var allHubs: [NewsSource: NewsHub] = Dictionary<NewsSource, NewsHub>()
 	
 	var headlines: [News]
 	var taggedNews: NewsList
@@ -19,8 +19,18 @@ struct NewsHub {
 		taggedNews = NewsList()
 	}
 	
-	mutating func clear() {
+	func clear() {
 		headlines = []
 		taggedNews = NewsList()
+	}
+	
+	static func hub(for source: NewsSource = .All) -> NewsHub {
+		if let hub = allHubs[source] {
+			return hub
+		} else {
+			let hub = NewsHub()
+			allHubs[source] = hub
+			return hub
+		}
 	}
 }

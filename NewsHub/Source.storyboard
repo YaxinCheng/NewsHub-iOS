@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--News Source Controller-->
+        <scene sceneID="iOM-ri-Ufw">
+            <objects>
+                <viewController storyboardIdentifier="NewsSource" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o4W-LU-fj5" customClass="NewsSourceController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SNf-hX-Rz5"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Ez-6I-87y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K9t-IY-cId">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6PP-Co-KRl">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="o4W-LU-fj5" id="UDv-G0-DdR"/>
+                                    <outlet property="delegate" destination="o4W-LU-fj5" id="xn6-XW-bwi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="6PP-Co-KRl" secondAttribute="trailing" constant="-20" id="HAU-vg-IFX"/>
+                            <constraint firstItem="4Ez-6I-87y" firstAttribute="top" secondItem="6PP-Co-KRl" secondAttribute="bottom" id="cc5-Fl-V0m"/>
+                            <constraint firstItem="6PP-Co-KRl" firstAttribute="top" secondItem="SNf-hX-Rz5" secondAttribute="bottom" constant="-20" id="oIH-u4-kWQ"/>
+                            <constraint firstItem="6PP-Co-KRl" firstAttribute="leading" secondItem="K9t-IY-cId" secondAttribute="leadingMargin" constant="-20" id="rls-3C-BJg"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j3J-bh-vEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="350" y="351"/>
+        </scene>
+    </scenes>
+</document>
