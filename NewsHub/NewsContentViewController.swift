@@ -15,7 +15,8 @@ class NewsContentViewController: UIViewController {
 	private var imageLoaded: Bool = false
 	private var backgroundImage: UIView!
 	@IBOutlet weak var topConstraint: NSLayoutConstraint!
-	var shadow: UIImage?
+	private var shadow: UIImage?
+	private var imageView: UIImageView?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,13 +27,33 @@ class NewsContentViewController: UIViewController {
 		self.navigationController?.view.backgroundColor = UIColor.clearColor()
 		
 		backgroundImage = UIView()
-		backgroundImage.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 64)
+		if self.view.traitCollection.verticalSizeClass == .Compact {
+			backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 32)
+		} else {
+			backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 64)
+		}
 		backgroundImage.backgroundColor = .whiteColor()
 		backgroundImage.layer.opacity = 0
 		view.addSubview(backgroundImage)
 	
 		tableView.rowHeight = UITableViewAutomaticDimension
-
+		
+		let centre = NSNotificationCenter.defaultCenter()
+		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
+	}
+	
+	func orientationDidChange(notification: NSNotification) {
+		if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+			if self.view.traitCollection.verticalSizeClass == .Compact {
+				backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 32)
+			}
+			setImageView()
+		} else {
+			if self.view.traitCollection.verticalSizeClass == .Compact {
+				backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 64)
+			}
+			setImageView()
+		}
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -61,21 +82,28 @@ class NewsContentViewController: UIViewController {
 
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
+		
 		dataSource.downloadImage { [unowned self] in
 			guard let image = $0 else { return }
-			self.topConstraint.constant = -130
-			let imageView = UIImageView(image: image)
-			imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 200)
-			imageView.contentMode = .ScaleToFill
 			
-			let headerView = UIView()
-			headerView.backgroundColor = .whiteColor()
-			headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 220)
-			headerView.addSubview(imageView)
-			
-			self.tableView.tableHeaderView = headerView
+			self.imageView = UIImageView(image: image)
+			self.imageView!.contentMode = .ScaleToFill
 			self.imageLoaded = true
+			self.setImageView()
 		}
+	}
+	
+	private func setImageView() {
+		guard imageLoaded == true else { return }
+		
+		self.topConstraint.constant = -130
+		self.imageView!.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width + 5, height: 200)
+		let headerView = UIView()
+		headerView.backgroundColor = .whiteColor()
+		headerView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width + 5, height: 220)
+		headerView.addSubview(self.imageView!)
+		
+		self.tableView.tableHeaderView = headerView
 	}
 	
 	/*

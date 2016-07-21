@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -107,7 +107,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="nKt-5C-pMY"/>
                                                     </constraints>
-                                                    <state key="normal" title="Confirm">
+                                                    <state key="normal" title="Sign up">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -216,7 +216,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="JHV-DK-oZS"/>
                                                     </constraints>
-                                                    <state key="normal" title="Log in"/>
+                                                    <state key="normal" title="Sign in"/>
                                                     <connections>
                                                         <action selector="loginButtonPressed:" destination="Gfe-xy-FTB" eventType="touchUpInside" id="60G-5A-t69"/>
                                                     </connections>
@@ -278,8 +278,8 @@
                                                     <rect key="frame" x="200" y="524" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idn-ci-g4X">
-                                                    <rect key="frame" x="132" y="562" width="57" height="30"/>
-                                                    <state key="normal" title="Register"/>
+                                                    <rect key="frame" x="134" y="562" width="52" height="30"/>
+                                                    <state key="normal" title="Sign up"/>
                                                     <connections>
                                                         <action selector="registerButtonPressed:" destination="Gfe-xy-FTB" eventType="touchUpInside" id="4lz-7Q-9ja"/>
                                                     </connections>

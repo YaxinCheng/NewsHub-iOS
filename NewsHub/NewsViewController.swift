@@ -19,13 +19,13 @@ class NewsViewController: UIViewController {
 		
 		// Do any additional setup after loading the view.
 		navigationController?.navigationBarHidden = true
+		if Common.location.isEmpty {
+			Common.location = "halifax"
+		}
 		seeker.loadNews()
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(newsDidRefresh), name: Common.newsRefreshDidFinish, object: nil)
 		tableView.tableFooterView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-		if Common.location.isEmpty {
-			Common.location = "halifax"
-		}
 	}
 	
 	override func didReceiveMemoryWarning() {
