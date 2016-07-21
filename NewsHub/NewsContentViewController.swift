@@ -21,21 +21,22 @@ class NewsContentViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		shadow = self.navigationController?.navigationBar.shadowImage
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.view.backgroundColor = UIColor.clearColor()
 		
-		backgroundImage = UIView()
-		if self.view.traitCollection.verticalSizeClass == .Compact {
-			backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 32)
-		} else {
-			backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 64)
-		}
-		backgroundImage.backgroundColor = .whiteColor()
-		backgroundImage.layer.opacity = 0
+		// Create and initialize the navigation bar background view
+		backgroundImage = { [unowned self] in
+			let view = UIView()
+			let height: CGFloat = self.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
+			view.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
+			view.backgroundColor = .whiteColor()
+			view.layer.opacity = 0
+			return view
+		}()
 		view.addSubview(backgroundImage)
-	
+		
 		tableView.rowHeight = UITableViewAutomaticDimension
 		
 		let centre = NSNotificationCenter.defaultCenter()
@@ -43,17 +44,9 @@ class NewsContentViewController: UIViewController {
 	}
 	
 	func orientationDidChange(notification: NSNotification) {
-		if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-			if self.view.traitCollection.verticalSizeClass == .Compact {
-				backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 32)
-			}
-			setImageView()
-		} else {
-			if self.view.traitCollection.verticalSizeClass == .Compact {
-				backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 64)
-			}
-			setImageView()
-		}
+		let height: CGFloat = UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) && self.view.traitCollection.verticalSizeClass == .Compact ? 32: 64
+		backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
+		setImageView()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -82,10 +75,8 @@ class NewsContentViewController: UIViewController {
 
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
-		
 		dataSource.downloadImage { [unowned self] in
 			guard let image = $0 else { return }
-			
 			self.imageView = UIImageView(image: image)
 			self.imageView!.contentMode = .ScaleToFill
 			self.imageLoaded = true

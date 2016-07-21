@@ -37,7 +37,8 @@ extension LoginViewController: UICollectionViewDelegate, UICollectionViewDataSou
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+		let width = UI_USER_INTERFACE_IDIOM() == .Pad ? collectionView.bounds.width / 2 : collectionView.bounds.width
+		return CGSize(width: width, height: collectionView.bounds.height)
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

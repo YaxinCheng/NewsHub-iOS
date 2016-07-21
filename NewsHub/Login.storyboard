@@ -144,6 +144,7 @@
                                         </view>
                                         <color key="backgroundColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="XHR-pa-3m3" firstAttribute="leading" secondItem="jPX-ok-Y37" secondAttribute="leadingMargin" constant="12" id="2Fm-Mi-j78"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="XHR-pa-3m3" secondAttribute="trailing" constant="12" id="5hK-Df-xDG"/>

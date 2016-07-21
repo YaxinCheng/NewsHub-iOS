@@ -13,7 +13,7 @@ class moreHeaderCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-			separatorInset = UIEdgeInsets(top: 0, left: self.bounds.size.width, bottom: 0, right: 0)
+			separatorInset = UIEdgeInsets(top: 0, left: self.bounds.size.width * 2, bottom: 0, right: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

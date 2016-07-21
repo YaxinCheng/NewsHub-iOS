@@ -13,6 +13,16 @@ class LoginViewCell: LoginCells {
 	@IBOutlet weak var emailField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
 	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(viewDidSwipeDown))
+		swipeGesture.delaysTouchesBegan = false
+		swipeGesture.cancelsTouchesInView	= false
+		swipeGesture.direction = .Down
+		self.addGestureRecognizer(swipeGesture)
+	}
+	
 	@IBAction func dismissButtonPressed(sender: AnyObject) {
 		delegate?.dismiss()
 	}
@@ -43,6 +53,10 @@ class LoginViewCell: LoginCells {
 		delegate?.switchView()
 	}
 	
+	func viewDidSwipeDown(gesture: UISwipeGestureRecognizer) {
+		guard gesture.direction == .Down else { return }
+		delegate?.dismiss()
+	}
 }
 
 extension LoginViewCell: UITextFieldDelegate {

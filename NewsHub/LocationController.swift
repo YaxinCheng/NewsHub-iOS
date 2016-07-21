@@ -16,7 +16,7 @@ class LocationController: UITableViewController {
 		super.viewDidLoad()
 		
 		var loader = LocationLoader()
-		loader.loads { [unowned self] result in
+		loader.loads { result in
 			guard let locations = result else { return }
 			self.locations = locations
 			self.tableView.reloadData()

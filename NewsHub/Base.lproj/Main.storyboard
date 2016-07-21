@@ -31,13 +31,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJk-17-wdG">
-                                                    <rect key="frame" x="20" y="0.0" width="35" height="16"/>
+                                                    <rect key="frame" x="20" y="8" width="35" height="16"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPF-Nt-BxN">
-                                                    <rect key="frame" x="20" y="16" width="109" height="49"/>
+                                                    <rect key="frame" x="20" y="24" width="109" height="49"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                                 <constraint firstItem="nJk-17-wdG" firstAttribute="leading" secondItem="Qta-eO-8fe" secondAttribute="leadingMargin" constant="12" id="VaX-54-qwV"/>
                                                 <constraint firstItem="UPF-Nt-BxN" firstAttribute="top" secondItem="nJk-17-wdG" secondAttribute="bottom" id="jp6-UN-tSU"/>
                                                 <constraint firstItem="uVO-JU-Dkg" firstAttribute="centerY" secondItem="Qta-eO-8fe" secondAttribute="centerY" id="kyc-vs-Gft"/>
-                                                <constraint firstAttribute="topMargin" secondItem="nJk-17-wdG" secondAttribute="top" constant="8" id="neH-zt-JqZ"/>
+                                                <constraint firstAttribute="topMargin" secondItem="nJk-17-wdG" secondAttribute="top" id="neH-zt-JqZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -419,7 +419,7 @@
             <objects>
                 <tableViewController id="tWN-QA-WmJ" customClass="LocationController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0TC-90-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -427,14 +427,14 @@
                             <outlet property="delegate" destination="tWN-QA-WmJ" id="ak8-kU-C3G"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="400"/>
+                    <size key="freeformSize" width="300" height="400"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYZ-XX-u19" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2424" y="-666"/>
+            <point key="canvasLocation" x="2251" y="-507"/>
         </scene>
         <!--News-->
         <scene sceneID="g7G-uF-gMR">
@@ -442,7 +442,7 @@
                 <viewControllerPlaceholder storyboardName="News" referencedIdentifier="News" id="7YT-uP-og8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3Y-Mw-26C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2192" y="-331"/>
+            <point key="canvasLocation" x="2234" y="-111"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="R7a-jl-rFn">
@@ -603,7 +603,7 @@
                     <connections>
                         <segue destination="l5W-N9-ZbZ" kind="relationship" relationship="viewControllers" id="ckU-rs-uPh"/>
                         <segue destination="dla-El-7hm" kind="relationship" relationship="viewControllers" id="gmk-uj-XFZ"/>
-                        <segue destination="aA1-5C-wRz" kind="presentation" identifier="showLoginView" id="u7s-dn-4Bc"/>
+                        <segue destination="aA1-5C-wRz" kind="presentation" identifier="showLoginView" modalPresentationStyle="formSheet" id="u7s-dn-4Bc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t6b-n5-cGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
