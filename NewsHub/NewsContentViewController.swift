@@ -15,16 +15,17 @@ class NewsContentViewController: UIViewController {
 	private var imageLoaded: Bool = false
 	private var backgroundImage: UIView!
 	@IBOutlet weak var topConstraint: NSLayoutConstraint!
-	private var shadow: UIImage?
+	private var originalShadow: UIImage?
 	private var imageView: UIImageView?
+	private var originalBackground: UIImage?
+	private var originalColour: UIColor?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		shadow = self.navigationController?.navigationBar.shadowImage
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
-		self.navigationController?.view.backgroundColor = UIColor.clearColor()
+		originalShadow = self.navigationController?.navigationBar.shadowImage
+		originalColour = self.navigationController?.view.backgroundColor
+		originalBackground = self.navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
 		
 		// Create and initialize the navigation bar background view
 		backgroundImage = { [unowned self] in
@@ -43,6 +44,12 @@ class NewsContentViewController: UIViewController {
 		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
 	}
 	
+	override func viewWillDisappear(animated: Bool) {
+		navigationController?.navigationBar.shadowImage = originalShadow
+		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
+		navigationController?.view.backgroundColor = originalColour
+	}
+	
 	func orientationDidChange(notification: NSNotification) {
 		let height: CGFloat = UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) && self.view.traitCollection.verticalSizeClass == .Compact ? 32: 64
 		backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
@@ -52,6 +59,9 @@ class NewsContentViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.view.backgroundColor = UIColor.clearColor()
 		navigationController?.navigationBarHidden = false
 		
 		dataSource.downloadDetails { [unowned self] (news) in
@@ -145,7 +155,7 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		if alpha >= 1 {
 			navigationItem.title = dataSource.title
 			backgroundImage.layer.opacity = 1
-			navigationController?.navigationBar.shadowImage = shadow
+			navigationController?.navigationBar.shadowImage = originalShadow
 		} else if alpha > 0 {
 			backgroundImage.layer.opacity = alpha
 		} else {

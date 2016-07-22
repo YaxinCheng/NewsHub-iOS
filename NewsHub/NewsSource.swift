@@ -39,4 +39,15 @@ enum NewsSource: String {
 	var placeHolder: UIImage {
 		return UIImage(named: self.rawValue + "Placeholder")!
 	}
+	
+	var themeColour: UIColor {
+		switch self {
+		case .Metro:
+			return UIColor(red: 83/255, green: 159/255, blue: 40/255, alpha: 1)
+		case .Chronicle:
+			return UIColor(red: 159/255, green: 25/255, blue: 27/255, alpha: 1)
+		default:
+			return UIColor.clearColor()
+		}
+	}
 }

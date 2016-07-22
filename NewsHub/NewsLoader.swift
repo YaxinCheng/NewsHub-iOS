@@ -32,7 +32,7 @@ extension NewsLoader {
 		request.responseJSON { (response) in
 			switch response.result {
 			case .Success(let result):
-				if let json = result as? NSDictionary {
+				if let json = result as? NSDictionary where json["message"] == nil {
 					self.process(json, error: nil)
 				}
 			case .Failure(let error):
