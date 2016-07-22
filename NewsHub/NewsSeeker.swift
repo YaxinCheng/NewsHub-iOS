@@ -29,12 +29,11 @@ struct NewsSeeker: NewsLoader	{
 		centre.postNotification(notification)
 	}
 	
-	func loadNews(from source: NewsSource = .All) {
+	func loadNews() {
 		sendRequest(from: source)
 	}
 	
-	mutating func loadMore(from source: NewsSource = .All, at page: Int) {
-		self.source = source
+	func loadMore(at page: Int) {
 		sendRequest(from: source, at: page)
 	}
 }

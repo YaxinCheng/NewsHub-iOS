@@ -82,7 +82,7 @@
                                                     <rect key="frame" x="290" y="51" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVA-bB-Dwg">
-                                                    <rect key="frame" x="20" y="0.0" width="580" height="121"/>
+                                                    <rect key="frame" x="16" y="0.0" width="584" height="121"/>
                                                     <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -96,7 +96,7 @@
                                                 <constraint firstItem="02O-gO-Tfk" firstAttribute="centerY" secondItem="sYP-be-WAu" secondAttribute="centerY" id="JQw-ZN-ma0"/>
                                                 <constraint firstItem="JVA-bB-Dwg" firstAttribute="top" secondItem="sYP-be-WAu" secondAttribute="topMargin" constant="-8" id="VhQ-ts-TG8"/>
                                                 <constraint firstItem="02O-gO-Tfk" firstAttribute="centerX" secondItem="sYP-be-WAu" secondAttribute="centerX" id="eP9-eD-cVD"/>
-                                                <constraint firstItem="JVA-bB-Dwg" firstAttribute="leading" secondItem="sYP-be-WAu" secondAttribute="leadingMargin" constant="12" id="l6b-jr-WOj"/>
+                                                <constraint firstItem="JVA-bB-Dwg" firstAttribute="leading" secondItem="sYP-be-WAu" secondAttribute="leadingMargin" constant="8" id="l6b-jr-WOj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
