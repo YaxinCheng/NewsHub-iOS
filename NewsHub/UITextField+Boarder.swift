@@ -6,7 +6,9 @@
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.
 //
 
-import UIKit
+import UIKit.UITextField
+import UIKit.UIColor
+import Foundation
 
 extension UITextField {
 	@IBInspectable var borderColour: UIColor! {

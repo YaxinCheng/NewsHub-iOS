@@ -30,6 +30,10 @@
 		E33ED9A11D303E1B00AB989E /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33ED9A01D303E1B00AB989E /* News.storyboard */; };
 		E33ED9A51D31626B00AB989E /* NewsImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33ED9A41D31626B00AB989E /* NewsImageLoader.swift */; };
 		E38D56A31D439B27008B5EA5 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A21D439B27008B5EA5 /* LogoutService.swift */; };
+		E38D56A51D452B19008B5EA5 /* ChangePassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E38D56A41D452B19008B5EA5 /* ChangePassword.storyboard */; };
+		E38D56A71D452CAA008B5EA5 /* NSDate+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */; };
+		E38D56A91D452D6A008B5EA5 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */; };
+		E38D56AB1D452DB7008B5EA5 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */; };
 		E3AF9CBF1D413FAA00BE53E0 /* Source.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */; };
 		E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */; };
 		E3D1B7FD1D3550F600421744 /* moreHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */; };
@@ -107,6 +111,10 @@
 		E33ED9A01D303E1B00AB989E /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
 		E33ED9A41D31626B00AB989E /* NewsImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageLoader.swift; sourceTree = "<group>"; };
 		E38D56A21D439B27008B5EA5 /* LogoutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
+		E38D56A41D452B19008B5EA5 /* ChangePassword.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChangePassword.storyboard; sourceTree = "<group>"; };
+		E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Localization.swift"; sourceTree = "<group>"; };
+		E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
+		E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Source.storyboard; sourceTree = "<group>"; };
 		E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSourceController.swift; sourceTree = "<group>"; };
 		E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreHeaderCell.swift; sourceTree = "<group>"; };
@@ -283,6 +291,8 @@
 				E3D1B8391D3BC35100421744 /* User.swift */,
 				E3D1B82E1D3970D800421744 /* UserManager.swift */,
 				E38D56A21D439B27008B5EA5 /* LogoutService.swift */,
+				E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */,
+				E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -326,6 +336,7 @@
 				E33ED98E1D2FE65700AB989E /* Common.swift */,
 				E3D1B8261D396A6300421744 /* formatChecker.swift */,
 				E3D1B8271D396A6300421744 /* Regex.swift */,
+				E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */,
 				E3D1B8201D39647300421744 /* UITextField+Boarder.swift */,
 				E31B48321D3C62480050F1A0 /* Persistable.swift */,
 				E31B48341D3C62B90050F1A0 /* PropertySerializable.swift */,
@@ -336,6 +347,7 @@
 				E33ED9A01D303E1B00AB989E /* News.storyboard */,
 				E3F86D9F1D3E588400EA57C5 /* Login.storyboard */,
 				E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */,
+				E38D56A41D452B19008B5EA5 /* ChangePassword.storyboard */,
 				E3EC37C91D2AE803009714AF /* Assets.xcassets */,
 				E3EC37CB1D2AE803009714AF /* LaunchScreen.storyboard */,
 				E3EC37CE1D2AE803009714AF /* Info.plist */,
@@ -475,6 +487,7 @@
 				E3EC37C81D2AE803009714AF /* Main.storyboard in Resources */,
 				E3F86DA01D3E588400EA57C5 /* Login.storyboard in Resources */,
 				E33ED9A11D303E1B00AB989E /* News.storyboard in Resources */,
+				E38D56A51D452B19008B5EA5 /* ChangePassword.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +569,7 @@
 				E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */,
 				E33ED9911D2FED6E00AB989E /* NewsHeadlineCell.swift in Sources */,
 				E3D1B8251D3968B400421744 /* RegisterService.swift in Sources */,
+				E38D56A91D452D6A008B5EA5 /* PasswordChangeViewController.swift in Sources */,
 				E3F86DA21D3E8B0600EA57C5 /* NewsViewDelegate.swift in Sources */,
 				E33ED9A51D31626B00AB989E /* NewsImageLoader.swift in Sources */,
 				E33ED9791D2AE91E00AB989E /* News.swift in Sources */,
@@ -571,6 +585,7 @@
 				E325A0A61D3FF546003DC950 /* LocationLoader.swift in Sources */,
 				E325A0A41D3FF24B003DC950 /* LocationController.swift in Sources */,
 				E3D1B82F1D3970D800421744 /* UserManager.swift in Sources */,
+				E38D56A71D452CAA008B5EA5 /* NSDate+Localization.swift in Sources */,
 				E3D1B83B1D3BC35100421744 /* User.swift in Sources */,
 				E33ED97B1D2AEA8100AB989E /* NewsLoaderProtocol.swift in Sources */,
 				E3D1B8031D36A50900421744 /* tagHeaderCell.swift in Sources */,
@@ -585,6 +600,7 @@
 				E3D1B81D1D395ACA00421744 /* LoginViewCell.swift in Sources */,
 				E33ED9991D3008CC00AB989E /* headerCell.swift in Sources */,
 				E33ED9931D2FEF9300AB989E /* NewsHeadlineContentCell.swift in Sources */,
+				E38D56AB1D452DB7008B5EA5 /* TextFieldCell.swift in Sources */,
 				E3D1B8291D396A6300421744 /* Regex.swift in Sources */,
 				E31B48351D3C62B90050F1A0 /* PropertySerializable.swift in Sources */,
 				E33ED99F1D3019D500AB989E /* NewsNoImageCell.swift in Sources */,

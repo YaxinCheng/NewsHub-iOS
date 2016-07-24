@@ -8,23 +8,6 @@
 
 import Foundation
 
-extension NSDate {
-	func formatDate() -> String {
-		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = "EEEE, MMMM dd"
-		dateFmt.timeZone = NSTimeZone.localTimeZone()
-		return dateFmt.stringFromDate(self)
-	}
-	
-	func localTime() -> String {
-		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = "yyyy-MM-dd hh:mm:ss"
-		let localTimeZone = NSTimeZone.localTimeZone()
-		dateFmt.timeZone = localTimeZone
-		return dateFmt.stringFromDate(self)
-	}
-}
-
 struct Common {
 	static let headerIdentifier = "headerCell"
 	static let headlinesIdentifier = "headlineCell"
@@ -46,6 +29,8 @@ struct Common {
 	static let popOverIdentifier = "presentLocationPicker"
 	static let segueNewsSourceIdentifier = "showNewsSource"
 	static let segueNewsDeatailsFromSourceIdentifier = "segueToNewsFromSource"
+	static let textFieldCellIdentifier = "textFieldCell"
+	static let seguePasswordChangeIdentifier = "segueToPasswordChange"
 	
 	static var location: String {
 		get {

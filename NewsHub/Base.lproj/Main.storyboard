@@ -587,11 +587,20 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="yMk-y5-Fnl" id="6fl-3z-o6s"/>
+                        <segue destination="TNh-9K-hSq" kind="presentation" identifier="segueToPasswordChange" id="XMD-1f-uAG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15L-83-uOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1725" y="1079"/>
+        </scene>
+        <!--ChangePassword-->
+        <scene sceneID="jdL-Md-xNS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChangePassword" referencedIdentifier="ChangePassword" id="TNh-9K-hSq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eed-sL-Dta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2175.5" y="996"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="DmK-bv-kgo">

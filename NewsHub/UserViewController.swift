@@ -34,34 +34,22 @@ class UserViewController: UIViewController {
 			tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
 		}
 	}
-	/*
-	// MARK: - Navigation
 	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
-	}
-	*/
+	
+	// MARK: - Navigation
+//	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//		guard let identifier = segue.identifier else { return }
+//		switch identifier {
+//		case Common.seguePasswordChangeIdentifier:
+//			
+//		default:
+//			break
+//		}
+//	}
+
 	
 	func popLoginView() {
 		parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
-	}
-	
-	func logoutAction() -> UIAlertAction {
-		let logout = UIAlertAction(title: "Log Out", style: .Destructive) { [unowned self] _ in
-			var logout = LogoutService()
-			logout.logout { [unowned self] in
-				if let errorInfo = $0 {
-					let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .Alert)
-					alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-					self.presentViewController(alert, animated: true, completion: nil)
-				} else {
-					self.popLoginView()
-				}
-			}
-		}
-		return logout
 	}
 }
 
@@ -105,6 +93,7 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		if indexPath.section == 0 {
 			let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+			actionSheet.addAction(segueToChangePassword())
 			actionSheet.addAction(logoutAction())
 			actionSheet.addAction(.Cancel)
 			presentViewController(actionSheet, animated: true, completion: nil)
@@ -116,5 +105,30 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 private extension UIAlertAction {
 	static var Cancel: UIAlertAction {
 		return UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+	}
+}
+
+private extension UserViewController {
+	private func logoutAction() -> UIAlertAction {
+		let logout = UIAlertAction(title: "Log Out", style: .Destructive) { [unowned self] _ in
+			var logout = LogoutService()
+			logout.logout { [unowned self] in
+				if let errorInfo = $0 {
+					let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .Alert)
+					alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+					self.presentViewController(alert, animated: true, completion: nil)
+				} else {
+					self.popLoginView()
+				}
+			}
+		}
+		return logout
+	}
+	
+	private func segueToChangePassword() -> UIAlertAction {
+		let segue = UIAlertAction(title: "Change Password", style: .Default) { [unowned self] _ in
+			self.performSegueWithIdentifier(Common.seguePasswordChangeIdentifier, sender: nil)
+		}
+		return segue
 	}
 }
