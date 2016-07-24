@@ -1,5 +1,5 @@
 //
-//  RegisterManager.swift
+//  RegisterService.swift
 //  NewsHub
 //
 //  Created by Yaxin Cheng on 2016-07-15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RegisterManager: UserSideManager, formatChecker {
+struct RegisterService: UserServiceProtocol, formatChecker {
 	var endPoint: String {
 		return "/register"
 	}

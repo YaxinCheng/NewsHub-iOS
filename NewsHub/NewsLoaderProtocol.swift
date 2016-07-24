@@ -1,5 +1,5 @@
 //
-//  NewsLoader.swift
+//  NewsLoaderProtocol.swift
 //  NewsHub
 //
 //  Created by Yaxin Cheng on 2016-07-04.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol NewsLoader {
+protocol NewsLoaderProtocol {
 	var api: String { get }
 	var endPoint: String { get }
 	
@@ -17,7 +17,7 @@ protocol NewsLoader {
 	func process(json: NSDictionary, error: NSError?)
 }
 
-extension NewsLoader {
+extension NewsLoaderProtocol {
 	var api: String {
 		return "https://hubnews.herokuapp.com"
 	}

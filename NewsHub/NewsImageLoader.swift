@@ -9,7 +9,7 @@
 import Foundation
 import UIKit.UIImage
 
-struct NewsImageLoader: NewsLoader {
+struct NewsImageLoader: NewsLoaderProtocol {
 	var endPoint: String {
 		return "/api/thumbnails"
 	}

@@ -17,7 +17,7 @@ class UserViewController: UIViewController {
 		// Do any additional setup after loading the view.
 		navigationController?.navigationBarHidden = true
 		if UserManager.sharedManager.userStatus == false {
-			parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
+			popLoginView()
 		}
 		tableView.estimatedRowHeight = 100
 	}
@@ -44,6 +44,25 @@ class UserViewController: UIViewController {
 	}
 	*/
 	
+	func popLoginView() {
+		parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
+	}
+	
+	func logoutAction() -> UIAlertAction {
+		let logout = UIAlertAction(title: "Log Out", style: .Destructive) { [unowned self] _ in
+			var logout = LogoutService()
+			logout.logout { [unowned self] in
+				if let errorInfo = $0 {
+					let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .Alert)
+					alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+					self.presentViewController(alert, animated: true, completion: nil)
+				} else {
+					self.popLoginView()
+				}
+			}
+		}
+		return logout
+	}
 }
 
 extension UserViewController: UITableViewDelegate, UITableViewDataSource {
@@ -81,5 +100,21 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 		default:
 			return UITableViewAutomaticDimension
 		}
+	}
+	
+	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if indexPath.section == 0 {
+			let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+			actionSheet.addAction(logoutAction())
+			actionSheet.addAction(.Cancel)
+			presentViewController(actionSheet, animated: true, completion: nil)
+		}
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	}
+}
+
+private extension UIAlertAction {
+	static var Cancel: UIAlertAction {
+		return UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
 	}
 }

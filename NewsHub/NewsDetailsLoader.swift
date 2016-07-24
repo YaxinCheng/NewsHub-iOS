@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NewsDetailsLoader: NewsLoader {
+struct NewsDetailsLoader: NewsLoaderProtocol {
 	
 	var endPoint: String {
 		return "/api/details"

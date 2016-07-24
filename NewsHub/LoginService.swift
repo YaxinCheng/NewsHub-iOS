@@ -1,5 +1,5 @@
 //
-//  LoginManager.swift
+//  LoginService.swift
 //  NewsHub
 //
 //  Created by Yaxin Cheng on 2016-07-15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LoginManager: UserSideManager, formatChecker {
+struct LoginService: UserServiceProtocol, formatChecker {
 	var endPoint: String {
 		return "/login"
 	}

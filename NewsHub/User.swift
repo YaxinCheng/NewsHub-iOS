@@ -55,7 +55,7 @@ extension User: PropertySerializable {
 	}
 }
 
-extension User: Cacheable {
+extension User: Persistable {
 	var primaryKeyAttribute: String {
 		return "email"
 	}

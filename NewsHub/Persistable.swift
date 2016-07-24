@@ -9,7 +9,7 @@
 import UIKit.UIApplication
 import CoreData
 
-protocol Cacheable: PropertySerializable {
+protocol Persistable: PropertySerializable {
 	static var entityName: String { get }
 	var primaryKeyAttribute: String { get }
 	var primaryKeyValue: AnyObject { get }
@@ -18,7 +18,7 @@ protocol Cacheable: PropertySerializable {
 	func deleteFromCache() throws
 }
 
-extension Cacheable {
+extension Persistable {
 	static var entityName: String {
 		return "\(Self.self)"
 	}

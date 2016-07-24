@@ -33,7 +33,7 @@ class RegisterViewCell: LoginCells {
 			let password = passwordField.text,
 			let userName = userNameField.text
 		else { return }
-		var register = RegisterManager()
+		var register = RegisterService()
 		register.registerAccount(email, password: password, userName: userName) { [unowned self] (info) in
 			defer {
 				self.activityIndicator.stopAnimating()

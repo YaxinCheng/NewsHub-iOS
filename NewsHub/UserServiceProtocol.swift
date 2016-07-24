@@ -1,5 +1,5 @@
 //
-//  UserManager.swift
+//  UserServiceProtocol.swift
 //  NewsHub
 //
 //  Created by Yaxin Cheng on 2016-07-15.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol UserSideManager {
+protocol UserServiceProtocol {
 	var api: String { get }
 	var endPoint: String { get }
 	func sendRequest(method: Alamofire.Method, with parameters: [String: String])
@@ -17,7 +17,7 @@ protocol UserSideManager {
 	var completion: ((String?) -> Void)? { set get }
 }
 
-extension UserSideManager {
+extension UserServiceProtocol {
 	var api: String {
 		return "https://hubnews.herokuapp.com"
 	}

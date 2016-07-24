@@ -36,7 +36,7 @@ class LoginViewCell: LoginCells {
 			let email = emailField.text?.lowercaseString,
 			let password = passwordField.text
 			else { return }
-		var login = LoginManager()
+		var login = LoginService()
 		login.login(email, password: password) { [unowned self] (info) in
 			guard let error = info where error != "SUCCESS" else {
 				self.delegate?.dismiss()
