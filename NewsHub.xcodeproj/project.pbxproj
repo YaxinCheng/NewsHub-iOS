@@ -221,6 +221,16 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		E38D56B81D46598A008B5EA5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */,
+				E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */,
+				E3D1B8201D39647300421744 /* UITextField+Boarder.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		E3AF9CC01D41431D00BE53E0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,11 +351,9 @@
 				E33ED98E1D2FE65700AB989E /* Common.swift */,
 				E3D1B8261D396A6300421744 /* formatChecker.swift */,
 				E3D1B8271D396A6300421744 /* Regex.swift */,
-				E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */,
-				E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */,
-				E3D1B8201D39647300421744 /* UITextField+Boarder.swift */,
 				E31B48321D3C62480050F1A0 /* Persistable.swift */,
 				E31B48341D3C62B90050F1A0 /* PropertySerializable.swift */,
+				E38D56B81D46598A008B5EA5 /* Extensions */,
 				E3D1B8401D3BCB1900421744 /* User */,
 				E3D1B8301D3971C200421744 /* LoginView */,
 				E3D1B80E1D380EB900421744 /* News */,

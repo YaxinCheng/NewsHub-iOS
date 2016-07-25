@@ -28,9 +28,9 @@ class NewsContentViewController: UIViewController {
 		originalBackground = self.navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
 		
 		// Create and initialize the navigation bar background view
-		backgroundImage = { [weak self] in
+		backgroundImage = { [unowned self] in
 			let view = UIView()
-			let height: CGFloat = self?.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
+			let height: CGFloat = self.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
 			view.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
 			view.backgroundColor = .whiteColor()
 			view.layer.opacity = 0

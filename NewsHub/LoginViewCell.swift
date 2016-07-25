@@ -31,6 +31,7 @@ class LoginViewCell: LoginCells {
 		defer {
 			activityIndicator.stopAnimating()
 		}
+		activityIndicator.hidden = false
 		activityIndicator.startAnimating()
 		guard
 			let email = emailField.text?.lowercaseString,

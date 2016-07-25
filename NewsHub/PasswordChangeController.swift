@@ -35,6 +35,7 @@ class PasswordChangeController: UIViewController {
 		defer {
 			activityIndicator.stopAnimating()
 		}
+		activityIndicator.hidden = false
 		activityIndicator.startAnimating()
 		guard
 			let old = oldField.text,
@@ -59,6 +60,17 @@ class PasswordChangeController: UIViewController {
 	
 	@IBAction func cancelButtonPressed(sender: AnyObject) {
 		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+}
+
+extension PasswordChangeController: UITextFieldDelegate {
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if textField === oldField {
+			newField.becomeFirstResponder()
+		} else {
+			confirmButtonPressed(textField)
+		}
+		return true
 	}
 	
 }

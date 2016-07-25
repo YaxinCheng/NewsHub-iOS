@@ -190,3 +190,9 @@ extension NewsViewController: UIPopoverPresentationControllerDelegate {
 		return .None
 	}
 }
+
+extension NewsViewController: UITabBarControllerDelegate {
+	func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+		
+	}
+}
