@@ -118,11 +118,11 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			}
 			
 			let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
-			news.downloadThumbnail { [unowned self] (news) in
+			news.downloadThumbnail { [weak self] (news) in
 				if let loadedNews = news {
 					if NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] != loadedNews {
 						NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] = loadedNews
-						self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+						self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 					}
 				}
 			}

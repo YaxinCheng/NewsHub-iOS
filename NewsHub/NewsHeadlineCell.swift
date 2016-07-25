@@ -41,9 +41,9 @@ extension NewsHeadlineCell: UICollectionViewDelegate, UICollectionViewDataSource
 			cell.titleLabel.text = news.title
 			cell.sourceLabel.text = news.source.rawValue
 			cell.imageView.image = news.source.placeHolder
-			news.downloadThumbnail { [unowned self] (news) in
-				if let loadedNews = news {
-					NewsHub.hub(for: self.source).headlines[indexPath.row] = loadedNews
+			news.downloadThumbnail { [weak self] (news) in
+				if let loadedNews = news, let source = self?.source {
+					NewsHub.hub(for: source).headlines[indexPath.row] = loadedNews
 					cell.imageView.image = loadedNews.image
 				}
 			}

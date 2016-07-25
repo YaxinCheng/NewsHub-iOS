@@ -21,6 +21,7 @@ struct LoginService: UserServiceProtocol, formatChecker {
 		} else if let errorInfo = JSON?["ERROR"] as? String {
 			completion?(errorInfo)
 		} else if let user = User(with: JSON!) {
+			UserManager.sharedManager.userStatus = true
 			UserManager.sharedManager.currentUser = user
 			try! user.saveToCache()
 			completion?("SUCCESS")

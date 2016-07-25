@@ -34,22 +34,22 @@ class RegisterViewCell: LoginCells {
 			let userName = userNameField.text
 		else { return }
 		var register = RegisterService()
-		register.registerAccount(email, password: password, userName: userName) { [unowned self] (info) in
+		register.registerAccount(email, password: password, userName: userName) { [weak self] (info) in
 			defer {
-				self.activityIndicator.stopAnimating()
+				self?.activityIndicator.stopAnimating()
 			}
 			guard let error = info where error != "Register Successfully"	else {
-				UIView.animateWithDuration(0.2) { [unowned self] in
-					self.emailIndicator.layer.opacity = 1
-					self.passwordIndicator.layer.opacity = 1
-					self.userNameIndicator.layer.opacity = 1
+				UIView.animateWithDuration(0.2) { [weak self] in
+					self?.emailIndicator.layer.opacity = 1
+					self?.passwordIndicator.layer.opacity = 1
+					self?.userNameIndicator.layer.opacity = 1
 				}
 				return
 			}
 			let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .Alert)
-			alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-			alert.view.tintColor = self.tintColor
-			self.delegate?.present(alert)
+			alert.addAction(.Cancel)
+			alert.view.tintColor = self?.tintColor
+			self?.delegate?.present(alert)
 		}
 	}
 }

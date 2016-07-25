@@ -16,10 +16,10 @@ class LocationController: UITableViewController {
 		super.viewDidLoad()
 		
 		var loader = LocationLoader()
-		loader.loads { result in
+		loader.loads {[weak self] result in
 			guard let locations = result else { return }
-			self.locations = locations
-			self.tableView.reloadData()
+			self?.locations = locations
+			self?.tableView.reloadData()
 		}
 	}
 

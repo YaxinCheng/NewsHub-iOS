@@ -428,7 +428,7 @@
                             <outlet property="delegate" destination="tWN-QA-WmJ" id="ak8-kU-C3G"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>

@@ -91,11 +91,11 @@ extension NewsSourceController: UITableViewDelegate, UITableViewDataSource {
 				return cell
 			}
 			let news = dataSource.taggedNews[indexPath.section - 2][indexPath.row - 1]
-			news.downloadThumbnail { [unowned self] (news) in
+			news.downloadThumbnail { [weak self] (news) in
 				if let loadedNews = news {
-					if self.dataSource.taggedNews[indexPath.section - 2][indexPath.row - 1] != loadedNews {
-						self.dataSource.taggedNews[indexPath.section - 2][indexPath.row - 1] = loadedNews
-						self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+					if self?.dataSource.taggedNews[indexPath.section - 2][indexPath.row - 1] != loadedNews {
+						self?.dataSource.taggedNews[indexPath.section - 2][indexPath.row - 1] = loadedNews
+						self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 					}
 				}
 			}

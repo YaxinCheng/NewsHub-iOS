@@ -18,13 +18,7 @@ struct LogoutService: UserServiceProtocol {
 			completion?(error?.localizedDescription)
 		} else if let _ = JSON?["SUCCESS"] {
 			do {
-				let user = UserManager.sharedManager.currentUser
-				try user?.deleteFromCache()
-				UserManager.sharedManager.userStatus = false
-				for eachCookie in NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "https://hubnews.herokuapp.com")!) ?? [] {
-					NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(eachCookie)
-				}
-				UserManager.sharedManager.currentUser = nil
+				try clearCookies()
 			} catch {
 				completion?("\(error)")
 			}
@@ -40,5 +34,15 @@ struct LogoutService: UserServiceProtocol {
 		guard let _ = UserManager.sharedManager.currentUser else { return }
 		self.completion = completion
 		sendRequest(.GET, with: [:])
+	}
+	
+	func clearCookies() throws {
+		let user = UserManager.sharedManager.currentUser
+		try user?.deleteFromCache()
+		UserManager.sharedManager.userStatus = false
+		for eachCookie in NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "https://hubnews.herokuapp.com")!) ?? [] {
+			NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(eachCookie)
+		}
+		UserManager.sharedManager.currentUser = nil
 	}
 }

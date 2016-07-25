@@ -28,9 +28,9 @@ class NewsContentViewController: UIViewController {
 		originalBackground = self.navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
 		
 		// Create and initialize the navigation bar background view
-		backgroundImage = { [unowned self] in
+		backgroundImage = { [weak self] in
 			let view = UIView()
-			let height: CGFloat = self.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
+			let height: CGFloat = self?.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
 			view.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
 			view.backgroundColor = .whiteColor()
 			view.layer.opacity = 0
@@ -64,33 +64,33 @@ class NewsContentViewController: UIViewController {
 		navigationController?.view.backgroundColor = UIColor.clearColor()
 		navigationController?.navigationBarHidden = false
 		
-		dataSource.downloadDetails { [unowned self] (news) in
+		dataSource.downloadDetails { [weak self] (news) in
 			defer {
-				self.tableView.reloadData()
-				self.loadNewsImage()
+				self?.tableView.reloadData()
+				self?.loadNewsImage()
 			}
 			if let loadedNews = news {
-				self.dataSource = loadedNews
+				self?.dataSource = loadedNews
 			} else {
 				let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .Alert)
-				let action = UIAlertAction(title: "OK", style: .Cancel) { [unowned self] _ in
-					self.navigationController?.popToRootViewControllerAnimated(true)
+				let action = UIAlertAction(title: "OK", style: .Cancel) { [weak self] _ in
+					self?.navigationController?.popToRootViewControllerAnimated(true)
 				}
 				alert.addAction(action)
-				alert.view.tintColor = self.view.tintColor
-				self.presentViewController(alert, animated: true, completion: nil)
+				alert.view.tintColor = self?.view.tintColor
+				self?.presentViewController(alert, animated: true, completion: nil)
 			}
 		}
 	}
 
 	private func loadNewsImage() {
 		guard imageLoaded == false else { return }
-		dataSource.downloadImage { [unowned self] in
+		dataSource.downloadImage { [weak self] in
 			guard let image = $0 else { return }
-			self.imageView = UIImageView(image: image)
-			self.imageView!.contentMode = .ScaleToFill
-			self.imageLoaded = true
-			self.setImageView()
+			self?.imageView = UIImageView(image: image)
+			self?.imageView!.contentMode = .ScaleToFill
+			self?.imageLoaded = true
+			self?.setImageView()
 		}
 	}
 	

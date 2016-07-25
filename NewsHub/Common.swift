@@ -31,6 +31,7 @@ struct Common {
 	static let segueNewsDeatailsFromSourceIdentifier = "segueToNewsFromSource"
 	static let textFieldCellIdentifier = "textFieldCell"
 	static let seguePasswordChangeIdentifier = "segueToPasswordChange"
+	static let segueUserViewIdentifier = "segueToUesrView"
 	
 	static var location: String {
 		get {

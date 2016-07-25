@@ -32,8 +32,10 @@
 		E38D56A31D439B27008B5EA5 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A21D439B27008B5EA5 /* LogoutService.swift */; };
 		E38D56A51D452B19008B5EA5 /* ChangePassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E38D56A41D452B19008B5EA5 /* ChangePassword.storyboard */; };
 		E38D56A71D452CAA008B5EA5 /* NSDate+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */; };
-		E38D56A91D452D6A008B5EA5 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */; };
 		E38D56AB1D452DB7008B5EA5 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */; };
+		E38D56B01D463A90008B5EA5 /* PasswordChangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56AF1D463A90008B5EA5 /* PasswordChangeController.swift */; };
+		E38D56B21D463FB4008B5EA5 /* ChangePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56B11D463FB4008B5EA5 /* ChangePasswordService.swift */; };
+		E38D56B41D46442E008B5EA5 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */; };
 		E3AF9CBF1D413FAA00BE53E0 /* Source.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */; };
 		E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */; };
 		E3D1B7FD1D3550F600421744 /* moreHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */; };
@@ -113,8 +115,10 @@
 		E38D56A21D439B27008B5EA5 /* LogoutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		E38D56A41D452B19008B5EA5 /* ChangePassword.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChangePassword.storyboard; sourceTree = "<group>"; };
 		E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Localization.swift"; sourceTree = "<group>"; };
-		E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
 		E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		E38D56AF1D463A90008B5EA5 /* PasswordChangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeController.swift; sourceTree = "<group>"; };
+		E38D56B11D463FB4008B5EA5 /* ChangePasswordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordService.swift; sourceTree = "<group>"; };
+		E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Source.storyboard; sourceTree = "<group>"; };
 		E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSourceController.swift; sourceTree = "<group>"; };
 		E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreHeaderCell.swift; sourceTree = "<group>"; };
@@ -287,11 +291,12 @@
 		E3D1B8401D3BCB1900421744 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				E38D56AF1D463A90008B5EA5 /* PasswordChangeController.swift */,
+				E38D56B11D463FB4008B5EA5 /* ChangePasswordService.swift */,
 				E3D1B80F1D380ED000421744 /* UserViewController.swift */,
 				E3D1B8391D3BC35100421744 /* User.swift */,
 				E3D1B82E1D3970D800421744 /* UserManager.swift */,
 				E38D56A21D439B27008B5EA5 /* LogoutService.swift */,
-				E38D56A81D452D6A008B5EA5 /* PasswordChangeViewController.swift */,
 				E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */,
 			);
 			name = User;
@@ -337,6 +342,7 @@
 				E3D1B8261D396A6300421744 /* formatChecker.swift */,
 				E3D1B8271D396A6300421744 /* Regex.swift */,
 				E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */,
+				E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */,
 				E3D1B8201D39647300421744 /* UITextField+Boarder.swift */,
 				E31B48321D3C62480050F1A0 /* Persistable.swift */,
 				E31B48341D3C62B90050F1A0 /* PropertySerializable.swift */,
@@ -560,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38D56B01D463A90008B5EA5 /* PasswordChangeController.swift in Sources */,
 				E33ED9851D2D79D100AB989E /* NewsDetailsLoader.swift in Sources */,
 				E3D1B82B1D396DE300421744 /* LoginService.swift in Sources */,
 				E33ED99D1D3019AA00AB989E /* NewsNormalCell.swift in Sources */,
@@ -569,7 +576,6 @@
 				E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */,
 				E33ED9911D2FED6E00AB989E /* NewsHeadlineCell.swift in Sources */,
 				E3D1B8251D3968B400421744 /* RegisterService.swift in Sources */,
-				E38D56A91D452D6A008B5EA5 /* PasswordChangeViewController.swift in Sources */,
 				E3F86DA21D3E8B0600EA57C5 /* NewsViewDelegate.swift in Sources */,
 				E33ED9A51D31626B00AB989E /* NewsImageLoader.swift in Sources */,
 				E33ED9791D2AE91E00AB989E /* News.swift in Sources */,
@@ -580,6 +586,7 @@
 				E3EC37C31D2AE803009714AF /* AppDelegate.swift in Sources */,
 				E33ED97D1D2AEDE500AB989E /* NewsSeeker.swift in Sources */,
 				E3D1B8431D3BD0B600421744 /* titleCell.swift in Sources */,
+				E38D56B41D46442E008B5EA5 /* UIAlertAction+Cancel.swift in Sources */,
 				E3D1B8211D39647300421744 /* UITextField+Boarder.swift in Sources */,
 				E33ED97F1D2AF1AD00AB989E /* NewsHub.swift in Sources */,
 				E325A0A61D3FF546003DC950 /* LocationLoader.swift in Sources */,
@@ -594,6 +601,7 @@
 				E3D1B80D1D37DA4F00421744 /* NewsContentViewController.swift in Sources */,
 				E3D1B7FF1D3554CD00421744 /* NewsCell.swift in Sources */,
 				E3D1B8341D39A2C000421744 /* LoginCells.swift in Sources */,
+				E38D56B21D463FB4008B5EA5 /* ChangePasswordService.swift in Sources */,
 				E3D7889F1D3D5D2100782F31 /* contentCell.swift in Sources */,
 				E33ED98F1D2FE65700AB989E /* Common.swift in Sources */,
 				E3D1B8321D39A0D000421744 /* LoginCellsDelegate.swift in Sources */,
