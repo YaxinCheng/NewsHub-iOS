@@ -9,7 +9,7 @@
 import Foundation
 import UIKit.UIImage
 
-struct News: Hashable, Equatable {
+struct News: Hashable, Equatable, TagProtocol {
 	var title: String
 	var content: String
 	let contentLink: String
@@ -17,7 +17,7 @@ struct News: Hashable, Equatable {
 	var date: NSDate?
 	var imageLink: String?
 	var image: UIImage?
-	let tag: String
+	var tag: String
 	private var imageLoaded = false
 	private static var imageLoader = NewsImageLoader()
 	private var detailsLoaded = false

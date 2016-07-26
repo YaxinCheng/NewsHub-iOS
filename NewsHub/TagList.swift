@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct NewsList {
-	private var internalList: [String: [News]]
+struct TagList<Element: TagProtocol> {
+	private var internalList: [String: [Element]]
 	private var tags: NSMutableOrderedSet
 	
 	init() {
@@ -17,7 +17,7 @@ struct NewsList {
 		internalList = [:]
 	}
 	
-	mutating func append(newValue: News) {
+	mutating func append(newValue: Element) {
 		if tags.containsObject(newValue.tag) {
 			internalList[newValue.tag]?.append(newValue)
 		} else {
@@ -30,7 +30,7 @@ struct NewsList {
 		return tags.count
 	}
 	
-	subscript(index: Int) -> [News] {
+	subscript(index: Int) -> [Element] {
 		get {
 			let tag = tags.objectAtIndex(index) as! String
 			return internalList[tag]!
@@ -40,7 +40,7 @@ struct NewsList {
 		}
 	}
 	
-	mutating func append(list: Array<News>) {
+	mutating func append(list: Array<Element>) {
 		for eachNews in list {
 			append(eachNews)
 		}
@@ -51,12 +51,12 @@ struct NewsList {
 	}
 }
 
-func + (lhs: NewsList, rhs: Array<News>) -> NewsList {
+func + (lhs: TagList<News>, rhs: Array<News>) -> TagList<News> {
 	var newList = lhs
 	newList.append(rhs)
 	return newList
 }
 
-func += (inout lhs: NewsList, rhs: Array<News>) {
+func += (inout lhs: TagList<News>, rhs: Array<News>) {
 	lhs.append(rhs)
 }

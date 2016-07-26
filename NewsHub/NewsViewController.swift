@@ -161,7 +161,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height && tableView.visibleCells.count > 0 {
+		if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height && tableView.visibleCells.count > 0 && pageCounter > 1 {
 			(tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
 			seeker.loadMore(at: pageCounter)
 		}

@@ -12,16 +12,16 @@ final class NewsHub {
 	static var allHubs: [NewsSource: NewsHub] = Dictionary<NewsSource, NewsHub>()
 	
 	var headlines: [News]
-	var taggedNews: NewsList
+	var taggedNews: TagList<News>
 	
 	private init() {
 		headlines = []
-		taggedNews = NewsList()
+		taggedNews = TagList()
 	}
 	
 	func clear() {
 		headlines = []
-		taggedNews = NewsList()
+		taggedNews = TagList()
 	}
 	
 	static func hub(for source: NewsSource = .All) -> NewsHub {
