@@ -16,15 +16,13 @@ struct LogoutService: UserServiceProtocol {
 	func process(JSON: [String : AnyObject]?, error: NSError?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
-		} else if let _ = JSON?["SUCCESS"] {
+		} else {
 			do {
 				try clearCookies()
 			} catch {
 				completion?("\(error)")
 			}
 			completion?(nil)
-		} else {
-			completion?("Unknown error happened")
 		}
 	}
 	

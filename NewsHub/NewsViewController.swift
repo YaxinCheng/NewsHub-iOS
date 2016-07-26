@@ -51,11 +51,13 @@ class NewsViewController: UIViewController {
 			if let indexPath = tableView.indexPathForSelectedRow {
 				let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				destinationVC.hidesBottomBarWhenPushed = true
 				destinationVC.dataSource = news
 			} else {
 				let index = sender as! Int
 				let news = NewsHub.hub().headlines[index]
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				destinationVC.hidesBottomBarWhenPushed = true
 				destinationVC.dataSource = news
 			}
 		} else if identifier == Common.popOverIdentifier {

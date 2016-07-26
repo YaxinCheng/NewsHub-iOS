@@ -48,6 +48,8 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBar.shadowImage = originalShadow
 		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
 		navigationController?.view.backgroundColor = originalColour
+		
+		navigationItem.rightBarButtonItem = nil
 	}
 	
 	func orientationDidChange(notification: NSNotification) {
@@ -63,6 +65,9 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBar.shadowImage = UIImage()
 		navigationController?.view.backgroundColor = UIColor.clearColor()
 		navigationController?.navigationBarHidden = false
+		
+		let heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
+		navigationItem.rightBarButtonItem = heartButton
 		
 		dataSource.downloadDetails { [weak self] (news) in
 			defer {
@@ -105,6 +110,13 @@ class NewsContentViewController: UIViewController {
 		headerView.addSubview(self.imageView!)
 		
 		self.tableView.tableHeaderView = headerView
+	}
+	
+	func likeButtonPressed(sender: UIBarButtonItem) {
+		let index = 1 - sender.tag
+		sender.tag = index
+		let imageName = index == 0 ? "hearticon" : "hearticon-highlight"
+		sender.image = UIImage(named: imageName)
 	}
 	
 	/*
