@@ -37,6 +37,7 @@
 		E38D56B21D463FB4008B5EA5 /* ChangePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56B11D463FB4008B5EA5 /* ChangePasswordService.swift */; };
 		E38D56B41D46442E008B5EA5 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */; };
 		E38D56BA1D47BCA9008B5EA5 /* TagProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56B91D47BCA9008B5EA5 /* TagProtocol.swift */; };
+		E38D56BC1D47DCA9008B5EA5 /* UserSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56BB1D47DCA9008B5EA5 /* UserSettingCell.swift */; };
 		E3AF9CBF1D413FAA00BE53E0 /* Source.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */; };
 		E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */; };
 		E3D1B7FD1D3550F600421744 /* moreHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */; };
@@ -121,6 +122,7 @@
 		E38D56B11D463FB4008B5EA5 /* ChangePasswordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordService.swift; sourceTree = "<group>"; };
 		E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E38D56B91D47BCA9008B5EA5 /* TagProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagProtocol.swift; sourceTree = "<group>"; };
+		E38D56BB1D47DCA9008B5EA5 /* UserSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingCell.swift; sourceTree = "<group>"; };
 		E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Source.storyboard; sourceTree = "<group>"; };
 		E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSourceController.swift; sourceTree = "<group>"; };
 		E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreHeaderCell.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				E3D1B82E1D3970D800421744 /* UserManager.swift */,
 				E38D56A21D439B27008B5EA5 /* LogoutService.swift */,
 				E38D56AA1D452DB6008B5EA5 /* TextFieldCell.swift */,
+				E38D56BB1D47DCA9008B5EA5 /* UserSettingCell.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				E33ED97B1D2AEA8100AB989E /* NewsLoaderProtocol.swift in Sources */,
 				E3D1B8031D36A50900421744 /* tagHeaderCell.swift in Sources */,
 				E3D1B81B1D395A4300421744 /* LoginViewController.swift in Sources */,
+				E38D56BC1D47DCA9008B5EA5 /* UserSettingCell.swift in Sources */,
 				E33ED9971D3000B500AB989E /* NewsSourceContentCell.swift in Sources */,
 				E3D1B80D1D37DA4F00421744 /* NewsContentViewController.swift in Sources */,
 				E3D1B7FF1D3554CD00421744 /* NewsCell.swift in Sources */,

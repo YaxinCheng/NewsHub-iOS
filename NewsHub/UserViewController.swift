@@ -45,7 +45,7 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return section == 0 ? 1 : 3
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,9 +60,13 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 			}
 			return cell
 		} else {
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.userTypeCellIdentifier) else {
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.userTypeCellIdentifier) as? UserSettingCell else {
 				return UITableViewCell()
 			}
+			let images = ["heart", "gear", "about"]
+			let texts = ["Liked", "Setting", "About"]
+			cell.iconImageView.image = UIImage(named: images[indexPath.row])
+			cell.settingLabel.text = texts[indexPath.row]
 			return cell
 		}
 	}
@@ -70,7 +74,7 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		switch indexPath.section {
 		case 0:
-			return 90
+			return 120
 		default:
 			return UITableViewAutomaticDimension
 		}
