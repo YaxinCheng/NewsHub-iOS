@@ -37,6 +37,16 @@ class UserViewController: UIViewController {
 	func popLoginView() {
 		parentViewController?.parentViewController?.performSegueWithIdentifier(Common.loginViewIndentifier, sender: nil)
 	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else {
+			return
+		}
+		if identifier == Common.segueSettingViewIdentifier {
+			let destinationVC = segue.destinationViewController as! SettingViewController
+			destinationVC.viewTitle = "Liked"
+		}
+	}
 }
 
 extension UserViewController: UITableViewDelegate, UITableViewDataSource {
@@ -87,6 +97,8 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 			actionSheet.addAction(logoutAction())
 			actionSheet.addAction(.Cancel)
 			presentViewController(actionSheet, animated: true, completion: nil)
+		} else if indexPath.section == 1 && indexPath.row == 0 {
+			performSegueWithIdentifier(Common.segueSettingViewIdentifier, sender: nil)
 		}
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}

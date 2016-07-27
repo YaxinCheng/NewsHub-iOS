@@ -29,10 +29,10 @@ struct News: Hashable, Equatable, TagProtocol {
 	
 	init(with json: NSDictionary) {
 		title = json["title"] as! String
-		content = json["content"] as! String
 		contentLink = json["_id"] as! String
-		source = NewsSource(rawValue: json["source"] as! String)!
 		imageLink = json["img"] as? String
+		content = json["content"] as! String
+		source = NewsSource(rawValue: json["source"] as! String)!
 		tag = json["tag"] as! String
 		if let date = json["date"] as? String {
 			let dateFmt = NSDateFormatter()

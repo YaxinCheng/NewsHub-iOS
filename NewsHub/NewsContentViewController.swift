@@ -195,9 +195,11 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 			navigationController?.navigationBar.shadowImage = originalShadow
 		} else if alpha > 0 {
 			backgroundImage.layer.opacity = alpha
+			if alpha > 0.5 {
+				navigationController?.navigationBar.barStyle = .Black
+				navigationController?.navigationBar.tintColor = .whiteColor()
+			}
 		} else {
-			navigationController?.navigationBar.barStyle = .Black
-			navigationController?.navigationBar.tintColor = .whiteColor()
 			navigationItem.title = ""
 			backgroundImage.layer.opacity = 0
 			navigationController?.navigationBar.shadowImage = UIImage()

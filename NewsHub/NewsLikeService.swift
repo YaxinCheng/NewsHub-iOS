@@ -13,7 +13,7 @@ struct NewsLikeService: NewsLoaderProtocol {
 		return "/api/likes"
 	}
 	
-	var newsLikedCompletion: (([News]) -> Void)?
+	var newsLikedCompletion: (([SettingContent]) -> Void)?
 	var completion: ((String?) -> Void)?
 	
 	func process(json: NSDictionary, error: NSError?) {
@@ -23,8 +23,8 @@ struct NewsLikeService: NewsLoaderProtocol {
 		} else if let errorInfo = json["ERROR"] as? String {
 			newsLikedCompletion?([])
 			completion?(errorInfo)
-		} else if let likes = json["SUCCESS"] as? NSDictionary, let newsJSON = likes["likes"] as? [NSDictionary] {
-			let news = newsJSON.map { News(with: $0) }
+		} else if let newsJSON = json["SUCCESS"] as? [NSDictionary] {
+			let news = newsJSON.flatMap { SettingContent(with: $0) }
 			newsLikedCompletion?(news)
 		} else if let _ = json["SUCCESS"] as? String {
 			completion?(nil)
@@ -34,7 +34,7 @@ struct NewsLikeService: NewsLoaderProtocol {
 		}
 	}
 	
-	mutating func newsLiked(completion: ([News]) -> Void) {
+	mutating func newsLiked(completion: ([SettingContent]) -> Void) {
 		self.newsLikedCompletion = completion
 		sendRequest()
 	}
