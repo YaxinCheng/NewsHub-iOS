@@ -48,6 +48,7 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBar.shadowImage = originalShadow
 		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
 		navigationController?.view.backgroundColor = originalColour
+		navigationController?.navigationBar.tintColor = .blackColor()
 		
 		navigationItem.rightBarButtonItem = nil
 	}
@@ -63,8 +64,10 @@ class NewsContentViewController: UIViewController {
 		
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.tintColor = .whiteColor()
 		navigationController?.view.backgroundColor = UIColor.clearColor()
 		navigationController?.navigationBarHidden = false
+		navigationController?.navigationBar.barStyle = .Black
 		
 		let heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
 		navigationItem.rightBarButtonItem = heartButton
@@ -114,9 +117,29 @@ class NewsContentViewController: UIViewController {
 	
 	func likeButtonPressed(sender: UIBarButtonItem) {
 		let index = 1 - sender.tag
-		sender.tag = index
-		let imageName = index == 0 ? "hearticon" : "hearticon-highlight"
-		sender.image = UIImage(named: imageName)
+		let changeImage: (Int) -> () = { index in
+			sender.tag = index
+			let imageName = index == 0 ? "hearticon" : "hearticon-highlight"
+			sender.image = UIImage(named: imageName)
+		}
+		changeImage(index)
+		let completion: (String?) -> Void = { [weak self] in
+			guard let info = $0 else { return }
+			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
+			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
+				changeImage(1 - index)
+			}
+			alert.addAction(cancel)
+			self?.presentViewController(alert, animated: true, completion: nil)
+		}
+		
+		if index == 1 {
+			var likesService = NewsLikeService()
+			likesService.like(dataSource, completion: completion)
+		} else {
+			var likeService = NewsLikeService()
+			likeService.unlike(dataSource, completion: completion)
+		}
 	}
 	
 	/*
@@ -165,12 +188,16 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		let alpha = Float(scrollView.contentOffset.y / 50)
 		if alpha >= 1 {
+			navigationController?.navigationBar.barStyle = .Default
+			navigationController?.navigationBar.tintColor = .blackColor()
 			navigationItem.title = dataSource.title
 			backgroundImage.layer.opacity = 1
 			navigationController?.navigationBar.shadowImage = originalShadow
 		} else if alpha > 0 {
 			backgroundImage.layer.opacity = alpha
 		} else {
+			navigationController?.navigationBar.barStyle = .Black
+			navigationController?.navigationBar.tintColor = .whiteColor()
 			navigationItem.title = ""
 			backgroundImage.layer.opacity = 0
 			navigationController?.navigationBar.shadowImage = UIImage()
