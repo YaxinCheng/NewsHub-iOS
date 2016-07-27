@@ -13,6 +13,7 @@ struct NewsLikeService: NewsLoaderProtocol {
 		return "/api/likes"
 	}
 	
+	var checkCompletion: ((Bool) -> Void)?
 	var newsLikedCompletion: (([SettingContent]) -> Void)?
 	var completion: ((String?) -> Void)?
 	
@@ -23,14 +24,17 @@ struct NewsLikeService: NewsLoaderProtocol {
 		} else if let errorInfo = json["ERROR"] as? String {
 			newsLikedCompletion?([])
 			completion?(errorInfo)
+			checkCompletion?(false)
 		} else if let newsJSON = json["SUCCESS"] as? [NSDictionary] {
 			let news = newsJSON.flatMap { SettingContent(with: $0) }
 			newsLikedCompletion?(news)
 		} else if let _ = json["SUCCESS"] as? String {
 			completion?(nil)
+			checkCompletion?(true)
 		} else {
 			newsLikedCompletion?([])
 			completion?("Unknown error")
+			checkCompletion?(false)
 		}
 	}
 	
@@ -44,8 +48,12 @@ struct NewsLikeService: NewsLoaderProtocol {
 		sendRequest(.PUT, with: ["url": news.contentLink])
 	}
 	
-	mutating func unlike(news: News, completion: (String?) -> Void) {
-		self.completion = completion
+	mutating func checkLike(news: News, completion: (Bool) -> Void) {
+		guard let _ = UserManager.sharedManager.currentUser else {
+			completion(false)
+			return
+		}
+		self.checkCompletion = completion
 		sendRequest(.POST, with: ["url": news.contentLink])
 	}
 }

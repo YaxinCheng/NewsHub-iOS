@@ -19,6 +19,16 @@ class NewsContentViewController: UIViewController {
 	private var imageView: UIImageView?
 	private var originalBackground: UIImage?
 	private var originalColour: UIColor?
+	private var heartButton: UIBarButtonItem!
+	private var liked: Bool = false {
+		didSet {
+			guard let button = heartButton else { return }
+			let tag = liked ? 1 : 0
+			let image = liked ? UIImage(named: "hearticon-highlight") : UIImage(named: "hearticon")
+			button.tag = tag
+			button.image = image
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,6 +49,11 @@ class NewsContentViewController: UIViewController {
 		view.addSubview(backgroundImage)
 		
 		tableView.rowHeight = UITableViewAutomaticDimension
+		
+		var likeService = NewsLikeService()
+		likeService.checkLike(dataSource) { [weak self] (result) in
+			self?.liked = result
+		}
 		
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -69,7 +84,8 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBarHidden = false
 		navigationController?.navigationBar.barStyle = .Black
 		
-		let heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
+		
+		heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
 		navigationItem.rightBarButtonItem = heartButton
 		
 		dataSource.downloadDetails { [weak self] (news) in
@@ -116,29 +132,16 @@ class NewsContentViewController: UIViewController {
 	}
 	
 	func likeButtonPressed(sender: UIBarButtonItem) {
-		let index = 1 - sender.tag
-		let changeImage: (Int) -> () = { index in
-			sender.tag = index
-			let imageName = index == 0 ? "hearticon" : "hearticon-highlight"
-			sender.image = UIImage(named: imageName)
-		}
-		changeImage(index)
-		let completion: (String?) -> Void = { [weak self] in
+		self.liked = !self.liked
+		var likesService = NewsLikeService()
+		likesService.like(dataSource) { [weak self] in
 			guard let info = $0 else { return }
 			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
 			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
-				changeImage(1 - index)
+				self?.liked = !(self?.liked ?? false)
 			}
 			alert.addAction(cancel)
 			self?.presentViewController(alert, animated: true, completion: nil)
-		}
-		
-		if index == 1 {
-			var likesService = NewsLikeService()
-			likesService.like(dataSource, completion: completion)
-		} else {
-			var likeService = NewsLikeService()
-			likeService.unlike(dataSource, completion: completion)
 		}
 	}
 	
