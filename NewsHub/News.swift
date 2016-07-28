@@ -49,14 +49,21 @@ struct News: Hashable, Equatable, TagProtocol {
 		if imageLoaded == true {
 			completion(news: self)
 		} else {
-			News.imageLoader.loadThumbnail(from: self) { (image, error) in
-				if error != nil {
-					completion(news: nil)
-				} else {
-					var loadedNews = self
-					loadedNews.image = image
-					loadedNews.imageLoaded = true
-					completion(news: loadedNews)
+			let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
+			dispatch_async(queue) {
+				News.imageLoader.loadThumbnail(from: self) { (image, error) in
+					if error != nil {
+						dispatch_async(dispatch_get_main_queue()) {
+							completion(news: nil)
+						}
+					} else {
+						var loadedNews = self
+						loadedNews.image = image
+						loadedNews.imageLoaded = true
+						dispatch_async(dispatch_get_main_queue()) {
+							completion(news: loadedNews)
+						}
+					}
 				}
 			}
 		}
