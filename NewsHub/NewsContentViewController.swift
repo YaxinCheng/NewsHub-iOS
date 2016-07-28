@@ -29,6 +29,12 @@ class NewsContentViewController: UIViewController {
 			button.image = image
 		}
 	}
+	private var viewStyle: NewsBarStyle = .Light {
+		didSet {
+			navigationController?.navigationBar.tintColor = viewStyle.barColour
+			navigationController?.navigationBar.barStyle = viewStyle.barStyle
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -75,10 +81,10 @@ class NewsContentViewController: UIViewController {
 		
 		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.tintColor = .whiteColor()
 		navigationController?.view.backgroundColor = UIColor.clearColor()
 		navigationController?.navigationBarHidden = false
-		navigationController?.navigationBar.barStyle = .Black
+		
+		viewStyle = .Light
 		
 		var likeService = NewsLikeService()
 		likeService.checkLike(dataSource) { [weak self] (result) in
@@ -111,6 +117,7 @@ class NewsContentViewController: UIViewController {
 		guard imageLoaded == false else { return }
 		dataSource.downloadImage { [weak self] in
 			guard let image = $0 else { return }
+			self?.viewStyle = image.isDark ? .Dark : .Light
 			self?.imageView = UIImageView(image: image)
 			self?.imageView!.contentMode = .ScaleToFill
 			self?.imageLoaded = true
@@ -199,8 +206,8 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		} else if alpha > 0 {
 			backgroundImage.layer.opacity = alpha
 			if alpha > 0.5 {
-				navigationController?.navigationBar.barStyle = .Black
-				navigationController?.navigationBar.tintColor = .whiteColor()
+				navigationController?.navigationBar.barStyle = viewStyle.barStyle
+				navigationController?.navigationBar.tintColor = viewStyle.barColour
 			}
 		} else {
 			navigationItem.title = ""

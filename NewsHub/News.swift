@@ -72,12 +72,19 @@ struct News: Hashable, Equatable, TagProtocol {
 		if detailsLoaded == true {
 			completion(news: self)
 		} else {
-			News.detailsLoader.loadDetails(from: self) { (news, error) in
-				if var loadedNews = news {
-					loadedNews.detailsLoaded = true
-					completion(news: loadedNews)
-				} else {
-					completion(news: nil)
+			let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
+			dispatch_async(queue) {
+				News.detailsLoader.loadDetails(from: self) { (news, error) in
+					if var loadedNews = news {
+						loadedNews.detailsLoaded = true
+						dispatch_async(dispatch_get_main_queue()) {
+							completion(news: loadedNews)
+						}
+					} else {
+						dispatch_async(dispatch_get_main_queue()) {
+							completion(news: nil)
+						}
+					}
 				}
 			}
 		}

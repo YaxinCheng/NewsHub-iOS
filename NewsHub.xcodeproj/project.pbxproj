@@ -42,6 +42,8 @@
 		E38D56C01D48F6C4008B5EA5 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E38D56BF1D48F6C4008B5EA5 /* Setting.storyboard */; };
 		E38D56C21D4911D6008B5EA5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56C11D4911D6008B5EA5 /* SettingViewController.swift */; };
 		E38D56CE1D4A3970008B5EA5 /* SettingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56CD1D4A3970008B5EA5 /* SettingContent.swift */; };
+		E38D56D01D4A455E008B5EA5 /* UIImage+DarkDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56CF1D4A455E008B5EA5 /* UIImage+DarkDetection.swift */; };
+		E38D56D21D4A47BA008B5EA5 /* NewsBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D56D11D4A47BA008B5EA5 /* NewsBarStyle.swift */; };
 		E3AF9CBF1D413FAA00BE53E0 /* Source.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */; };
 		E3AF9CC31D41437000BE53E0 /* NewsSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */; };
 		E3D1B7FD1D3550F600421744 /* moreHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */; };
@@ -131,6 +133,8 @@
 		E38D56BF1D48F6C4008B5EA5 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		E38D56C11D4911D6008B5EA5 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		E38D56CD1D4A3970008B5EA5 /* SettingContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingContent.swift; sourceTree = "<group>"; };
+		E38D56CF1D4A455E008B5EA5 /* UIImage+DarkDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+DarkDetection.swift"; sourceTree = "<group>"; };
+		E38D56D11D4A47BA008B5EA5 /* NewsBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBarStyle.swift; sourceTree = "<group>"; };
 		E3AF9CBE1D413FAA00BE53E0 /* Source.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Source.storyboard; sourceTree = "<group>"; };
 		E3AF9CC21D41437000BE53E0 /* NewsSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSourceController.swift; sourceTree = "<group>"; };
 		E3D1B7FC1D3550F600421744 /* moreHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreHeaderCell.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 		E38D56B81D46598A008B5EA5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E38D56CF1D4A455E008B5EA5 /* UIImage+DarkDetection.swift */,
 				E38D56A61D452CAA008B5EA5 /* NSDate+Localization.swift */,
 				E38D56B31D46442E008B5EA5 /* UIAlertAction+Cancel.swift */,
 				E3D1B8201D39647300421744 /* UITextField+Boarder.swift */,
@@ -333,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D1B80C1D37DA4F00421744 /* NewsContentViewController.swift */,
+				E38D56D11D4A47BA008B5EA5 /* NewsBarStyle.swift */,
 				E3D1B8421D3BD0B600421744 /* titleCell.swift */,
 				E3D7889E1D3D5D2100782F31 /* contentCell.swift */,
 			);
@@ -606,6 +612,7 @@
 				E3F86DA21D3E8B0600EA57C5 /* NewsViewDelegate.swift in Sources */,
 				E33ED9A51D31626B00AB989E /* NewsImageLoader.swift in Sources */,
 				E33ED9791D2AE91E00AB989E /* News.swift in Sources */,
+				E38D56D01D4A455E008B5EA5 /* UIImage+DarkDetection.swift in Sources */,
 				E3D1B8011D3699C700421744 /* TagList.swift in Sources */,
 				E38D56A31D439B27008B5EA5 /* LogoutService.swift in Sources */,
 				E3D1B81F1D39608B00421744 /* RegisterViewCell.swift in Sources */,
@@ -630,6 +637,7 @@
 				E33ED9971D3000B500AB989E /* NewsSourceContentCell.swift in Sources */,
 				E3D1B80D1D37DA4F00421744 /* NewsContentViewController.swift in Sources */,
 				E3D1B7FF1D3554CD00421744 /* NewsCell.swift in Sources */,
+				E38D56D21D4A47BA008B5EA5 /* NewsBarStyle.swift in Sources */,
 				E3D1B8341D39A2C000421744 /* LoginCells.swift in Sources */,
 				E38D56B21D463FB4008B5EA5 /* ChangePasswordService.swift in Sources */,
 				E3D7889F1D3D5D2100782F31 /* contentCell.swift in Sources */,
