@@ -48,12 +48,8 @@ class NewsContentViewController: UIViewController {
 		}()
 		view.addSubview(backgroundImage)
 		
+		navigationController?.navigationBar.backItem?.title = ""
 		tableView.rowHeight = UITableViewAutomaticDimension
-		
-		var likeService = NewsLikeService()
-		likeService.checkLike(dataSource) { [weak self] (result) in
-			self?.liked = result
-		}
 		
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -84,6 +80,10 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBarHidden = false
 		navigationController?.navigationBar.barStyle = .Black
 		
+		var likeService = NewsLikeService()
+		likeService.checkLike(dataSource) { [weak self] (result) in
+			self?.liked = result
+		}
 		
 		heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
 		navigationItem.rightBarButtonItem = heartButton

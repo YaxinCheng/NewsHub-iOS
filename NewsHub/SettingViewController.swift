@@ -10,21 +10,67 @@ import UIKit
 
 class SettingViewController: UITableViewController {
 	
-	var dataSource: [SettingContent] = []
+	var dataSource: [SettingContent<News>] = []
 	var viewTitle: String!
 	var content: String? = nil
+	
+	var originalColour: UIColor?
+	var originalShadow: UIImage?
+	var originalBackground: UIImage?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		if viewTitle == "Liked" {
+			content = "Everything you liked is here"
 			var service = NewsLikeService()
 			service.newsLiked { [weak self] news in
-				self?.dataSource = news
+				self?.dataSource = news.map { SettingContent.News($0) }
 				self?.tableView.reloadData()
 			}
 		}
+		
+		originalColour = navigationController?.navigationBar.backgroundColor
+		originalShadow = navigationController?.navigationBar.shadowImage
+		originalBackground = navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
+		
 		tableView.estimatedRowHeight = 90
+		navigationController?.navigationBarHidden = false
+		navigationController?.navigationBar.tintColor = .blackColor()
+		navigationController?.navigationBar.backItem?.title = ""
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		navigationController?.navigationBar.backgroundColor = .whiteColor()
+		navigationController?.navigationBar.shadowImage = UIImage()
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+	}
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		revertNavigationBar()
+		navigationController?.navigationBarHidden = true
+	}
+	
+	private func revertNavigationBar() {
+		navigationController?.navigationBar.backgroundColor = originalColour
+		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
+		navigationController?.navigationBar.shadowImage = originalShadow
+	}
+	
+	// MARK: - Navigation
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
+		if identifier == Common.segueNewsDetailsIdentifier {
+			if case .News(let news) = dataSource[indexPath.row] {
+				revertNavigationBar()
+				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				destinationVC.dataSource = news
+				destinationVC.hidesBottomBarWhenPushed = true
+			}
+		}
 	}
 	
 	// MARK: - Table view data source
@@ -49,19 +95,27 @@ class SettingViewController: UITableViewController {
 			return cell
 		} else {
 			let content = dataSource[indexPath.row]
-			let identifier = content.imageLink == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as? NewsCell else { return UITableViewCell() }
-			cell.titleLabel.text = content.title
-			if content.imageLink != nil && content.image == nil {
-				content.downloadImage { [weak self] in
-					guard let loaded = $0 else { return }
-					self?.dataSource[indexPath.row] = loaded
-					tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+			switch content {
+			case .News(let news):
+				let identifier = news.imageLink == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
+				guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsCell else { return UITableViewCell() }
+				cell.titleLabel.text = news.title
+				if news.imageLink != nil && news.image == nil {
+					news.downloadThumbnail { [weak self] in
+						if let news = $0 {
+							self?.dataSource[indexPath.row] = SettingContent.News(news)
+							self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+						}
+					}
 				}
-			} else {
-				(cell as! NewsNormalCell).newsImageView.image = content.image
+				if news.image != nil {
+					(cell as! NewsNormalCell).newsImageView.image = news.image
+				}
+				return cell as! UITableViewCell
+			case .Setting(let info):
+				break
 			}
-			return cell as! UITableViewCell
+			return UITableViewCell()
 		}
 	}
 	
@@ -69,4 +123,9 @@ class SettingViewController: UITableViewController {
 		return indexPath.section == 0 ? 110 : UITableViewAutomaticDimension
 	}
 	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if viewTitle == "Liked" && indexPath.section == 1 {
+			performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: nil)
+		}
+	}
 }

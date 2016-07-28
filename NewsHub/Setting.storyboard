@@ -143,10 +143,21 @@
                             <outlet property="delegate" destination="Hy9-dq-dl7" id="13m-zj-MSj"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="16n-nt-jl5" kind="show" identifier="showNewsDetails" id="DO4-3j-yAD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xa8-Py-xWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="375" y="145"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="4Zm-p0-jhs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="News" referencedIdentifier="News" id="16n-nt-jl5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VWv-fM-i08" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="795.5" y="27"/>
         </scene>
     </scenes>
 </document>
