@@ -17,7 +17,7 @@ Readers should not be distracted by colourful headers, and they should be concen
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/main.png)<br>
 Scroll down a little bit, readers can read from only their favourite source of news (Ongoing)<br>
 Non-headline news will be put under the sources, and they will be grouped by their topics<br>
-![alt tag](http://ycheng.xyz/static/Github/NewsHub/more.png)<br>
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/more.png)<br>
 **Login & Register**<br>
 Simple and concise view makes sure readers have the best experience<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/login.png)<br>
