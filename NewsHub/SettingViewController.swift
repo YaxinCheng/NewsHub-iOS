@@ -63,13 +63,11 @@ class SettingViewController: UITableViewController {
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
-		if identifier == Common.segueNewsDetailsIdentifier {
-			if case .News(let news) = dataSource[indexPath.row] {
+		if identifier == Common.segueNewsDetailsIdentifier, case .News(let news) = dataSource[indexPath.row] {
 				revertNavigationBar()
 				let destinationVC = segue.destinationViewController as! NewsContentViewController
 				destinationVC.dataSource = news
 				destinationVC.hidesBottomBarWhenPushed = true
-			}
 		}
 	}
 	
@@ -113,9 +111,12 @@ class SettingViewController: UITableViewController {
 				}
 				return cell as! UITableViewCell
 			case .Setting(let info):
-				break
+				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNoImageIdentifier, forIndexPath: indexPath) as? NewsNoImageCell else {
+					return UITableViewCell()
+				}
+				cell.titleLabel.text = info
+				return cell
 			}
-			return UITableViewCell()
 		}
 	}
 	

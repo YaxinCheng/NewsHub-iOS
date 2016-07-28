@@ -122,11 +122,73 @@
                     <connections>
                         <outlet property="tableView" destination="PQA-Ly-QPm" id="rKN-S1-DVd"/>
                         <outlet property="topConstraint" destination="YxW-d2-0Xt" id="Cx2-ud-Wwe"/>
+                        <segue destination="fjX-yw-HEn" kind="presentation" identifier="showEmotionView" id="x66-pZ-LUz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tie-33-NFX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="234" y="389"/>
         </scene>
+        <!--News Emition View Controller-->
+        <scene sceneID="VER-2i-g7y">
+            <objects>
+                <viewController id="fjX-yw-HEn" customClass="NewsEmitionViewController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hv8-0N-s5y"/>
+                        <viewControllerLayoutGuide type="bottom" id="nQr-zb-u2x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dh7-i6-ndd">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFB-X6-RJ0">
+                                <rect key="frame" x="250" y="4" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="kbx-TW-psX"/>
+                                    <constraint firstAttribute="height" constant="62" id="vBN-cF-sas"/>
+                                </constraints>
+                                <state key="normal" image="heart"/>
+                                <connections>
+                                    <action selector="touchup:" destination="fjX-yw-HEn" eventType="touchUpInside" id="KWH-Kn-rqG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSK-pE-Q73">
+                                <rect key="frame" x="169" y="4" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="60Z-4c-Vsc"/>
+                                    <constraint firstAttribute="height" constant="62" id="aoj-dX-PzB"/>
+                                </constraints>
+                                <state key="normal" image="heart"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-1D-Osg">
+                                <rect key="frame" x="88" y="4" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="6lx-jG-fMP"/>
+                                    <constraint firstAttribute="width" constant="62" id="vu5-2b-ojS"/>
+                                </constraints>
+                                <state key="normal" image="heart"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gC9-1D-Osg" firstAttribute="centerY" secondItem="dh7-i6-ndd" secondAttribute="centerY" id="5Q7-r0-XB4"/>
+                            <constraint firstItem="nSK-pE-Q73" firstAttribute="leading" secondItem="gC9-1D-Osg" secondAttribute="trailing" constant="19" id="CDP-vh-g1q"/>
+                            <constraint firstItem="FFB-X6-RJ0" firstAttribute="centerY" secondItem="dh7-i6-ndd" secondAttribute="centerY" id="SU1-0p-0vB"/>
+                            <constraint firstItem="FFB-X6-RJ0" firstAttribute="leading" secondItem="nSK-pE-Q73" secondAttribute="trailing" constant="19" id="dIz-rk-8X0"/>
+                            <constraint firstItem="nSK-pE-Q73" firstAttribute="centerX" secondItem="dh7-i6-ndd" secondAttribute="centerX" id="nwK-h0-Sfm"/>
+                            <constraint firstItem="nSK-pE-Q73" firstAttribute="centerY" secondItem="dh7-i6-ndd" secondAttribute="centerY" id="teM-p4-LyF"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="70"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="70"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5w-BU-enp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863" y="176"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="89" height="89"/>
+    </resources>
 </document>

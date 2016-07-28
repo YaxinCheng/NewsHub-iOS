@@ -33,6 +33,7 @@ struct Common {
 	static let seguePasswordChangeIdentifier = "segueToPasswordChange"
 	static let segueUserViewIdentifier = "segueToUesrView"
 	static let segueSettingViewIdentifier = "showSetting"
+	static let segueEmitionViewIdentifier = "showEmotionView"
 	
 	static var location: String {
 		get {

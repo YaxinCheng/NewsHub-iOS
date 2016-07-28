@@ -20,13 +20,16 @@ class NewsContentViewController: UIViewController {
 	private var originalBackground: UIImage?
 	private var originalColour: UIColor?
 	private var heartButton: UIBarButtonItem!
+	
+	private weak var emotionVC: NewsEmitionViewController?
+	
 	private var liked: Bool = false {
 		didSet {
 			guard let button = heartButton else { return }
 			let tag = liked ? 1 : 0
-			let image = liked ? UIImage(named: "hearticon-highlight") : UIImage(named: "hearticon")
+			let image = liked ? UIImage(named: "hearticon-highlight")?.imageWithRenderingMode(.AlwaysTemplate) : UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate)
 			button.tag = tag
-			button.image = image
+			(button.customView as! UIButton).setImage(image, forState: .Normal)
 		}
 	}
 	private var viewStyle: NewsBarStyle = .Light {
@@ -57,6 +60,29 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBar.backItem?.title = ""
 		tableView.rowHeight = UITableViewAutomaticDimension
 		
+		var likeService = NewsLikeService()
+		likeService.checkLike(dataSource) { [weak self] (result) in
+			self?.liked = result
+		}
+		
+		heartButton = {
+			let button = UIButton(type: .Custom)
+			button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+			button.titleLabel?.text = ""
+			button.setImage(UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+			button.addTarget(self, action: #selector(likeButtonPressed), forControlEvents: .TouchUpInside)
+			return UIBarButtonItem(customView: button)
+		}()
+		navigationItem.rightBarButtonItem = heartButton
+		
+		let gesture: UILongPressGestureRecognizer = {
+			let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(heartButtonLongPressed))
+			longPressGesture.cancelsTouchesInView = false
+			longPressGesture.delaysTouchesBegan = true
+			return longPressGesture
+		}()
+		heartButton.customView?.addGestureRecognizer(gesture)
+		
 		let centre = NSNotificationCenter.defaultCenter()
 		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
 	}
@@ -68,6 +94,17 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBar.tintColor = .blackColor()
 		
 		navigationItem.rightBarButtonItem = nil
+		
+		var likesService = NewsLikeService()
+		likesService.like(dataSource) { [weak self] in
+			guard let info = $0 else { return }
+			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
+			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
+				self?.liked = !(self?.liked ?? false)
+			}
+			alert.addAction(cancel)
+			self?.presentViewController(alert, animated: true, completion: nil)
+		}
 	}
 	
 	func orientationDidChange(notification: NSNotification) {
@@ -85,14 +122,6 @@ class NewsContentViewController: UIViewController {
 		navigationController?.navigationBarHidden = false
 		
 		viewStyle = .Light
-		
-		var likeService = NewsLikeService()
-		likeService.checkLike(dataSource) { [weak self] (result) in
-			self?.liked = result
-		}
-		
-		heartButton = UIBarButtonItem(image: UIImage(named: "hearticon"), style: .Plain, target: self, action: #selector(likeButtonPressed))
-		navigationItem.rightBarButtonItem = heartButton
 		
 		dataSource.downloadDetails { [weak self] (news) in
 			defer {
@@ -140,27 +169,34 @@ class NewsContentViewController: UIViewController {
 	
 	func likeButtonPressed(sender: UIBarButtonItem) {
 		self.liked = !self.liked
-		var likesService = NewsLikeService()
-		likesService.like(dataSource) { [weak self] in
-			guard let info = $0 else { return }
-			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
-			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
-				self?.liked = !(self?.liked ?? false)
-			}
-			alert.addAction(cancel)
-			self?.presentViewController(alert, animated: true, completion: nil)
+	}
+	
+	func heartButtonLongPressed(gesture: UILongPressGestureRecognizer) {
+		switch gesture.state {
+		case .Began:
+			performSegueWithIdentifier(Common.segueEmitionViewIdentifier, sender: nil)
+		case .Ended:
+			let touchPoint = gesture.locationInView(emotionVC?.view)
+			emotionVC?.touchedPoint = touchPoint
+			emotionVC?.dismissViewControllerAnimated(true, completion: nil)
+		default:
+			break
 		}
 	}
 	
-	/*
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
+		guard let identifier = segue.identifier else { return }
+		if identifier == Common.segueEmitionViewIdentifier {
+			let destinationVC = segue.destinationViewController as! NewsEmitionViewController
+			emotionVC = destinationVC
+			destinationVC.modalPresentationStyle = .Popover
+			destinationVC.popoverPresentationController?.sourceView = heartButton.customView
+			destinationVC.popoverPresentationController?.delegate = self
+		}
 	}
-	*/
 	
 }
 
@@ -214,5 +250,11 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 			backgroundImage.layer.opacity = 0
 			navigationController?.navigationBar.shadowImage = UIImage()
 		}
+	}
+}
+
+extension NewsContentViewController: UIPopoverPresentationControllerDelegate {
+	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .None
 	}
 }
