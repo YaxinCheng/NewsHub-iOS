@@ -691,7 +691,7 @@
     <resources>
         <image name="gear" width="89" height="89"/>
         <image name="globe" width="25" height="25"/>
-        <image name="news" width="25" height="25"/>
+        <image name="news" width="30" height="30"/>
         <image name="user" width="30" height="30"/>
     </resources>
 </document>

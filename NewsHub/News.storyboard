@@ -147,7 +147,7 @@
                                     <constraint firstAttribute="width" constant="62" id="kbx-TW-psX"/>
                                     <constraint firstAttribute="height" constant="62" id="vBN-cF-sas"/>
                                 </constraints>
-                                <state key="normal" image="heart"/>
+                                <state key="normal" image="thumbdown-1"/>
                                 <connections>
                                     <action selector="touchup:" destination="fjX-yw-HEn" eventType="touchUpInside" id="KWH-Kn-rqG"/>
                                 </connections>
@@ -166,7 +166,7 @@
                                     <constraint firstAttribute="height" constant="62" id="6lx-jG-fMP"/>
                                     <constraint firstAttribute="width" constant="62" id="vu5-2b-ojS"/>
                                 </constraints>
-                                <state key="normal" image="heart"/>
+                                <state key="normal" image="thumbup-1"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,5 +190,7 @@
     </scenes>
     <resources>
         <image name="heart" width="89" height="89"/>
+        <image name="thumbdown-1" width="62" height="62"/>
+        <image name="thumbup-1" width="62" height="62"/>
     </resources>
 </document>
