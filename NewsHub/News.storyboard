@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="234" y="389"/>
         </scene>
-        <!--News Emition View Controller-->
+        <!--News Emotion View Controller-->
         <scene sceneID="VER-2i-g7y">
             <objects>
-                <viewController id="fjX-yw-HEn" customClass="NewsEmitionViewController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fjX-yw-HEn" customClass="NewsEmotionViewController" customModule="NewsHub" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hv8-0N-s5y"/>
                         <viewControllerLayoutGuide type="bottom" id="nQr-zb-u2x"/>
@@ -141,7 +141,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFB-X6-RJ0">
+                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFB-X6-RJ0">
                                 <rect key="frame" x="250" y="4" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="kbx-TW-psX"/>
@@ -160,7 +160,7 @@
                                 </constraints>
                                 <state key="normal" image="heart"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-1D-Osg">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-1D-Osg">
                                 <rect key="frame" x="88" y="4" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="6lx-jG-fMP"/>
@@ -182,8 +182,12 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="70"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="70"/>
+                    <connections>
+                        <segue destination="ry8-2v-oeH" kind="unwind" identifier="backFromEmotion" unwindAction="backFromEmotion:" id="fVw-o5-rPy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h5w-BU-enp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ry8-2v-oeH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="863" y="176"/>
         </scene>

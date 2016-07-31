@@ -34,6 +34,7 @@ struct Common {
 	static let segueUserViewIdentifier = "segueToUesrView"
 	static let segueSettingViewIdentifier = "showSetting"
 	static let segueEmitionViewIdentifier = "showEmotionView"
+	static let unwindFromEmotionIdentifier = "backFromEmotion"
 	
 	static var location: String {
 		get {

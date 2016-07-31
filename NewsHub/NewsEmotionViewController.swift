@@ -8,8 +8,9 @@
 
 import UIKit
 
-class NewsEmitionViewController: UIViewController {
+class NewsEmotionViewController: UIViewController {
 
+	var selectedEmotion: Int?
 	override func viewDidLoad() {
 			super.viewDidLoad()
 
@@ -34,7 +35,9 @@ class NewsEmitionViewController: UIViewController {
 	}
 	
 	@IBAction func touchup(sender: AnyObject) {
-		print("touch up")
+		guard let emotion = sender.tag else { return }
+		selectedEmotion = emotion
+		performSegueWithIdentifier(Common.unwindFromEmotionIdentifier, sender: nil)
 	}
 	
 

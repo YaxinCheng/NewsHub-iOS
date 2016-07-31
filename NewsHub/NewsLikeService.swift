@@ -43,9 +43,9 @@ struct NewsLikeService: NewsLoaderProtocol {
 		sendRequest()
 	}
 	
-	mutating func like(news: News, completion: (String?) -> Void) {
+	mutating func react(news: News, emotion: String = "liked", completion: (String?) -> Void) {
 		self.completion = completion
-		sendRequest(.PUT, with: ["url": news.contentLink])
+		sendRequest(.PUT, with: ["url": news.contentLink, "emotion": emotion])
 	}
 	
 	mutating func checkLike(news: News, completion: (Bool) -> Void) {

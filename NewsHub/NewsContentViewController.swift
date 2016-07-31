@@ -21,7 +21,7 @@ class NewsContentViewController: UIViewController {
 	private var originalColour: UIColor?
 	private var heartButton: UIBarButtonItem!
 	
-	private weak var emotionVC: NewsEmitionViewController?
+	private weak var emotionVC: NewsEmotionViewController?
 	
 	private var liked: Bool = false {
 		didSet {
@@ -96,7 +96,7 @@ class NewsContentViewController: UIViewController {
 		navigationItem.rightBarButtonItem = nil
 		
 		var likesService = NewsLikeService()
-		likesService.like(dataSource) { [weak self] in
+		likesService.react(dataSource) { [weak self] in
 			guard let info = $0 else { return }
 			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
 			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
@@ -190,7 +190,7 @@ class NewsContentViewController: UIViewController {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueEmitionViewIdentifier {
-			let destinationVC = segue.destinationViewController as! NewsEmitionViewController
+			let destinationVC = segue.destinationViewController as! NewsEmotionViewController
 			emotionVC = destinationVC
 			destinationVC.modalPresentationStyle = .Popover
 			destinationVC.popoverPresentationController?.sourceView = heartButton.customView
@@ -198,6 +198,31 @@ class NewsContentViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func backFromEmotion(segue: UIStoryboardSegue) {
+		let sourceVC = segue.sourceViewController as! NewsEmotionViewController
+		guard let emotionIndex = sourceVC.selectedEmotion else { return }
+		var likeService = NewsLikeService()
+		let emotion: String
+		switch emotionIndex {
+		case 0:
+			emotion = "liked"
+		case 1:
+			emotion = "thumbup"
+		case -1:
+			emotion = "thumbdown"
+		default:
+			return
+		}
+		likeService.react(dataSource, emotion: emotion) { [weak self] in
+			guard let info = $0 else { return }
+			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
+			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
+				self?.liked = !(self?.liked ?? false)
+			}
+			alert.addAction(cancel)
+			self?.presentViewController(alert, animated: true, completion: nil)
+		}
+	}
 }
 
 extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource {
