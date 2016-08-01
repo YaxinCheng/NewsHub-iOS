@@ -138,14 +138,14 @@
                         <viewControllerLayoutGuide type="bottom" id="nQr-zb-u2x"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dh7-i6-ndd">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFB-X6-RJ0">
-                                <rect key="frame" x="250" y="4" width="62" height="62"/>
+                                <rect key="frame" x="137" y="8" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="kbx-TW-psX"/>
-                                    <constraint firstAttribute="height" constant="62" id="vBN-cF-sas"/>
+                                    <constraint firstAttribute="width" constant="35" id="kbx-TW-psX"/>
+                                    <constraint firstAttribute="height" constant="35" id="vBN-cF-sas"/>
                                 </constraints>
                                 <state key="normal" image="thumbdown-1"/>
                                 <connections>
@@ -153,18 +153,18 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSK-pE-Q73">
-                                <rect key="frame" x="169" y="4" width="62" height="62"/>
+                                <rect key="frame" x="83" y="8" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="60Z-4c-Vsc"/>
-                                    <constraint firstAttribute="height" constant="62" id="aoj-dX-PzB"/>
+                                    <constraint firstAttribute="width" constant="35" id="60Z-4c-Vsc"/>
+                                    <constraint firstAttribute="height" constant="35" id="aoj-dX-PzB"/>
                                 </constraints>
                                 <state key="normal" image="heart"/>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-1D-Osg">
-                                <rect key="frame" x="88" y="4" width="62" height="62"/>
+                                <rect key="frame" x="29" y="8" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="6lx-jG-fMP"/>
-                                    <constraint firstAttribute="width" constant="62" id="vu5-2b-ojS"/>
+                                    <constraint firstAttribute="height" constant="35" id="6lx-jG-fMP"/>
+                                    <constraint firstAttribute="width" constant="35" id="vu5-2b-ojS"/>
                                 </constraints>
                                 <state key="normal" image="thumbup-1"/>
                             </button>
@@ -179,9 +179,9 @@
                             <constraint firstItem="nSK-pE-Q73" firstAttribute="centerY" secondItem="dh7-i6-ndd" secondAttribute="centerY" id="teM-p4-LyF"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="70"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="170" height="50"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="70"/>
+                    <size key="freeformSize" width="200" height="50"/>
                     <connections>
                         <segue destination="ry8-2v-oeH" kind="unwind" identifier="backFromEmotion" unwindAction="backFromEmotion:" id="fVw-o5-rPy"/>
                     </connections>
