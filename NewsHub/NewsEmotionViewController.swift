@@ -10,7 +10,7 @@ import UIKit
 
 class NewsEmotionViewController: UIViewController {
 
-	var selectedEmotion: Int?
+	var selectedEmotion: emotion?
 	override func viewDidLoad() {
 			super.viewDidLoad()
 
@@ -35,7 +35,7 @@ class NewsEmotionViewController: UIViewController {
 	}
 	
 	@IBAction func touchup(sender: AnyObject) {
-		guard let emotion = sender.tag else { return }
+		guard let emotion = emotion(value: sender.tag) else { return }
 		selectedEmotion = emotion
 		performSegueWithIdentifier(Common.unwindFromEmotionIdentifier, sender: nil)
 	}

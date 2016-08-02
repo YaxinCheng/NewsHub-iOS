@@ -200,25 +200,11 @@ class NewsContentViewController: UIViewController {
 	
 	@IBAction func backFromEmotion(segue: UIStoryboardSegue) {
 		let sourceVC = segue.sourceViewController as! NewsEmotionViewController
-		guard let emotionIndex = sourceVC.selectedEmotion else { return }
+		guard let emotion = sourceVC.selectedEmotion else { return }
 		var likeService = NewsLikeService()
-		let emotion: String
-		let image: UIImage?
-		switch emotionIndex {
-		case 0:
-			emotion = "liked"
-			image = UIImage(named: "hearticon-highlight")?.imageWithRenderingMode(.AlwaysTemplate)
-		case 1:
-			emotion = "thumbup"
-			image = UIImage(named: "thumbupicon")?.imageWithRenderingMode(.AlwaysTemplate)
-		case -1:
-			emotion = "thumbdown"
-			image = UIImage(named: "thumbdownicon")?.imageWithRenderingMode(.AlwaysTemplate)
-		default:
-			return
-		}
+		let image: UIImage? = emotion.image
 		(heartButton.customView as! UIButton).setImage(image, forState: .Normal)
-		likeService.react(dataSource, emotion: emotion) { [weak self] in
+		likeService.react(dataSource, emotion: emotion.rawValue) { [weak self] in
 			guard let info = $0 else { return }
 			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
 			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
