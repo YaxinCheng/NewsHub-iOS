@@ -13,7 +13,7 @@ struct NewsLikeService: NewsLoaderProtocol {
 		return "/api/likes"
 	}
 	
-	var checkCompletion: ((Bool) -> Void)?
+	var checkCompletion: ((emotion?) -> Void)?
 	var newsLikedCompletion: (([News]) -> Void)?
 	var completion: ((String?) -> Void)?
 	
@@ -24,17 +24,17 @@ struct NewsLikeService: NewsLoaderProtocol {
 		} else if let errorInfo = json["ERROR"] as? String {
 			newsLikedCompletion?([])
 			completion?(errorInfo)
-			checkCompletion?(false)
+			checkCompletion?(nil)
 		} else if let newsJSON = json["SUCCESS"] as? [NSDictionary] {
 			let news = newsJSON.map { News(with: $0) }
 			newsLikedCompletion?(news)
-		} else if let _ = json["SUCCESS"] as? String {
+		} else if let emotionString = json["SUCCESS"] as? String {
 			completion?(nil)
-			checkCompletion?(true)
+			checkCompletion?(emotion(rawValue: emotionString))
 		} else {
 			newsLikedCompletion?([])
 			completion?("Unknown error")
-			checkCompletion?(false)
+			checkCompletion?(nil)
 		}
 	}
 	
@@ -43,14 +43,14 @@ struct NewsLikeService: NewsLoaderProtocol {
 		sendRequest()
 	}
 	
-	mutating func react(news: News, emotion: String = "liked", completion: (String?) -> Void) {
+	mutating func react(news: News, Emotion: emotion = .liked, completion: (String?) -> Void) {
 		self.completion = completion
-		sendRequest(.PUT, with: ["url": news.contentLink, "emotion": emotion])
+		sendRequest(.PUT, with: ["url": news.contentLink, "emotion": Emotion.rawValue])
 	}
 	
-	mutating func checkLike(news: News, completion: (Bool) -> Void) {
+	mutating func checkReact(news: News, completion: (emotion?) -> Void) {
 		guard let _ = UserManager.sharedManager.currentUser else {
-			completion(false)
+			completion(nil)
 			return
 		}
 		self.checkCompletion = completion

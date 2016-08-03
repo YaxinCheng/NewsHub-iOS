@@ -22,14 +22,14 @@ class NewsContentViewController: UIViewController {
 	private var heartButton: UIBarButtonItem!
 	
 	private weak var emotionVC: NewsEmotionViewController?
-	
-	private var liked: Bool = false {
+	private var reactedEmotion: emotion? {
 		didSet {
 			guard let button = heartButton else { return }
-			let tag = liked ? 1 : 0
-			let image = liked ? UIImage(named: "hearticon-highlight")?.imageWithRenderingMode(.AlwaysTemplate) : UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate)
-			button.tag = tag
-			(button.customView as! UIButton).setImage(image, forState: .Normal)
+			if reactedEmotion == nil {
+				(button.customView as! UIButton).setImage(UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+			} else {
+				(button.customView as! UIButton).setImage(reactedEmotion?.image, forState: .Normal)
+			}
 		}
 	}
 	private var viewStyle: NewsBarStyle = .Light {
@@ -61,8 +61,8 @@ class NewsContentViewController: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
 		
 		var likeService = NewsLikeService()
-		likeService.checkLike(dataSource) { [weak self] (result) in
-			self?.liked = result
+		likeService.checkReact(dataSource) { [weak self] (result) in
+			self?.reactedEmotion = result
 		}
 		
 		heartButton = {
@@ -96,11 +96,12 @@ class NewsContentViewController: UIViewController {
 		navigationItem.rightBarButtonItem = nil
 		
 		var likesService = NewsLikeService()
-		likesService.react(dataSource) { [weak self] in
+		guard let reactEmotion = reactedEmotion else { return }
+		likesService.react(dataSource, Emotion: reactEmotion) { [weak self] in
 			guard let info = $0 else { return }
 			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
-			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
-				self?.liked = !(self?.liked ?? false)
+			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
+				self?.reactedEmotion = nil
 			}
 			alert.addAction(cancel)
 			self?.presentViewController(alert, animated: true, completion: nil)
@@ -168,7 +169,7 @@ class NewsContentViewController: UIViewController {
 	}
 	
 	func likeButtonPressed(sender: UIBarButtonItem) {
-		self.liked = !self.liked
+		reactedEmotion = reactedEmotion == nil ? .liked : nil
 	}
 	
 	func heartButtonLongPressed(gesture: UILongPressGestureRecognizer) {
@@ -201,18 +202,7 @@ class NewsContentViewController: UIViewController {
 	@IBAction func backFromEmotion(segue: UIStoryboardSegue) {
 		let sourceVC = segue.sourceViewController as! NewsEmotionViewController
 		guard let emotion = sourceVC.selectedEmotion else { return }
-		var likeService = NewsLikeService()
-		let image: UIImage? = emotion.image
-		(heartButton.customView as! UIButton).setImage(image, forState: .Normal)
-		likeService.react(dataSource, emotion: emotion.rawValue) { [weak self] in
-			guard let info = $0 else { return }
-			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
-			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
-				self?.liked = !(self?.liked ?? false)
-			}
-			alert.addAction(cancel)
-			self?.presentViewController(alert, animated: true, completion: nil)
-		}
+		reactedEmotion = emotion
 	}
 }
 
