@@ -96,8 +96,7 @@ class NewsContentViewController: UIViewController {
 		navigationItem.rightBarButtonItem = nil
 		
 		var likesService = NewsLikeService()
-		guard let reactEmotion = reactedEmotion else { return }
-		likesService.react(dataSource, Emotion: reactEmotion) { [weak self] in
+		likesService.react(dataSource, Emotion: reactedEmotion) { [weak self] in
 			guard let info = $0 else { return }
 			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
 			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
@@ -176,10 +175,9 @@ class NewsContentViewController: UIViewController {
 		switch gesture.state {
 		case .Began:
 			performSegueWithIdentifier(Common.segueEmitionViewIdentifier, sender: nil)
-		case .Ended:
+		case .Changed, .Ended:
 			let touchPoint = gesture.locationInView(emotionVC?.view)
-			emotionVC?.touchedPoint = touchPoint
-			emotionVC?.dismissViewControllerAnimated(true, completion: nil)
+			emotionVC?.touched = (touchPoint, gesture.state)
 		default:
 			break
 		}

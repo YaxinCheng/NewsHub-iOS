@@ -149,6 +149,7 @@
                                 </constraints>
                                 <state key="normal" image="thumbdown-1"/>
                                 <connections>
+                                    <action selector="touchdown:" destination="fjX-yw-HEn" eventType="touchDown" id="tQW-Pt-4Kv"/>
                                     <action selector="touchup:" destination="fjX-yw-HEn" eventType="touchUpInside" id="KWH-Kn-rqG"/>
                                 </connections>
                             </button>
@@ -159,6 +160,10 @@
                                     <constraint firstAttribute="height" constant="35" id="aoj-dX-PzB"/>
                                 </constraints>
                                 <state key="normal" image="heart"/>
+                                <connections>
+                                    <action selector="touchdown:" destination="fjX-yw-HEn" eventType="touchDown" id="Dye-bM-1Mo"/>
+                                    <action selector="touchup:" destination="fjX-yw-HEn" eventType="touchUpInside" id="im0-Zw-gUn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-1D-Osg">
                                 <rect key="frame" x="29" y="8" width="35" height="35"/>
@@ -167,6 +172,10 @@
                                     <constraint firstAttribute="width" constant="35" id="vu5-2b-ojS"/>
                                 </constraints>
                                 <state key="normal" image="thumbup-1"/>
+                                <connections>
+                                    <action selector="touchdown:" destination="fjX-yw-HEn" eventType="touchDown" id="xJg-lZ-97d"/>
+                                    <action selector="touchup:" destination="fjX-yw-HEn" eventType="touchUpInside" id="hm3-zK-rcY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
