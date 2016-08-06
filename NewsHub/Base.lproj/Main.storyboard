@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -246,7 +247,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JeY-Zv-iJW">
-                                                            <rect key="frame" x="118" y="10" width="474" height="23"/>
+                                                            <rect key="frame" x="161" y="10" width="431" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="vIl-Ib-Ua9"/>
                                                             </constraints>
@@ -260,11 +261,24 @@
                                                             </variation>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-Xc-qNH">
-                                                            <rect key="frame" x="20" y="10" width="90" height="90"/>
+                                                            <rect key="frame" x="20" y="0.0" width="133" height="109"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="100" id="5YW-o9-tKB"/>
+                                                                <constraint firstAttribute="width" secondItem="fXE-Xc-qNH" secondAttribute="height" multiplier="11:9" id="8mM-MO-yXa"/>
                                                                 <constraint firstAttribute="height" constant="90" id="IEd-Xe-xHP"/>
+                                                                <constraint firstAttribute="width" constant="527" id="gE3-Lf-fwi"/>
                                                                 <constraint firstAttribute="width" constant="90" id="o8f-Qa-DNF"/>
+                                                                <constraint firstAttribute="height" constant="109" id="r4j-hc-D86"/>
                                                             </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="5YW-o9-tKB"/>
+                                                                    <exclude reference="IEd-Xe-xHP"/>
+                                                                    <exclude reference="gE3-Lf-fwi"/>
+                                                                    <exclude reference="o8f-Qa-DNF"/>
+                                                                    <exclude reference="r4j-hc-D86"/>
+                                                                </mask>
+                                                            </variation>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -273,10 +287,17 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="109" id="5Ep-mr-DFj"/>
                                                         <constraint firstItem="JeY-Zv-iJW" firstAttribute="top" secondItem="gQA-n1-A72" secondAttribute="top" constant="10" id="btf-u9-pqm"/>
                                                         <constraint firstAttribute="trailing" secondItem="JeY-Zv-iJW" secondAttribute="trailing" constant="8" id="c14-ay-OzR"/>
+                                                        <constraint firstItem="fXE-Xc-qNH" firstAttribute="top" secondItem="gQA-n1-A72" secondAttribute="top" id="jNx-o2-43N"/>
                                                         <constraint firstItem="fXE-Xc-qNH" firstAttribute="centerY" secondItem="gQA-n1-A72" secondAttribute="centerY" id="pl6-r3-dIl"/>
                                                         <constraint firstItem="JeY-Zv-iJW" firstAttribute="leading" secondItem="fXE-Xc-qNH" secondAttribute="trailing" constant="8" id="ub4-9Q-OZ8"/>
                                                         <constraint firstItem="fXE-Xc-qNH" firstAttribute="leading" secondItem="gQA-n1-A72" secondAttribute="leading" constant="20" id="uc7-ca-qNz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="fXE-Xc-qNH" secondAttribute="bottom" id="vU2-mW-fIM"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="pl6-r3-dIl"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -691,7 +712,7 @@
     <resources>
         <image name="gear" width="89" height="89"/>
         <image name="globe" width="25" height="25"/>
-        <image name="news" width="30" height="30"/>
+        <image name="news" width="25" height="25"/>
         <image name="user" width="30" height="30"/>
     </resources>
 </document>

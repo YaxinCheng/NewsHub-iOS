@@ -39,7 +39,7 @@ class UserViewController: UIViewController {
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else {
+		guard let identifier = segue.identifier else {
 			return
 		}
 		if identifier == Common.segueSettingViewIdentifier {

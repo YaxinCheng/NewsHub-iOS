@@ -21,15 +21,6 @@ class SettingViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if viewTitle == "Liked" {
-			content = "Everything you liked is here"
-			var service = NewsLikeService()
-			service.newsLiked { [weak self] news in
-				self?.dataSource = news.map { SettingContent.News($0) }
-				self?.tableView.reloadData()
-			}
-		}
-		
 		originalColour = navigationController?.navigationBar.backgroundColor
 		originalShadow = navigationController?.navigationBar.shadowImage
 		originalBackground = navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)

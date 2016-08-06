@@ -96,15 +96,7 @@ class NewsContentViewController: UIViewController {
 		navigationItem.rightBarButtonItem = nil
 		
 		var likesService = NewsLikeService()
-		likesService.react(dataSource, Emotion: reactedEmotion) { [weak self] in
-			guard let info = $0 else { return }
-			let alert = UIAlertController(title: nil, message: info, preferredStyle: .Alert)
-			let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
-				self?.reactedEmotion = nil
-			}
-			alert.addAction(cancel)
-			self?.presentViewController(alert, animated: true, completion: nil)
-		}
+		likesService.react(dataSource, Emotion: reactedEmotion)
 	}
 	
 	func orientationDidChange(notification: NSNotification) {

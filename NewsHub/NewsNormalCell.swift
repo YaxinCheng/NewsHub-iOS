@@ -14,10 +14,23 @@ class NewsNormalCell: UITableViewCell, NewsCell {
 	@IBOutlet weak var titleLabel: UILabel!
 	
     override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-			newsImageView.layer.cornerRadius = 5
-			newsImageView.layer.masksToBounds = true
+			super.awakeFromNib()
+			
+			let mask = CAShapeLayer()
+			mask.frame = newsImageView.layer.bounds
+			let width = newsImageView.layer.bounds.width
+			let height = newsImageView.layer.bounds.height
+			
+			let path = CGPathCreateMutable()
+			CGPathMoveToPoint(path, nil, 0, 0)
+			CGPathAddLineToPoint(path, nil, width, 0)
+			CGPathAddLineToPoint(path, nil, width * 5 / 7, height)
+			CGPathAddLineToPoint(path, nil, 0, height)
+			CGPathAddLineToPoint(path, nil, 0, 0)
+			
+			mask.path = path
+			mask.masksToBounds = true
+			newsImageView.layer.mask = mask
 			newsImageView.clipsToBounds = true
     }
 

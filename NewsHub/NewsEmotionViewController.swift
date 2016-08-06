@@ -55,7 +55,7 @@ class NewsEmotionViewController: UIViewController {
 		animation.autoreverses = true
 		animation.toValue = NSValue(CATransform3D: CATransform3DMakeScale(2, 2, 1.0))
 		animation.fillMode = kCAFillModeForwards
-		(sender as! UIButton).layer.addAnimation(animation, forKey: "scale")
+		(sender as! UIButton).layer.addAnimation(animation, forKey: nil)
 	}
 
 }
