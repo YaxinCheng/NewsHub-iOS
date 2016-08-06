@@ -247,7 +247,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JeY-Zv-iJW">
-                                                            <rect key="frame" x="161" y="10" width="431" height="23"/>
+                                                            <rect key="frame" x="141" y="10" width="451" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="vIl-Ib-Ua9"/>
                                                             </constraints>
@@ -261,7 +261,7 @@
                                                             </variation>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-Xc-qNH">
-                                                            <rect key="frame" x="20" y="0.0" width="133" height="109"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="133" height="109"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="5YW-o9-tKB"/>
                                                                 <constraint firstAttribute="width" secondItem="fXE-Xc-qNH" secondAttribute="height" multiplier="11:9" id="8mM-MO-yXa"/>
@@ -290,7 +290,7 @@
                                                         <constraint firstItem="fXE-Xc-qNH" firstAttribute="top" secondItem="gQA-n1-A72" secondAttribute="top" id="jNx-o2-43N"/>
                                                         <constraint firstItem="fXE-Xc-qNH" firstAttribute="centerY" secondItem="gQA-n1-A72" secondAttribute="centerY" id="pl6-r3-dIl"/>
                                                         <constraint firstItem="JeY-Zv-iJW" firstAttribute="leading" secondItem="fXE-Xc-qNH" secondAttribute="trailing" constant="8" id="ub4-9Q-OZ8"/>
-                                                        <constraint firstItem="fXE-Xc-qNH" firstAttribute="leading" secondItem="gQA-n1-A72" secondAttribute="leading" constant="20" id="uc7-ca-qNz"/>
+                                                        <constraint firstItem="fXE-Xc-qNH" firstAttribute="leading" secondItem="gQA-n1-A72" secondAttribute="leading" id="uc7-ca-qNz"/>
                                                         <constraint firstAttribute="bottom" secondItem="fXE-Xc-qNH" secondAttribute="bottom" id="vU2-mW-fIM"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -449,7 +449,7 @@
                             <outlet property="delegate" destination="tWN-QA-WmJ" id="ak8-kU-C3G"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="300"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>

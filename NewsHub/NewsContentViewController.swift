@@ -184,7 +184,7 @@ class NewsContentViewController: UIViewController {
 			let destinationVC = segue.destinationViewController as! NewsEmotionViewController
 			emotionVC = destinationVC
 			destinationVC.modalPresentationStyle = .Popover
-			destinationVC.popoverPresentationController?.sourceView = heartButton.customView
+			destinationVC.popoverPresentationController?.barButtonItem = heartButton
 			destinationVC.popoverPresentationController?.delegate = self
 		}
 	}

@@ -65,6 +65,7 @@ class NewsViewController: UIViewController {
 			destinationVC.delegate = self
 			destinationVC.modalPresentationStyle = .Popover
 			destinationVC.popoverPresentationController?.sourceView = sender as! UIButton
+			destinationVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: (sender?.bounds.width)!, height: (sender?.bounds.height)!)
 			destinationVC.popoverPresentationController?.delegate = self
 		} else if identifier == Common.segueNewsSourceIdentifier {
 			let destinationVC = segue.destinationViewController as! NewsSourceController

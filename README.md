@@ -18,6 +18,12 @@ Readers should not be distracted by colourful headers, and they should be concen
 Scroll down a little bit, readers can read from only their favourite source of news (Ongoing)<br>
 Non-headline news will be put under the sources, and they will be grouped by their topics<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/more.png)<br>
+Multi-locations is now supported, and news from several locations can be reached instantly<br>
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/locations.png)
+**Source categoried**<br>
+News can be picked by their sources. <br>
+Readers can read news only from their favourite source<br>
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/source.png)
 **Login & Register**<br>
 Simple and concise view makes sure readers have the best experience<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/login.png)<br>
@@ -28,6 +34,12 @@ Images will be put on the header<br>
 With scrolling down, navigationBar will show to indicates the title of the news<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/content.png)<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/contentMore.png)<br>
+Readers can now react to the news and influence the order of this new(Not finished)<br>
+Vote to your favourite news, and react to the news you like<br>
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/emotion.png)<br>
+**User view**<br>
+Users can adjust their preferences here<br>
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/user.png)
 <br>
 ##Coming functions:
 Auto location<br>
