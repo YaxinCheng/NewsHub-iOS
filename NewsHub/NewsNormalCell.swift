@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsNormalCell: UITableViewCell, NewsCell {
+class NewsNormalCell: UITableViewCell {
 
 	@IBOutlet weak var newsImageView: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!

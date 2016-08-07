@@ -86,8 +86,7 @@ class SettingViewController: UITableViewController {
 			let content = dataSource[indexPath.row]
 			switch content {
 			case .News(let news):
-				let identifier = news.imageLink == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
-				guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsCell else { return UITableViewCell() }
+				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else { return UITableViewCell() }
 				cell.titleLabel.text = news.title
 				if news.imageLink != nil && news.image == nil {
 					news.downloadThumbnail { [weak self] in
@@ -98,13 +97,20 @@ class SettingViewController: UITableViewController {
 					}
 				}
 				if news.image != nil {
-					(cell as! NewsNormalCell).newsImageView.image = news.image
+					cell.newsImageView.image = news.image
+					cell.sourceIconView.hidden = false
+					cell.sourceIconView.image = news.source.sourceIcon
+				} else {
+					cell.sourceIconView.hidden = true
+					cell.newsImageView.image = news.source.normalPlaceholder
 				}
-				return cell as! UITableViewCell
+				return cell
 			case .Setting(let info):
-				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNoImageIdentifier, forIndexPath: indexPath) as? NewsNoImageCell else {
+				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier, forIndexPath: indexPath) as? NewsNormalCell else {
 					return UITableViewCell()
 				}
+				cell.newsImageView.removeFromSuperview()
+				cell.sourceIconView.removeFromSuperview()
 				cell.titleLabel.text = info
 				return cell
 			}

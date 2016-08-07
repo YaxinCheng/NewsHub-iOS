@@ -99,14 +99,16 @@ extension NewsSourceController: UITableViewDelegate, UITableViewDataSource {
 					}
 				}
 			}
-			let identifier = news.image == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) else {
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else {
 				return UITableViewCell()
 			}
+			cell.sourceIconView.removeFromSuperview()
+			cell.titleLabel.text = news.title
 			if let image = news.image {
-				(cell as! NewsNormalCell).newsImageView.image = image
+				cell.newsImageView.image = image
+			} else {
+				cell.newsImageView.image = news.source.normalPlaceholder
 			}
-			(cell as! NewsCell).titleLabel.text = news.title
 			return cell
 		}
 	}

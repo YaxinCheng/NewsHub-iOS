@@ -330,42 +330,8 @@
                                             <outlet property="titleLabel" destination="JeY-Zv-iJW" id="wxx-WY-3Uf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NewsNoImageCell" rowHeight="94" id="tEc-4s-u2T" customClass="NewsNoImageCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="691" width="600" height="94"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tEc-4s-u2T" id="wRb-Pe-lal">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-mK-4tS">
-                                                    <rect key="frame" x="20" y="8" width="572" height="23"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="FbV-F6-sqt"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="7aM-mK-4tS" secondAttribute="bottom" constant="8" id="CzQ-gY-b9w"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="7aM-mK-4tS" secondAttribute="trailing" id="GsD-cO-Zxx"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="7aM-mK-4tS" secondAttribute="bottom" constant="32" id="JbP-Ba-gxS"/>
-                                                <constraint firstItem="7aM-mK-4tS" firstAttribute="leading" secondItem="wRb-Pe-lal" secondAttribute="leadingMargin" constant="12" id="fBl-6U-RE5"/>
-                                                <constraint firstItem="7aM-mK-4tS" firstAttribute="top" secondItem="wRb-Pe-lal" secondAttribute="topMargin" id="fki-wn-B2d"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="JbP-Ba-gxS"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="7aM-mK-4tS" id="1R4-Bh-3jX"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="moreHeaderCell" rowHeight="36" id="tfb-Ha-4oj" customClass="moreHeaderCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="785" width="600" height="36"/>
+                                        <rect key="frame" x="0.0" y="691" width="600" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfb-Ha-4oj" id="fdm-kj-RmD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
@@ -385,7 +351,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="taggedHeaderCell" rowHeight="25" id="mGM-Rn-Ajd" customClass="tagHeaderCell" customModule="NewsHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="821" width="600" height="25"/>
+                                        <rect key="frame" x="0.0" y="727" width="600" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mGM-Rn-Ajd" id="PjF-ZH-Eg3">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="24"/>
