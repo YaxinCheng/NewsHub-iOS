@@ -19,7 +19,7 @@ Scroll down a little bit, readers can read from only their favourite source of n
 Non-headline news will be put under the sources, and they will be grouped by their topics<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/more.png)<br>
 Multi-locations is now supported, and news from several locations can be reached instantly<br>
-![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/locations.png)
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/locations.png)<br>
 **Source categoried**<br>
 News can be picked by their sources. <br>
 Readers can read news only from their favourite source<br>
