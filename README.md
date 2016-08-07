@@ -23,7 +23,7 @@ Multi-locations is now supported, and news from several locations can be reached
 **Source categoried**<br>
 News can be picked by their sources. <br>
 Readers can read news only from their favourite source<br>
-![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/source.png)
+![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/source.png)<br>
 **Login & Register**<br>
 Simple and concise view makes sure readers have the best experience<br>
 ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/NewsHub/login.png)<br>
