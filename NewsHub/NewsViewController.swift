@@ -131,14 +131,18 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 					}
 				}
 			}
-			let identifier = news.image == nil ? Common.newsNoImageIdentifier : Common.newsNormalIdentifier
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) else {
+			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else {
 				return UITableViewCell()
 			}
 			if let image = news.image {
-				(cell as! NewsNormalCell).newsImageView.image = image
+				cell.newsImageView.image = image
+				cell.sourceIconView.hidden = false
+				cell.sourceIconView.image = news.source.sourceIcon
+			} else {
+				cell.newsImageView.image = news.source.normalPlaceholder
+				cell.sourceIconView.hidden = true
 			}
-			(cell as! NewsCell).titleLabel.text = news.title
+			cell.titleLabel.text = news.title
 			return cell
 		}
 	}

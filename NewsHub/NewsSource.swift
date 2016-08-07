@@ -50,4 +50,18 @@ enum NewsSource: String {
 			return UIColor.clearColor()
 		}
 	}
+	
+	var sourceIcon: UIImage {
+		if self == .All {
+			return UIImage()
+		}
+		return UIImage(named: self.rawValue + "Icon")!
+	}
+	
+	var normalPlaceholder: UIImage {
+		if self == .All {
+			return UIImage()
+		}
+		return UIImage(named: self.rawValue + "NormalPlaceholder")!
+	}
 }

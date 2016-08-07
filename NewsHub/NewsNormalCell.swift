@@ -12,6 +12,7 @@ class NewsNormalCell: UITableViewCell, NewsCell {
 
 	@IBOutlet weak var newsImageView: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var sourceIconView: UIImageView!
 	
     override func awakeFromNib() {
 			super.awakeFromNib()
@@ -32,6 +33,10 @@ class NewsNormalCell: UITableViewCell, NewsCell {
 			mask.masksToBounds = true
 			newsImageView.layer.mask = mask
 			newsImageView.clipsToBounds = true
+			
+			sourceIconView.layer.cornerRadius = sourceIconView.bounds.width / 2
+			sourceIconView.layer.masksToBounds = true
+			sourceIconView.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
