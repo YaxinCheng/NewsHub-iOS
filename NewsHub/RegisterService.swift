@@ -14,7 +14,7 @@ struct RegisterService: UserServiceProtocol, formatChecker {
 	}
 	var completion: ((String?) -> Void)?
 	
-	func process(JSON: [String: AnyObject]?, error: NSError?) {
+	func process(JSON: [String: AnyObject]?, error: Error?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
 		} else if let errorInfo = JSON?["ERROR"] as? String {
@@ -26,7 +26,7 @@ struct RegisterService: UserServiceProtocol, formatChecker {
 		}
 	}
 	
-	mutating func registerAccount(email: String, password: String, userName: String, completion: (String?)->()) {
+	mutating func registerAccount(_ email: String, password: String, userName: String, completion: @escaping (String?)->()) {
 		do {
 			try checkEmpty(email, fieldInfo: "Email")
 			try checkEmpty(password, fieldInfo: "Password")
@@ -37,13 +37,13 @@ struct RegisterService: UserServiceProtocol, formatChecker {
 			try checkUpperCase(password, fieldInfo: "Password")
 			try checkNumbers(password, fieldInfo: "Password")
 			try checkSpecialCharacter(password, fieldInfo: "Password")
-		} catch FormatNotMatchException.IsEmpty(errorMessage: let error) {
+		} catch FormatNotMatchException.isEmpty(errorMessage: let error) {
 			completion(error)
 			return
-		} catch FormatNotMatchException.TooLong(errorMessage: let error) {
+		} catch FormatNotMatchException.tooLong(errorMessage: let error) {
 			completion(error)
 			return
-		} catch FormatNotMatchException.WrongFormat(errorMessage: let error) {
+		} catch FormatNotMatchException.wrongFormat(errorMessage: let error) {
 			completion(error)
 			return
 		} catch {
@@ -51,7 +51,7 @@ struct RegisterService: UserServiceProtocol, formatChecker {
 			return
 		}
 		self.completion = completion
-		let registerTime = NSDate().localTime()
+		let registerTime = Date().localTime()
 		sendRequest(with: ["email": email, "password": password, "registerTime": registerTime, "name": userName])
 	}
 }

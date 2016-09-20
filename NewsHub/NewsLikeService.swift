@@ -16,7 +16,7 @@ struct NewsLikeService: NewsLoaderProtocol {
 	var checkCompletion: ((emotion?) -> Void)?
 	var completion: ((String?) -> Void)?
 	
-	func process(json: NSDictionary, error: NSError?) {
+	func process(json: NSDictionary, error: Error?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
 		} else if let errorInfo = json["ERROR"] as? String {
@@ -31,17 +31,17 @@ struct NewsLikeService: NewsLoaderProtocol {
 		}
 	}
 	
-	mutating func react(news: News, Emotion: emotion? = .liked) {
+	mutating func react(_ news: News, Emotion: emotion? = .liked) {
 		let emotionString = Emotion?.rawValue ?? "unreact"
-		sendRequest(.PUT, with: ["url": news.contentLink, "emotion": emotionString])
+		sendRequest(method: .put, with: ["url": news.contentLink, "emotion": emotionString])
 	}
 	
-	mutating func checkReact(news: News, completion: (emotion?) -> Void) {
+	mutating func checkReact(_ news: News, completion: @escaping (emotion?) -> Void) {
 		guard let _ = UserManager.sharedManager.currentUser else {
 			completion(nil)
 			return
 		}
 		self.checkCompletion = completion
-		sendRequest(.POST, with: ["url": news.contentLink])
+		sendRequest(method: .post, with: ["url": news.contentLink])
 	}
 }

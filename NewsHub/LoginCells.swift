@@ -17,19 +17,19 @@ class LoginCells: UICollectionViewCell {
 		super.awakeFromNib()
 		
 		let control = UIControl(frame: self.contentView.frame)
-		control.addTarget(self, action: #selector(backgrounTouched), forControlEvents: .TouchUpInside)
-		self.contentView.insertSubview(control, atIndex: 0)
+		control.addTarget(self, action: #selector(backgrounTouched), for: .touchUpInside)
+		self.contentView.insertSubview(control, at: 0)
 		
 		actionButton.layer.cornerRadius = 17
-		actionButton.layer.borderColor = tintColor.CGColor
+		actionButton.layer.borderColor = tintColor.cgColor
 		actionButton.layer.borderWidth = 1
 		actionButton.layer.masksToBounds = true
 		
 		activityIndicator.hidesWhenStopped = true
-		activityIndicator.hidden =  true
+		activityIndicator.isHidden =  true
 	}
 	
-	func backgrounTouched(sender: UIControl) {
+	func backgrounTouched(_ sender: UIControl) {
 		self.contentView.endEditing(true)
 	}
 }

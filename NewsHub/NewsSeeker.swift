@@ -15,7 +15,7 @@ struct NewsSeeker: NewsLoaderProtocol	{
 	
 	var source: NewsSource = .All
 	
-	func process(json: NSDictionary, error: NSError?) {
+	func process(json: NSDictionary, error: Error?) {
 		if error != nil {
 			print(error?.localizedDescription)
 			return
@@ -24,9 +24,9 @@ struct NewsSeeker: NewsLoaderProtocol	{
 		let normal = json["normal"] as? [NSDictionary] ?? []
 		NewsHub.hub(for: source).headlines += headline.map { News(with: $0) }
 		NewsHub.hub(for: source).taggedNews += normal.map { News(with: $0) }
-		let centre = NSNotificationCenter.defaultCenter()
-		let notification = NSNotification(name: Common.newsRefreshDidFinish, object: nil)
-		centre.postNotification(notification)
+		let centre = NotificationCenter.default
+		let notification = Notification(name: Notification.Name(rawValue: Common.newsRefreshDidFinish), object: nil)
+		centre.post(notification)
 	}
 	
 	func loadNews() {

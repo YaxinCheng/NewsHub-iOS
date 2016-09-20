@@ -43,11 +43,11 @@ enum emotion: String {
 	var image: UIImage? {
 		switch self {
 		case .liked:
-			return UIImage(named: "hearticon-highlight")?.imageWithRenderingMode(.AlwaysTemplate)
+			return UIImage(named: "hearticon-highlight")?.withRenderingMode(.alwaysTemplate)
 		case .thumbup:
-			return UIImage(named: "thumbupicon")?.imageWithRenderingMode(.AlwaysTemplate)
+			return UIImage(named: "thumbupicon")?.withRenderingMode(.alwaysTemplate)
 		case .thumbdown:
-			return UIImage(named: "thumbdownicon")?.imageWithRenderingMode(.AlwaysTemplate)
+			return UIImage(named: "thumbdownicon")?.withRenderingMode(.alwaysTemplate)
 		}
 	}
 }

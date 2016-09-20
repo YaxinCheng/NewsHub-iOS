@@ -35,23 +35,23 @@ struct User {
 	}
 	
 	var firstName: String {
-		return name.componentsSeparatedByString(" ")[0]
+		return name.components(separatedBy: " ")[0]
 	}
 }
 
 extension User: PropertySerializable {	
 	var properties: [String: AnyObject] {
 		var properties = Dictionary<String, AnyObject>()
-		properties["email"] = email
-		properties["name"] = name
-		properties["status"] = status
+		properties["email"] = email as AnyObject?
+		properties["name"] = name as AnyObject?
+		properties["status"] = status as AnyObject?
 		return properties
 	}
 	
 	init(with managedObject: NSManagedObject) {
-		self.email = managedObject.valueForKey("email") as! String
-		self.name = managedObject.valueForKey("name") as! String
-		self.status = managedObject.valueForKey("status") as! Bool
+		self.email = managedObject.value(forKey: "email") as! String
+		self.name = managedObject.value(forKey: "name") as! String
+		self.status = managedObject.value(forKey: "status") as! Bool
 	}
 }
 
@@ -61,6 +61,6 @@ extension User: Persistable {
 	}
 	
 	var primaryKeyValue: AnyObject {
-		return email
+		return email as AnyObject
 	}
 }

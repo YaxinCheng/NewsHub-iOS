@@ -38,11 +38,11 @@ struct Common {
 	
 	static var location: String {
 		get {
-			let userDefault = NSUserDefaults.standardUserDefaults()
-			return userDefault.stringForKey("preferedLocation") ?? ""
+			let userDefault = UserDefaults.standard
+			return userDefault.string(forKey: "preferedLocation") ?? ""
 		} set {
-			let userDefault = NSUserDefaults.standardUserDefaults()
-			userDefault.setObject(newValue, forKey: "preferedLocation")
+			let userDefault = UserDefaults.standard
+			userDefault.set(newValue, forKey: "preferedLocation")
 		}
 	}
 }

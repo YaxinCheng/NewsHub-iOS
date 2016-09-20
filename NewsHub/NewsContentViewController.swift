@@ -12,27 +12,27 @@ class NewsContentViewController: UIViewController {
 	
 	var dataSource: News!
 	@IBOutlet weak var tableView: UITableView!
-	private var imageLoaded: Bool = false
-	private var backgroundImage: UIView!
+	fileprivate var imageLoaded: Bool = false
+	fileprivate var backgroundImage: UIView!
 	@IBOutlet weak var topConstraint: NSLayoutConstraint!
-	private var originalShadow: UIImage?
-	private var imageView: UIImageView?
-	private var originalBackground: UIImage?
-	private var originalColour: UIColor?
-	private var heartButton: UIBarButtonItem!
+	fileprivate var originalShadow: UIImage?
+	fileprivate var imageView: UIImageView?
+	fileprivate var originalBackground: UIImage?
+	fileprivate var originalColour: UIColor?
+	fileprivate var heartButton: UIBarButtonItem!
 	
-	private weak var emotionVC: NewsEmotionViewController?
-	private var reactedEmotion: emotion? {
+	fileprivate weak var emotionVC: NewsEmotionViewController?
+	fileprivate var reactedEmotion: emotion? {
 		didSet {
 			guard let button = heartButton else { return }
 			if reactedEmotion == nil {
-				(button.customView as! UIButton).setImage(UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+				(button.customView as! UIButton).setImage(UIImage(named: "hearticon")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
 			} else {
-				(button.customView as! UIButton).setImage(reactedEmotion?.image, forState: .Normal)
+				(button.customView as! UIButton).setImage(reactedEmotion?.image, for: UIControlState())
 			}
 		}
 	}
-	private var viewStyle: NewsBarStyle = .Light {
+	fileprivate var viewStyle: NewsBarStyle = .light {
 		didSet {
 			navigationController?.navigationBar.tintColor = viewStyle.barColour
 			navigationController?.navigationBar.barStyle = viewStyle.barStyle
@@ -44,14 +44,14 @@ class NewsContentViewController: UIViewController {
 		
 		originalShadow = self.navigationController?.navigationBar.shadowImage
 		originalColour = self.navigationController?.view.backgroundColor
-		originalBackground = self.navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
+		originalBackground = self.navigationController?.navigationBar.backgroundImage(for: .default)
 		
 		// Create and initialize the navigation bar background view
 		backgroundImage = { [unowned self] in
 			let view = UIView()
-			let height: CGFloat = self.view.traitCollection.verticalSizeClass == .Compact ? 32 : 64
-			view.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
-			view.backgroundColor = .whiteColor()
+			let height: CGFloat = self.view.traitCollection.verticalSizeClass == .compact ? 32 : 64
+			view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
+			view.backgroundColor = .white
 			view.layer.opacity = 0
 			return view
 		}()
@@ -66,11 +66,11 @@ class NewsContentViewController: UIViewController {
 		}
 		
 		heartButton = {
-			let button = UIButton(type: .Custom)
+			let button = UIButton(type: .custom)
 			button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
 			button.titleLabel?.text = ""
-			button.setImage(UIImage(named: "hearticon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-			button.addTarget(self, action: #selector(likeButtonPressed), forControlEvents: .TouchUpInside)
+			button.setImage(UIImage(named: "hearticon")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+			button.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
 			return UIBarButtonItem(customView: button)
 		}()
 		navigationItem.rightBarButtonItem = heartButton
@@ -83,15 +83,15 @@ class NewsContentViewController: UIViewController {
 		}()
 		heartButton.customView?.addGestureRecognizer(gesture)
 		
-		let centre = NSNotificationCenter.defaultCenter()
-		centre.addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
+		let centre = NotificationCenter.default
+		centre.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 	}
 	
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		navigationController?.navigationBar.shadowImage = originalShadow
-		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
+		navigationController?.navigationBar.setBackgroundImage(originalBackground, for: .default)
 		navigationController?.view.backgroundColor = originalColour
-		navigationController?.navigationBar.tintColor = .blackColor()
+		navigationController?.navigationBar.tintColor = .black
 		
 		navigationItem.rightBarButtonItem = nil
 		
@@ -99,21 +99,21 @@ class NewsContentViewController: UIViewController {
 		likesService.react(dataSource, Emotion: reactedEmotion)
 	}
 	
-	func orientationDidChange(notification: NSNotification) {
-		let height: CGFloat = UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) && self.view.traitCollection.verticalSizeClass == .Compact ? 32: 64
-		backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: height)
+	func orientationDidChange(_ notification: Notification) {
+		let height: CGFloat = UIDeviceOrientationIsLandscape(UIDevice.current.orientation) && self.view.traitCollection.verticalSizeClass == .compact ? 32: 64
+		backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
 		setImageView()
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.view.backgroundColor = UIColor.clearColor()
-		navigationController?.navigationBarHidden = false
+		navigationController?.view.backgroundColor = UIColor.clear
+		navigationController?.isNavigationBarHidden = false
 		
-		viewStyle = .Light
+		viewStyle = .light
 		
 		dataSource.downloadDetails { [weak self] (news) in
 			defer {
@@ -123,52 +123,52 @@ class NewsContentViewController: UIViewController {
 			if let loadedNews = news {
 				self?.dataSource = loadedNews
 			} else {
-				let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .Alert)
-				let action = UIAlertAction(title: "OK", style: .Cancel) { [weak self] _ in
-					self?.navigationController?.popToRootViewControllerAnimated(true)
+				let alert = UIAlertController(title: "Error", message: "News failed loading", preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
+					_ = self?.navigationController?.popToRootViewController(animated: true)
 				}
 				alert.addAction(action)
 				alert.view.tintColor = self?.view.tintColor
-				self?.presentViewController(alert, animated: true, completion: nil)
+				self?.present(alert, animated: true, completion: nil)
 			}
 		}
 	}
 
-	private func loadNewsImage() {
+	fileprivate func loadNewsImage() {
 		guard imageLoaded == false else { return }
 		dataSource.downloadImage { [weak self] in
 			guard let image = $0 else { return }
-			self?.viewStyle = image.isDark ? .Dark : .Light
+			self?.viewStyle = image.isDark ? .dark : .light
 			self?.imageView = UIImageView(image: image)
-			self?.imageView!.contentMode = .ScaleToFill
+			self?.imageView!.contentMode = .scaleToFill
 			self?.imageLoaded = true
 			self?.setImageView()
 		}
 	}
 	
-	private func setImageView() {
+	fileprivate func setImageView() {
 		guard imageLoaded == true else { return }
 		
 		self.topConstraint.constant = -130
-		self.imageView!.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width + 5, height: 200)
+		self.imageView!.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width + 5, height: 200)
 		let headerView = UIView()
-		headerView.backgroundColor = .whiteColor()
-		headerView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width + 5, height: 220)
+		headerView.backgroundColor = .white
+		headerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width + 5, height: 220)
 		headerView.addSubview(self.imageView!)
 		
 		self.tableView.tableHeaderView = headerView
 	}
 	
-	func likeButtonPressed(sender: UIBarButtonItem) {
+	func likeButtonPressed(_ sender: UIBarButtonItem) {
 		reactedEmotion = reactedEmotion == nil ? .liked : nil
 	}
 	
-	func heartButtonLongPressed(gesture: UILongPressGestureRecognizer) {
+	func heartButtonLongPressed(_ gesture: UILongPressGestureRecognizer) {
 		switch gesture.state {
-		case .Began:
-			performSegueWithIdentifier(Common.segueEmitionViewIdentifier, sender: nil)
-		case .Changed, .Ended:
-			let touchPoint = gesture.locationInView(emotionVC?.view)
+		case .began:
+			performSegue(withIdentifier: Common.segueEmitionViewIdentifier, sender: nil)
+		case .changed, .ended:
+			let touchPoint = gesture.location(in: emotionVC?.view)
 			emotionVC?.touched = (touchPoint, gesture.state)
 		default:
 			break
@@ -178,37 +178,37 @@ class NewsContentViewController: UIViewController {
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueEmitionViewIdentifier {
-			let destinationVC = segue.destinationViewController as! NewsEmotionViewController
+			let destinationVC = segue.destination as! NewsEmotionViewController
 			emotionVC = destinationVC
-			destinationVC.modalPresentationStyle = .Popover
+			destinationVC.modalPresentationStyle = .popover
 			destinationVC.popoverPresentationController?.barButtonItem = heartButton
 			destinationVC.popoverPresentationController?.delegate = self
 		}
 	}
 	
-	@IBAction func backFromEmotion(segue: UIStoryboardSegue) {
-		let sourceVC = segue.sourceViewController as! NewsEmotionViewController
+	@IBAction func backFromEmotion(_ segue: UIStoryboardSegue) {
+		let sourceVC = segue.source as! NewsEmotionViewController
 		guard let emotion = sourceVC.selectedEmotion else { return }
 		reactedEmotion = emotion
 	}
 }
 
 extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource {
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let identifier = indexPath.section == 0 ? Common.titleCellIdentifier : Common.contentCellIdentifier
-		let cell = tableView.dequeueReusableCellWithIdentifier(identifier)
-		if indexPath.section == 0 {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let identifier = (indexPath as NSIndexPath).section == 0 ? Common.titleCellIdentifier : Common.contentCellIdentifier
+		let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+		if (indexPath as NSIndexPath).section == 0 {
 			(cell as! titleCell).titleLabel.text = dataSource.title
 		} else {
 			(cell as! contentCell).contentTextView.text = dataSource.content
@@ -219,19 +219,19 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		if indexPath.section == 0 {
+	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+		if (indexPath as NSIndexPath).section == 0 {
 			return 75
 		} else {
 			return 170
 		}
 	}
 	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let alpha = Float(scrollView.contentOffset.y / 50)
 		if alpha >= 1 {
-			navigationController?.navigationBar.barStyle = .Default
-			navigationController?.navigationBar.tintColor = .blackColor()
+			navigationController?.navigationBar.barStyle = .default
+			navigationController?.navigationBar.tintColor = .black
 			navigationItem.title = dataSource.title
 			backgroundImage.layer.opacity = 1
 			navigationController?.navigationBar.shadowImage = originalShadow
@@ -250,7 +250,7 @@ extension NewsContentViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension NewsContentViewController: UIPopoverPresentationControllerDelegate {
-	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-		return .None
+	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .none
 	}
 }

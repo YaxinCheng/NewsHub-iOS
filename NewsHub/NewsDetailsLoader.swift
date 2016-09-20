@@ -14,20 +14,20 @@ struct NewsDetailsLoader: NewsLoaderProtocol {
 		return "/api/details"
 	}
 	
-	private var handler: ((news: News?, error: NSError?)->())?
+	fileprivate var handler: ((_ news: News?, _ error: Error?)->())?
 	
-	func process(json: NSDictionary, error: NSError?) {
+	func process(json: NSDictionary, error: Error?) {
 		if error != nil {
 			// Deal with error
-			handler?(news: nil, error: error)
+			handler?(nil, error)
 		} else {
 			let news = News(with: json)
-			handler?(news: news, error: nil)
+			handler?(news, nil)
 		}
 	}
 	
-	mutating func loadDetails(from news: News, completion: (News?, NSError?)->()) {
+	mutating func loadDetails(from news: News, completion: @escaping (News?, Error?)->()) {
 		handler = completion
-		sendRequest(.POST, with: ["url": news.contentLink, "source": news.source.rawValue])
+		sendRequest(method: .post, with: ["url": news.contentLink, "source": news.source.rawValue])
 	}
 }

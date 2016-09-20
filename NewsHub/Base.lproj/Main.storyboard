@@ -247,7 +247,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JeY-Zv-iJW">
-                                                            <rect key="frame" x="141" y="10" width="451" height="23"/>
+                                                            <rect key="frame" x="118" y="10" width="474" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="vIl-Ib-Ua9"/>
                                                             </constraints>
@@ -261,18 +261,20 @@
                                                             </variation>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-Xc-qNH">
-                                                            <rect key="frame" x="0.0" y="0.0" width="133" height="109"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="109"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="5YW-o9-tKB"/>
                                                                 <constraint firstAttribute="width" secondItem="fXE-Xc-qNH" secondAttribute="height" multiplier="11:9" id="8mM-MO-yXa"/>
                                                                 <constraint firstAttribute="height" constant="90" id="IEd-Xe-xHP"/>
                                                                 <constraint firstAttribute="width" constant="527" id="gE3-Lf-fwi"/>
+                                                                <constraint firstAttribute="width" constant="110" id="n9u-ss-QeG"/>
                                                                 <constraint firstAttribute="width" constant="90" id="o8f-Qa-DNF"/>
                                                                 <constraint firstAttribute="height" constant="109" id="r4j-hc-D86"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="5YW-o9-tKB"/>
+                                                                    <exclude reference="8mM-MO-yXa"/>
                                                                     <exclude reference="IEd-Xe-xHP"/>
                                                                     <exclude reference="gE3-Lf-fwi"/>
                                                                     <exclude reference="o8f-Qa-DNF"/>
@@ -281,7 +283,7 @@
                                                             </variation>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iy7-pJ-d3X">
-                                                            <rect key="frame" x="103" y="79" width="30" height="30"/>
+                                                            <rect key="frame" x="80" y="79" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Wna-ZI-PeZ"/>
                                                                 <constraint firstAttribute="width" constant="30" id="zJS-8I-jZP"/>

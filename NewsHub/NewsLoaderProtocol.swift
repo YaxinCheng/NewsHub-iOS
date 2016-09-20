@@ -13,8 +13,8 @@ protocol NewsLoaderProtocol {
 	var api: String { get }
 	var endPoint: String { get }
 	
-	func sendRequest(method: Alamofire.Method, with parameters: [String: String],from source: NewsSource, at page: Int)
-	func process(json: NSDictionary, error: NSError?)
+	func sendRequest(method: HTTPMethod, with parameters: [String: String],from source: NewsSource, at page: Int)
+	func process(json: NSDictionary, error: Error?)
 }
 
 extension NewsLoaderProtocol {
@@ -22,22 +22,22 @@ extension NewsLoaderProtocol {
 		return "https://hubnews.herokuapp.com"
 	}
 	
-	func sendRequest(method: Alamofire.Method = .GET, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
-		let request: Request
-		if method == .GET {
+	func sendRequest(method: HTTPMethod = .get, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
+		let request: DataRequest
+		if method == .get {
 			let url = source == .All ? api + endPoint : api + endPoint + "/" + source.rawValue
-			request = Alamofire.request(method, url, headers: ["page": "\(page)", "location": Common.location])
+			request = Alamofire.request(url, method: method, headers: ["page": "\(page)", "location": Common.location])
 		} else {
-			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON, headers: ["page": "\(page)", "location": Common.location])
+			request = Alamofire.request(api + endPoint, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: ["page": "\(page)", "location": Common.location])
 		}
 		request.responseJSON { (response) in
 			switch response.result {
-			case .Success(let result):
-				if let json = result as? NSDictionary where json["message"] == nil {
-					self.process(json, error: nil)
+			case .success(let result):
+				if let json = result as? NSDictionary , json["message"] == nil {
+					self.process(json: json, error: nil)
 				}
-			case .Failure(let error):
-				self.process([:], error: error)
+			case .failure(let error):
+				self.process(json: [:], error: error)
 			}
 		}
 	}

@@ -14,42 +14,42 @@ struct NewsImageLoader: NewsLoaderProtocol {
 		return "/api/thumbnails"
 	}
 	
-	private var handler: ((images: UIImage?, error: NSError?) -> Void)?
+	fileprivate var handler: ((_ images: UIImage?, _ error: Error?) -> Void)?
 	
-	func process(json: NSDictionary, error: NSError?) {
+	func process(json: NSDictionary, error: Error?) {
 		if error != nil {
-			handler?(images: nil, error: error)
+			handler?(nil, error)
 		} else if let error = json["Error"] as? String {
-			handler?(images: nil, error: NSError(domain: error, code: 700, userInfo: nil))
+			handler?(nil, NSError(domain: error, code: 700, userInfo: nil))
 		} else {
 			guard let imageString = json["img"] as? String,
-				let imageData = NSData(base64EncodedString: imageString, options: .IgnoreUnknownCharacters),
+				let imageData = Data(base64Encoded: imageString, options: .ignoreUnknownCharacters),
 				let image = UIImage(data: imageData)
 				else { return }
-			handler?(images: image, error: nil)
+			handler?(image, nil)
 		}
 	}
 	
-	mutating func loadThumbnail(from news: News, completion: ((UIImage?, NSError?) -> Void)?) {
+	mutating func loadThumbnail(from news: News, completion: ((UIImage?, Error?) -> Void)?) {
 		if let link = news.imageLink {
 			handler = completion
-			sendRequest(.POST, with: ["url": link])
+			sendRequest(method: .post, with: ["url": link])
 		}
 	}
 	
-	func loadImage(from news: News, completion: ((UIImage?) -> Void)) {
+	func loadImage(from news: News, completion: @escaping ((UIImage?) -> Void)) {
 		var targetImage: UIImage? = nil
 		defer {
-			dispatch_async(dispatch_get_main_queue()) {
+			DispatchQueue.main.async {
 				completion(targetImage)
 			}
 		}
-		guard let url = news.imageLink where !url.isEmpty else { return }
-		let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
-		dispatch_sync(queue) {
+		guard let url = news.imageLink , !url.isEmpty else { return }
+		let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+		queue.sync {
 			guard
-				let imageURL = NSURL(string: url),
-				let imageData = NSData(contentsOfURL: imageURL),
+				let imageURL = URL(string: url),
+				let imageData = try? Data(contentsOf: imageURL),
 				let image = UIImage(data: imageData)
 			else { return }
 			targetImage = image

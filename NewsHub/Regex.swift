@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Regex: StringLiteralConvertible {
-  private let pattern: String!
-  private let internalExpression: NSRegularExpression!
+struct Regex: ExpressibleByStringLiteral {
+  fileprivate let pattern: String!
+  fileprivate let internalExpression: NSRegularExpression!
   
   typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
   typealias UnicodeScalarLiteralType = UnicodeScalar
   
-  init(pattern: String, options: NSRegularExpressionOptions) {
+  init(pattern: String, options: NSRegularExpression.Options) {
     self.pattern = pattern
     do {
       internalExpression = try NSRegularExpression(pattern: pattern, options: options)
@@ -28,7 +28,7 @@ struct Regex: StringLiteralConvertible {
   init(stringLiteral value: StringLiteralType) {
     self.pattern = value
     do {
-      internalExpression = try NSRegularExpression(pattern: pattern, options: .AllowCommentsAndWhitespace)
+      internalExpression = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
     } catch let error as NSError {
       internalExpression = nil
       print(error)
@@ -38,7 +38,7 @@ struct Regex: StringLiteralConvertible {
   init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
     self.pattern = value
     do {
-      internalExpression = try NSRegularExpression(pattern: pattern, options: .AllowCommentsAndWhitespace)
+      internalExpression = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
     } catch let error as NSError {
       internalExpression = nil
       print(error)
@@ -48,16 +48,16 @@ struct Regex: StringLiteralConvertible {
   init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
     self.pattern = "\(value)"
     do {
-      internalExpression = try NSRegularExpression(pattern: pattern, options: .AllowCommentsAndWhitespace)
+      internalExpression = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
     } catch let error as NSError {
       internalExpression = nil
       print(error)
     }
   }
   
-  func matches(input: String) -> Bool {
+  func matches(_ input: String) -> Bool {
     //        let result = internalExpression.matchesInString(input, options: .ReportCompletion, range: NSRange(location: 0, length: input.characters.count))
-    let result = internalExpression.numberOfMatchesInString(input, options: .WithoutAnchoringBounds, range: NSMakeRange(0, input.characters.count))
+    let result = internalExpression.numberOfMatches(in: input, options: .withoutAnchoringBounds, range: NSMakeRange(0, input.characters.count))
     return result > 0
   }
 }

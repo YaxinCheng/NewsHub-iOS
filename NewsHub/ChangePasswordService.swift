@@ -13,7 +13,7 @@ struct ChangePasswordService: UserServiceProtocol, formatChecker {
 		return "/uManage/password"
 	}
 	
-	func process(JSON: [String : AnyObject]?, error: NSError?) {
+	func process(JSON: [String : AnyObject]?, error: Error?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
 		} else if let errorInfo = JSON?["ERROR"] as? String {
@@ -33,7 +33,7 @@ struct ChangePasswordService: UserServiceProtocol, formatChecker {
 	
 	var completion: ((String?) -> Void)?
 	
-	mutating func changePassword(old: String, new: String, completion: (String?) -> Void) {
+	mutating func changePassword(_ old: String, new: String, completion: @escaping (String?) -> Void) {
 		guard UserManager.sharedManager.userStatus else {
 			completion("User is offline")
 			return
@@ -46,13 +46,13 @@ struct ChangePasswordService: UserServiceProtocol, formatChecker {
 			try checkUpperCase(new, fieldInfo: "New Passowrd")
 			try checkNumbers(new, fieldInfo: "New Passowrd")
 			try checkSpecialCharacter(new, fieldInfo: "New Passowrd")
-		} catch FormatNotMatchException.IsEmpty(errorMessage: let error) {
+		} catch FormatNotMatchException.isEmpty(errorMessage: let error) {
 			completion(error)
 			return
-		} catch FormatNotMatchException.TooLong(errorMessage: let error) {
+		} catch FormatNotMatchException.tooLong(errorMessage: let error) {
 			completion(error)
 			return
-		} catch FormatNotMatchException.WrongFormat(errorMessage: let error) {
+		} catch FormatNotMatchException.wrongFormat(errorMessage: let error) {
 			completion(error)
 			return
 		} catch {
@@ -60,7 +60,7 @@ struct ChangePasswordService: UserServiceProtocol, formatChecker {
 			return
 		}
 		self.completion = completion
-		let time = NSDate().localTime()
+		let time = Date().localTime()
 		sendRequest(with: ["password": old, "newpassword": new, "time": time])
 	}
 }

@@ -15,7 +15,7 @@ struct LoginService: UserServiceProtocol, formatChecker {
 	
 	var completion: ((String?) -> Void)?
 	
-	func process(JSON: [String : AnyObject]?, error: NSError?) {
+	func process(JSON: [String : AnyObject]?, error: Error?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
 		} else if let errorInfo = JSON?["ERROR"] as? String {
@@ -30,15 +30,15 @@ struct LoginService: UserServiceProtocol, formatChecker {
 		}
 	}
 	
-	mutating func login(email: String, password: String, completion: (String?)->Void) {
+	mutating func login(_ email: String, password: String, completion: @escaping (String?)->Void) {
 		do {
 			try checkEmpty(email, fieldInfo: "Email")
 			try checkEmpty(password, fieldInfo: "Password")
 			try checkLength(password, maximum: 30, fieldInfo: "Password")
-		} catch FormatNotMatchException.IsEmpty(errorMessage: let error) {
+		} catch FormatNotMatchException.isEmpty(errorMessage: let error) {
 			completion(error)
 			return
-		} catch FormatNotMatchException.TooLong(errorMessage: let error) {
+		} catch FormatNotMatchException.tooLong(errorMessage: let error) {
 			completion(error)
 			return
 		} catch {

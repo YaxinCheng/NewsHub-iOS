@@ -25,11 +25,11 @@ class RegisterViewCell: LoginCells {
 		userNameIndicator.layer.opacity = 0
 	}
 	
-	@IBAction func registerButtonPressed(sender: AnyObject) {
-		activityIndicator.hidden = false
+	@IBAction func registerButtonPressed(_ sender: AnyObject) {
+		activityIndicator.isHidden = false
 		activityIndicator.startAnimating()
 		guard
-			let email = emailField.text?.lowercaseString,
+			let email = emailField.text?.lowercased(),
 			let password = passwordField.text,
 			let userName = userNameField.text
 		else { return }
@@ -38,15 +38,15 @@ class RegisterViewCell: LoginCells {
 			defer {
 				self?.activityIndicator.stopAnimating()
 			}
-			guard let error = info where error != "Register Successfully"	else {
-				UIView.animateWithDuration(0.2) { [weak self] in
+			guard let error = info , error != "Register Successfully"	else {
+				UIView.animate(withDuration: 0.2, animations: { [weak self] in
 					self?.emailIndicator.layer.opacity = 1
 					self?.passwordIndicator.layer.opacity = 1
 					self?.userNameIndicator.layer.opacity = 1
-				}
+				}) 
 				return
 			}
-			let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .Alert)
+			let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .alert)
 			alert.addAction(.Cancel)
 			alert.view.tintColor = self?.tintColor
 			self?.delegate?.present(alert)
@@ -55,7 +55,7 @@ class RegisterViewCell: LoginCells {
 }
 
 extension RegisterViewCell: UITextFieldDelegate {
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		if textField === emailField {
 			passwordField.becomeFirstResponder()
 		} else if textField === passwordField {

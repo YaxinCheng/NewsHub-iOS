@@ -15,14 +15,14 @@ class headerCell: UITableViewCell {
 	@IBOutlet weak var subtitleLabel: UILabel!
 	@IBOutlet weak var settingButton: UIButton!
 	
-	@IBAction func settingPressed(sender: AnyObject) {
+	@IBAction func settingPressed(_ sender: AnyObject) {
 		let animation = CABasicAnimation(keyPath: "transform")
 		animation.duration = 0.2
 		animation.repeatCount = 1
 		animation.autoreverses = true
-		animation.removedOnCompletion = true
-		animation.toValue = NSValue(CATransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0))
+		animation.isRemovedOnCompletion = true
+		animation.toValue = NSValue(caTransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0))
 		animation.fillMode = kCAFillModeForwards
-		(sender as! UIButton).layer.addAnimation(animation, forKey: "scale")
+		(sender as! UIButton).layer.add(animation, forKey: "scale")
 	}
 }

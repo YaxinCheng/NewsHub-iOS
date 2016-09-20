@@ -28,13 +28,13 @@ class NewsEmotionViewController: UIViewController {
 	*/
 	var touched: (CGPoint, UIGestureRecognizerState)! {
 		didSet {
-			guard let button = view.hitTest(touched.0, withEvent: nil) as? UIButton else {
-				if case .Ended = touched.1 {
-					dismissViewControllerAnimated(true, completion: nil)
+			guard let button = view.hitTest(touched.0, with: nil) as? UIButton else {
+				if case .ended = touched.1 {
+					dismiss(animated: true, completion: nil)
 				}
 				return
 			}
-			if case .Ended = touched.1 {
+			if case .ended = touched.1 {
 				touchup(button)
 			} else {
 				touchdown(button)
@@ -42,20 +42,20 @@ class NewsEmotionViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func touchup(sender: AnyObject) {
+	@IBAction func touchup(_ sender: AnyObject) {
 		guard let emotion = emotion(value: sender.tag) else { return }
 		selectedEmotion = emotion
-		performSegueWithIdentifier(Common.unwindFromEmotionIdentifier, sender: nil)
+		performSegue(withIdentifier: Common.unwindFromEmotionIdentifier, sender: nil)
 	}
 	
-	@IBAction func touchdown(sender: AnyObject) {
+	@IBAction func touchdown(_ sender: AnyObject) {
 		let animation = CABasicAnimation(keyPath: "transform")
 		animation.duration = 0.2
 		animation.repeatCount = 1
 		animation.autoreverses = true
-		animation.toValue = NSValue(CATransform3D: CATransform3DMakeScale(2, 2, 1.0))
+		animation.toValue = NSValue(caTransform3D: CATransform3DMakeScale(2, 2, 1.0))
 		animation.fillMode = kCAFillModeForwards
-		(sender as! UIButton).layer.addAnimation(animation, forKey: nil)
+		(sender as! UIButton).layer.add(animation, forKey: nil)
 	}
 
 }

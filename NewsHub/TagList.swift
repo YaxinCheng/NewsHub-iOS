@@ -9,19 +9,19 @@
 import Foundation
 
 struct TagList<Element: TagProtocol> {
-	private var internalList: [String: [Element]]
-	private var tags: NSMutableOrderedSet
+	fileprivate var internalList: [String: [Element]]
+	fileprivate var tags: NSMutableOrderedSet
 	
 	init() {
 		tags = NSMutableOrderedSet()
 		internalList = [:]
 	}
 	
-	mutating func append(newValue: Element) {
-		if tags.containsObject(newValue.tag) {
+	mutating func append(_ newValue: Element) {
+		if tags.contains(newValue.tag) {
 			internalList[newValue.tag]?.append(newValue)
 		} else {
-			tags.addObject(newValue.tag)
+			tags.add(newValue.tag)
 			internalList[newValue.tag] = [newValue]
 		}
 	}
@@ -32,22 +32,22 @@ struct TagList<Element: TagProtocol> {
 	
 	subscript(index: Int) -> [Element] {
 		get {
-			let tag = tags.objectAtIndex(index) as! String
+			let tag = tags.object(at: index) as! String
 			return internalList[tag]!
 		} set {
-			let tag = tags.objectAtIndex(index) as! String
+			let tag = tags.object(at: index) as! String
 			internalList[tag]! = newValue
 		}
 	}
 	
-	mutating func append(list: Array<Element>) {
+	mutating func append(_ list: Array<Element>) {
 		for eachNews in list {
 			append(eachNews)
 		}
 	}
 	
 	func tag(for index: Int)	-> String {
-		return tags.objectAtIndex(index) as! String
+		return tags.object(at: index) as! String
 	}
 }
 
@@ -57,6 +57,6 @@ func + (lhs: TagList<News>, rhs: Array<News>) -> TagList<News> {
 	return newList
 }
 
-func += (inout lhs: TagList<News>, rhs: Array<News>) {
+func += (lhs: inout TagList<News>, rhs: Array<News>) {
 	lhs.append(rhs)
 }

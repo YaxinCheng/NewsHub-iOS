@@ -19,49 +19,49 @@ class LoginViewCell: LoginCells {
 		let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(viewDidSwipeDown))
 		swipeGesture.delaysTouchesBegan = false
 		swipeGesture.cancelsTouchesInView	= false
-		swipeGesture.direction = .Down
+		swipeGesture.direction = .down
 		self.addGestureRecognizer(swipeGesture)
 	}
 	
-	@IBAction func dismissButtonPressed(sender: AnyObject) {
+	@IBAction func dismissButtonPressed(_ sender: AnyObject) {
 		delegate?.dismiss()
 	}
 	
-	@IBAction func loginButtonPressed(sender: AnyObject) {
+	@IBAction func loginButtonPressed(_ sender: AnyObject) {
 		defer {
 			activityIndicator.stopAnimating()
 		}
-		activityIndicator.hidden = false
+		activityIndicator.isHidden = false
 		activityIndicator.startAnimating()
 		guard
-			let email = emailField.text?.lowercaseString,
+			let email = emailField.text?.lowercased(),
 			let password = passwordField.text
 			else { return }
 		var login = LoginService()
 		login.login(email, password: password) { [weak self] (info) in
-			guard let error = info where error != "SUCCESS" else {
+			guard let error = info , error != "SUCCESS" else {
 				self?.delegate?.dismiss()
 				return
 			}
-			let alert = UIAlertController(title: "Fail", message: error, preferredStyle: .Alert)
+			let alert = UIAlertController(title: "Fail", message: error, preferredStyle: .alert)
 			alert.addAction(.Cancel)
 			alert.view.tintColor = self?.tintColor
 			self?.delegate?.present(alert)
 		}
 	}
 	
-	@IBAction func registerButtonPressed(sender: AnyObject) {
+	@IBAction func registerButtonPressed(_ sender: AnyObject) {
 		delegate?.switchView()
 	}
 	
-	func viewDidSwipeDown(gesture: UISwipeGestureRecognizer) {
-		guard gesture.direction == .Down else { return }
+	func viewDidSwipeDown(_ gesture: UISwipeGestureRecognizer) {
+		guard gesture.direction == .down else { return }
 		delegate?.dismiss()
 	}
 }
 
 extension LoginViewCell: UITextFieldDelegate {
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		if textField === emailField {
 			passwordField.becomeFirstResponder()
 		} else {

@@ -10,6 +10,6 @@ import UIKit
 
 protocol LoginCellsDelegate: class {
 	func dismiss()
-	func present(alert: UIAlertController)
+	func present(_ alert: UIAlertController)
 	func switchView()
 }

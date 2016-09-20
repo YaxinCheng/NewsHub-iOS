@@ -25,54 +25,55 @@ extension Persistable {
 	
 	func saveToCache() throws {
 		let attributes = properties
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = appDelegate.managedObjectContext
 		
 		if existing == false {
-			let model = NSEntityDescription.insertNewObjectForEntityForName(Self.entityName, inManagedObjectContext: context)
+			let model = NSEntityDescription.insertNewObject(forEntityName: Self.entityName, into: context)
 			for (key, value) in attributes {
 				model.setValue(value, forKey: key)
 			}
 			appDelegate.saveContext()
 		} else {
-			let fetch = NSFetchRequest(entityName: Self.entityName)
+			let fetch = NSFetchRequest<NSManagedObject>(entityName: Self.entityName)
 			let predicateFmt = primaryKeyValue is String ? "\(primaryKeyAttribute) == \"\(primaryKeyValue)\"" : "\(primaryKeyAttribute) == \(primaryKeyValue)"
 			fetch.predicate = NSPredicate(format:  predicateFmt)
-			let model = try context.executeFetchRequest(fetch).first as! NSManagedObject
+			let model = try context.fetch(fetch).first
 			for (key, value) in attributes {
-				model.setValue(value, forKey: key)
+				model?.setValue(value, forKey: key)
 			}
 			appDelegate.saveContext()
 		}
 	}
 	
 	static func restoreFromCache() throws -> [Self] {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = appDelegate.managedObjectContext
-		let fetch = NSFetchRequest(entityName: entityName)
-		let result = try context.executeFetchRequest(fetch) as! [NSManagedObject]
+		let fetch = NSFetchRequest<NSManagedObject>(entityName: entityName)
+		let result = try context.fetch(fetch)
 		return result.map { Self.init(with: $0) }
 	}
 	
 	func deleteFromCache() throws {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = appDelegate.managedObjectContext
 		
-		let fetch = NSFetchRequest(entityName: Self.entityName)
+		let fetch = NSFetchRequest<NSManagedObject>(entityName: Self.entityName)
 		let predicateFmt = primaryKeyValue is String ? "\(primaryKeyAttribute) == \"\(primaryKeyValue)\"" : "\(primaryKeyAttribute) == \(primaryKeyValue)"
 		fetch.predicate = NSPredicate(format: predicateFmt)
-		for model in try context.executeFetchRequest(fetch) {
-			context.deleteObject(model as! NSManagedObject)
+		for model in try context.fetch(fetch) {
+			context.delete(model)
 		}
 	}
 	
 	var existing: Bool {
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = appDelegate.managedObjectContext
 		
-		let fetch = NSFetchRequest(entityName: Self.entityName)
+		let fetch = NSFetchRequest<NSManagedObject>(entityName: Self.entityName)
 		let predicateFmt = primaryKeyValue is String ? "\(primaryKeyAttribute) == \"\(primaryKeyValue)\"" : "\(primaryKeyAttribute) == \(primaryKeyValue)"
 		fetch.predicate = NSPredicate(format: predicateFmt)
-		return context.countForFetchRequest(fetch, error: nil) > 0
+		let count = try? context.count(for: fetch)
+		return count == nil ? false : count! > 0
 	}
 }

@@ -14,14 +14,14 @@ struct News: Hashable, Equatable, TagProtocol {
 	var content: String
 	let contentLink: String
 	let source: NewsSource
-	var date: NSDate?
+	var date: Date?
 	var imageLink: String?
 	var image: UIImage?
 	var tag: String
-	private var imageLoaded = false
-	private static var imageLoader = NewsImageLoader()
-	private var detailsLoaded = false
-	private static var detailsLoader = NewsDetailsLoader()
+	fileprivate var imageLoaded = false
+	fileprivate static var imageLoader = NewsImageLoader()
+	fileprivate var detailsLoaded = false
+	fileprivate static var detailsLoader = NewsDetailsLoader()
 	
 	var hashValue: Int {
 		return contentLink.hash
@@ -35,9 +35,9 @@ struct News: Hashable, Equatable, TagProtocol {
 		source = NewsSource(rawValue: json["source"] as! String)!
 		tag = json["tag"] as! String
 		if let date = json["date"] as? String {
-			let dateFmt = NSDateFormatter()
+			let dateFmt = DateFormatter()
 			dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
-			self.date = dateFmt.dateFromString(date)
+			self.date = dateFmt.date(from: date)
 		}
 	}
 	
@@ -45,23 +45,23 @@ struct News: Hashable, Equatable, TagProtocol {
 		return imageLink?.isEmpty ?? false
 	}
 	
-	func downloadThumbnail(completion: (news: News?) -> Void) {
+	func downloadThumbnail(_ completion: @escaping (_ news: News?) -> Void) {
 		if imageLoaded == true {
-			completion(news: self)
+			completion(self)
 		} else {
-			let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
-			dispatch_async(queue) {
+			let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+			queue.async {
 				News.imageLoader.loadThumbnail(from: self) { (image, error) in
 					if error != nil {
-						dispatch_async(dispatch_get_main_queue()) {
-							completion(news: nil)
+						DispatchQueue.main.async {
+							completion(nil)
 						}
 					} else {
 						var loadedNews = self
 						loadedNews.image = image
 						loadedNews.imageLoaded = true
-						dispatch_async(dispatch_get_main_queue()) {
-							completion(news: loadedNews)
+						DispatchQueue.main.async {
+							completion(loadedNews)
 						}
 					}
 				}
@@ -69,27 +69,27 @@ struct News: Hashable, Equatable, TagProtocol {
 		}
 	}
 	
-	func downloadImage(completion: (image: UIImage?) -> Void) {
+	func downloadImage(_ completion: @escaping (_ image: UIImage?) -> Void) {
 		News.imageLoader.loadImage(from: self) {
-			completion(image: $0)
+			completion($0)
 		}
 	}
 	
-	func downloadDetails(completion: (news: News?) -> Void) {
+	func downloadDetails(_ completion: @escaping (_ news: News?) -> Void) {
 		if detailsLoaded == true {
-			completion(news: self)
+			completion(self)
 		} else {
-			let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
-			dispatch_async(queue) {
+			let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+			queue.async {
 				News.detailsLoader.loadDetails(from: self) { (news, error) in
 					if var loadedNews = news {
 						loadedNews.detailsLoaded = true
-						dispatch_async(dispatch_get_main_queue()) {
-							completion(news: loadedNews)
+						DispatchQueue.main.async {
+							completion(loadedNews)
 						}
 					} else {
-						dispatch_async(dispatch_get_main_queue()) {
-							completion(news: nil)
+						DispatchQueue.main.async {
+							completion(nil)
 						}
 					}
 				}

@@ -22,12 +22,12 @@ class NewsNormalCell: UITableViewCell {
 			let width = newsImageView.layer.bounds.width
 			let height = newsImageView.layer.bounds.height
 			
-			let path = CGPathCreateMutable()
-			CGPathMoveToPoint(path, nil, 0, 0)
-			CGPathAddLineToPoint(path, nil, width, 0)
-			CGPathAddLineToPoint(path, nil, width * 5 / 7, height)
-			CGPathAddLineToPoint(path, nil, 0, height)
-			CGPathAddLineToPoint(path, nil, 0, 0)
+			let path = CGMutablePath()
+			path.move(to: CGPoint(x: 0, y: 0))
+			path.addLine(to: CGPoint(x: width, y: 0))
+			path.addLine(to: CGPoint(x: width * 5 / 7, y: height))
+			path.addLine(to: CGPoint(x: 0, y: height))
+			path.addLine(to: CGPoint(x: 0, y: 0))
 			
 			mask.path = path
 			mask.masksToBounds = true
@@ -39,7 +39,7 @@ class NewsNormalCell: UITableViewCell {
 			sourceIconView.clipsToBounds = true
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

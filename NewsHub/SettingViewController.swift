@@ -23,40 +23,40 @@ class SettingViewController: UITableViewController {
 		
 		originalColour = navigationController?.navigationBar.backgroundColor
 		originalShadow = navigationController?.navigationBar.shadowImage
-		originalBackground = navigationController?.navigationBar.backgroundImageForBarMetrics(.Default)
+		originalBackground = navigationController?.navigationBar.backgroundImage(for: .default)
 		
 		tableView.estimatedRowHeight = 90
-		navigationController?.navigationBarHidden = false
-		navigationController?.navigationBar.tintColor = .blackColor()
+		navigationController?.isNavigationBarHidden = false
+		navigationController?.navigationBar.tintColor = .black
 		navigationController?.navigationBar.backItem?.title = ""
 	}
 	
-	override func viewWillAppear(animated: Bool) {
-		navigationController?.navigationBar.backgroundColor = .whiteColor()
+	override func viewWillAppear(_ animated: Bool) {
+		navigationController?.navigationBar.backgroundColor = .white
 		navigationController?.navigationBar.shadowImage = UIImage()
-		navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+		navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 	}
 	
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		revertNavigationBar()
-		navigationController?.navigationBarHidden = true
+		navigationController?.isNavigationBarHidden = true
 	}
 	
-	private func revertNavigationBar() {
+	fileprivate func revertNavigationBar() {
 		navigationController?.navigationBar.backgroundColor = originalColour
-		navigationController?.navigationBar.setBackgroundImage(originalBackground, forBarMetrics: .Default)
+		navigationController?.navigationBar.setBackgroundImage(originalBackground, for: .default)
 		navigationController?.navigationBar.shadowImage = originalShadow
 	}
 	
 	// MARK: - Navigation
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
-		if identifier == Common.segueNewsDetailsIdentifier, case .News(let news) = dataSource[indexPath.row] {
+		if identifier == Common.segueNewsDetailsIdentifier, case .news(let news) = dataSource[(indexPath as NSIndexPath).row] {
 				revertNavigationBar()
-				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				let destinationVC = segue.destination as! NewsContentViewController
 				destinationVC.dataSource = news
 				destinationVC.hidesBottomBarWhenPushed = true
 		}
@@ -64,49 +64,49 @@ class SettingViewController: UITableViewController {
 	
 	// MARK: - Table view data source
 	
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		// #warning Incomplete implementation, return the number of sections
 		return 2
 	}
 	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// #warning Incomplete implementation, return the number of rows
 		return section == 0 ? 1 : dataSource.count
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		if indexPath.section == 0 {
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if (indexPath as NSIndexPath).section == 0 {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.headerIdentifier) as? headerCell else {
 				return UITableViewCell()
 			}
 			cell.titleLabel.text = viewTitle
 			cell.subtitleLabel.text = content ?? ""
 			return cell
 		} else {
-			let content = dataSource[indexPath.row]
+			let content = dataSource[(indexPath as NSIndexPath).row]
 			switch content {
-			case .News(let news):
-				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else { return UITableViewCell() }
+			case .news(let news):
+				guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.newsNormalIdentifier) as? NewsNormalCell else { return UITableViewCell() }
 				cell.titleLabel.text = news.title
 				if news.imageLink != nil && news.image == nil {
 					news.downloadThumbnail { [weak self] in
 						if let news = $0 {
-							self?.dataSource[indexPath.row] = SettingContent.News(news)
-							self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+							self?.dataSource[(indexPath as NSIndexPath).row] = SettingContent.news(news)
+							self?.tableView.reloadRows(at: [indexPath], with: .automatic)
 						}
 					}
 				}
 				if news.image != nil {
 					cell.newsImageView.image = news.image
-					cell.sourceIconView.hidden = false
+					cell.sourceIconView.isHidden = false
 					cell.sourceIconView.image = news.source.sourceIcon
 				} else {
-					cell.sourceIconView.hidden = true
+					cell.sourceIconView.isHidden = true
 					cell.newsImageView.image = news.source.normalPlaceholder
 				}
 				return cell
-			case .Setting(let info):
-				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier, forIndexPath: indexPath) as? NewsNormalCell else {
+			case .setting(let info):
+				guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.newsNormalIdentifier, for: indexPath) as? NewsNormalCell else {
 					return UITableViewCell()
 				}
 				cell.newsImageView.removeFromSuperview()
@@ -117,13 +117,13 @@ class SettingViewController: UITableViewController {
 		}
 	}
 	
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return indexPath.section == 0 ? 110 : UITableViewAutomaticDimension
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return (indexPath as NSIndexPath).section == 0 ? 110 : UITableViewAutomaticDimension
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if viewTitle == "Liked" && indexPath.section == 1 {
-			performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: nil)
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if viewTitle == "Liked" && (indexPath as NSIndexPath).section == 1 {
+			performSegue(withIdentifier: Common.segueNewsDetailsIdentifier, sender: nil)
 		}
 	}
 }

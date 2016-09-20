@@ -13,7 +13,7 @@ struct LogoutService: UserServiceProtocol {
 		return "/logout"
 	}
 	
-	func process(JSON: [String : AnyObject]?, error: NSError?) {
+	func process(JSON: [String : AnyObject]?, error: Error?) {
 		if error != nil {
 			completion?(error?.localizedDescription)
 		} else {
@@ -28,18 +28,18 @@ struct LogoutService: UserServiceProtocol {
 	
 	var completion: ((String?) -> Void)?
 	
-	mutating func logout(completion: (String?) -> Void) {
+	mutating func logout(_ completion: @escaping (String?) -> Void) {
 		guard let _ = UserManager.sharedManager.currentUser else { return }
 		self.completion = completion
-		sendRequest(.GET, with: [:])
+		sendRequest(method: .get, with: [:])
 	}
 	
 	func clearCookies() throws {
 		let user = UserManager.sharedManager.currentUser
 		try user?.deleteFromCache()
 		UserManager.sharedManager.userStatus = false
-		for eachCookie in NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "https://hubnews.herokuapp.com")!) ?? [] {
-			NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(eachCookie)
+		for eachCookie in HTTPCookieStorage.shared.cookies(for: URL(string: "https://hubnews.herokuapp.com")!) ?? [] {
+			HTTPCookieStorage.shared.deleteCookie(eachCookie)
 		}
 		UserManager.sharedManager.currentUser = nil
 	}

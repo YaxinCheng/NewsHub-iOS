@@ -9,6 +9,6 @@
 import Foundation
 
 enum SettingContent<Type> {
-	case Setting(String)
-	case News(Type)
+	case setting(String)
+	case news(Type)
 }

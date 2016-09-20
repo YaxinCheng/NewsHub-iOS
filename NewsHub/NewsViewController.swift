@@ -18,14 +18,14 @@ class NewsViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		navigationController?.navigationBarHidden = true
+		navigationController?.isNavigationBarHidden = true
 		if Common.location.isEmpty {
 			Common.location = "halifax"
 		}
 		seeker.loadNews()
-		let centre = NSNotificationCenter.defaultCenter()
-		centre.addObserver(self, selector: #selector(newsDidRefresh), name: Common.newsRefreshDidFinish, object: nil)
-		tableView.tableFooterView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+		let centre = NotificationCenter.default
+		centre.addObserver(self, selector: #selector(newsDidRefresh), name: NSNotification.Name(rawValue: Common.newsRefreshDidFinish), object: nil)
+		tableView.tableFooterView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -33,42 +33,42 @@ class NewsViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		navigationController?.navigationBarHidden = true
+		navigationController?.isNavigationBarHidden = true
 	}
 	
-	func newsDidRefresh(notification: NSNotification) {
+	func newsDidRefresh(_ notification: Notification) {
 		pageCounter += 1
 		tableView.reloadData()
 		(tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueNewsDetailsIdentifier {
 			if let indexPath = tableView.indexPathForSelectedRow {
-				let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
-				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				let news = NewsHub.hub().taggedNews[(indexPath as NSIndexPath).section - 4][(indexPath as NSIndexPath).row - 1]
+				let destinationVC = segue.destination as! NewsContentViewController
 				destinationVC.hidesBottomBarWhenPushed = true
 				destinationVC.dataSource = news
 			} else {
 				let index = sender as! Int
 				let news = NewsHub.hub().headlines[index]
-				let destinationVC = segue.destinationViewController as! NewsContentViewController
+				let destinationVC = segue.destination as! NewsContentViewController
 				destinationVC.hidesBottomBarWhenPushed = true
 				destinationVC.dataSource = news
 			}
 		} else if identifier == Common.popOverIdentifier {
-			let destinationVC = segue.destinationViewController as! LocationController
+			let destinationVC = segue.destination as! LocationController
 			destinationVC.delegate = self
-			destinationVC.modalPresentationStyle = .Popover
+			destinationVC.modalPresentationStyle = .popover
 			destinationVC.popoverPresentationController?.sourceView = sender as! UIButton
-			destinationVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: (sender?.bounds.width)!, height: (sender?.bounds.height)!)
+			destinationVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: ((sender as AnyObject).bounds.width), height: ((sender as AnyObject).bounds.height))
 			destinationVC.popoverPresentationController?.delegate = self
 		} else if identifier == Common.segueNewsSourceIdentifier {
-			let destinationVC = segue.destinationViewController as! NewsSourceController
+			let destinationVC = segue.destination as! NewsSourceController
 			let source = NewsSource.available[sender as! Int]
 			destinationVC.source = source
 		}
@@ -76,11 +76,11 @@ class NewsViewController: UIViewController {
 }
 
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 4 + NewsHub.hub().taggedNews.count
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
 		case 0, 1, 2, 3:
 			return 1
@@ -89,66 +89,66 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		}
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		switch indexPath.section  {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		switch (indexPath as NSIndexPath).section  {
 		case 0:
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerIdentifier) as? headerCell else {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.headerIdentifier) as? headerCell else {
 				return UITableViewCell()
 			}
-			cell.dateLabel.text = NSDate().formatDate().uppercaseString
-			cell.titleLabel.text = Common.location.uppercaseString
+			cell.dateLabel.text = Date().formatDate().uppercased()
+			cell.titleLabel.text = Common.location.uppercased()
 			return cell
 		case 1, 2, 3:
 			let identifiers = [Common.headlinesIdentifier, Common.sourceIdentifier, Common.moreHeaderCellIdentifier]
-			let identifier: String = identifiers[indexPath.section - 1]
-			if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsHeadlineCell {
+			let identifier: String = identifiers[(indexPath as NSIndexPath).section - 1]
+			if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? NewsHeadlineCell {
 				cell.delegate = self
 				cell.source = .All
 				return cell
-			} else if let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? NewsSourceCell {
+			} else if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? NewsSourceCell {
 				cell.delegate = self
 				return cell
 			} else {
-				return tableView.dequeueReusableCellWithIdentifier(identifier) ?? UITableViewCell()
+				return tableView.dequeueReusableCell(withIdentifier: identifier) ?? UITableViewCell()
 			}
 		default:
-			if indexPath.row == 0 {
-				guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.tagHeaderCellIdentifier) as? tagHeaderCell else {
+			if (indexPath as NSIndexPath).row == 0 {
+				guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.tagHeaderCellIdentifier) as? tagHeaderCell else {
 					return UITableViewCell()
 				}
-				cell.tagLabel.text = NewsHub.hub().taggedNews.tag(for: indexPath.section - 4).uppercaseString
+				cell.tagLabel.text = NewsHub.hub().taggedNews.tag(for: (indexPath as NSIndexPath).section - 4).uppercased()
 				return cell
 			}
 			
-			let news = NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1]
+			let news = NewsHub.hub().taggedNews[(indexPath as NSIndexPath).section - 4][(indexPath as NSIndexPath).row - 1]
 			if news.imageLink != nil && news.image == nil {
 				news.downloadThumbnail { [weak self] (news) in
 					if let loadedNews = news {
-						if NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] != loadedNews {
-							NewsHub.hub().taggedNews[indexPath.section - 4][indexPath.row - 1] = loadedNews
-							self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+						if NewsHub.hub().taggedNews[(indexPath as NSIndexPath).section - 4][(indexPath as NSIndexPath).row - 1] != loadedNews {
+							NewsHub.hub().taggedNews[(indexPath as NSIndexPath).section - 4][(indexPath as NSIndexPath).row - 1] = loadedNews
+							self?.tableView.reloadRows(at: [indexPath], with: .automatic)
 						}
 					}
 				}
 			}
-			guard let cell = tableView.dequeueReusableCellWithIdentifier(Common.newsNormalIdentifier) as? NewsNormalCell else {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: Common.newsNormalIdentifier) as? NewsNormalCell else {
 				return UITableViewCell()
 			}
 			if let image = news.image {
 				cell.newsImageView.image = image
-				cell.sourceIconView.hidden = false
+				cell.sourceIconView.isHidden = false
 				cell.sourceIconView.image = news.source.sourceIcon
 			} else {
 				cell.newsImageView.image = news.source.normalPlaceholder
-				cell.sourceIconView.hidden = true
+				cell.sourceIconView.isHidden = true
 			}
 			cell.titleLabel.text = news.title
 			return cell
 		}
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		switch indexPath.section  {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		switch (indexPath as NSIndexPath).section  {
 		case 0:
 			return 90
 		case 1:
@@ -158,18 +158,18 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 		case 3:
 			return 36
 		default:
-			return indexPath.row == 0 ? 24 : 110
+			return (indexPath as NSIndexPath).row == 0 ? 24 : 110
 		}
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if indexPath.section >= 4 && indexPath.row != 0 {
-			performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: self)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if (indexPath as NSIndexPath).section >= 4 && (indexPath as NSIndexPath).row != 0 {
+			performSegue(withIdentifier: Common.segueNewsDetailsIdentifier, sender: self)
 		}
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
-	func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height && tableView.visibleCells.count > 0 && pageCounter > 1 {
 			(tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
 			seeker.loadMore(at: pageCounter)
@@ -179,14 +179,14 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension NewsViewController: NewsViewDelegate {
 	func showContentView(at index: Int) {
-		performSegueWithIdentifier(Common.segueNewsDetailsIdentifier, sender: index)
+		performSegue(withIdentifier: Common.segueNewsDetailsIdentifier, sender: index)
 	}
 	
 	func showCategoryView(at index: Int) {
-		performSegueWithIdentifier(Common.segueNewsSourceIdentifier, sender: index)
+		performSegue(withIdentifier: Common.segueNewsSourceIdentifier, sender: index)
 	}
 	
-	func pick(location: String) {
+	func pick(_ location: String) {
 		Common.location = location
 		NewsHub.hub().clear()
 		pageCounter = 1
@@ -195,13 +195,13 @@ extension NewsViewController: NewsViewDelegate {
 }
 
 extension NewsViewController: UIPopoverPresentationControllerDelegate {
-	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-		return .None
+	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .none
 	}
 }
 
 extension NewsViewController: UITabBarControllerDelegate {
-	func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 		
 	}
 }

@@ -8,19 +8,19 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
 	func formatDate() -> String {
-		let dateFmt = NSDateFormatter()
+		let dateFmt = DateFormatter()
 		dateFmt.dateFormat = "EEEE, MMMM dd"
-		dateFmt.timeZone = NSTimeZone.localTimeZone()
-		return dateFmt.stringFromDate(self)
+		dateFmt.timeZone = TimeZone.autoupdatingCurrent
+		return dateFmt.string(from: self)
 	}
 	
 	func localTime() -> String {
-		let dateFmt = NSDateFormatter()
+		let dateFmt = DateFormatter()
 		dateFmt.dateFormat = "yyyy-MM-dd hh:mm:ss"
-		let localTimeZone = NSTimeZone.localTimeZone()
+		let localTimeZone = TimeZone.autoupdatingCurrent
 		dateFmt.timeZone = localTimeZone
-		return dateFmt.stringFromDate(self)
+		return dateFmt.string(from: self)
 	}
 }

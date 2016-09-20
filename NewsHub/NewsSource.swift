@@ -47,7 +47,7 @@ enum NewsSource: String {
 		case .Chronicle:
 			return UIColor(red: 159/255, green: 25/255, blue: 27/255, alpha: 1)
 		default:
-			return UIColor.clearColor()
+			return UIColor.clear
 		}
 	}
 	

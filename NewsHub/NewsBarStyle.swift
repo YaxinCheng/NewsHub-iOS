@@ -10,24 +10,24 @@ import Foundation
 import UIKit.UINavigationController
 
 enum NewsBarStyle {
-	case Light
-	case Dark
+	case light
+	case dark
 	
 	var barStyle: UIBarStyle {
 		switch self {
-		case .Light:
-			return .Default
-		case .Dark:
-			return .Black
+		case .light:
+			return .default
+		case .dark:
+			return .black
 		}
 	}
 	
 	var barColour: UIColor {
 		switch self {
-		case .Light:
-			return .blackColor()
-		case .Dark:
-			return .whiteColor()
+		case .light:
+			return .black
+		case .dark:
+			return .white
 		}
 	}
 }

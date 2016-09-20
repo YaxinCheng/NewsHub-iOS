@@ -14,7 +14,7 @@ struct LocationLoader: NewsLoaderProtocol {
 	}
 	
 	var completion: (([String]) -> Void)?
-	func process(json: NSDictionary, error: NSError?) {
+	func process(json: NSDictionary, error: Error?) {
 		if error != nil {
 			completion?([])
 		} else {
@@ -23,7 +23,7 @@ struct LocationLoader: NewsLoaderProtocol {
 		}
 	}
 	
-	mutating func loads(completion: ([String]?) -> Void) {
+	mutating func loads(_ completion: @escaping ([String]?) -> Void) {
 		self.completion = completion
 		sendRequest()
 	}

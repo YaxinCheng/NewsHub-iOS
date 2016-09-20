@@ -14,7 +14,7 @@ final class NewsHub {
 	var headlines: [News]
 	var taggedNews: TagList<News>
 	
-	private init() {
+	fileprivate init() {
 		headlines = []
 		taggedNews = TagList()
 	}

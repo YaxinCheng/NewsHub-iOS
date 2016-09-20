@@ -12,8 +12,8 @@ import Alamofire
 protocol UserServiceProtocol {
 	var api: String { get }
 	var endPoint: String { get }
-	func sendRequest(method: Alamofire.Method, with parameters: [String: String])
-	func process(JSON: [String: AnyObject]?, error: NSError?)
+	func sendRequest(method: HTTPMethod, with parameters: [String: String])
+	func process(JSON: [String: AnyObject]?, error: Error?)
 	var completion: ((String?) -> Void)? { set get }
 }
 
@@ -22,20 +22,20 @@ extension UserServiceProtocol {
 		return "https://hubnews.herokuapp.com"
 	}
 	
-	func sendRequest(method: Alamofire.Method = .POST, with parameters: [String: String]) {
-		let request: Request
-		if method == .GET && parameters.isEmpty {
-			request = Alamofire.request(method, api + endPoint)
+	func sendRequest(method: HTTPMethod = .post, with parameters: [String: String]) {
+		let request: DataRequest
+		if method == .get && parameters.isEmpty {
+			request = Alamofire.request(api + endPoint, method: method)
 		} else {
-			request = Alamofire.request(method, api + endPoint, parameters: parameters, encoding: .JSON)
+			request = Alamofire.request(api + endPoint, method: method, parameters: parameters, encoding: JSONEncoding.default)
 		}
 		request.responseJSON { (response) in
 			switch response.result {
-			case .Success(let value):
+			case .success(let value):
 				guard let json = value as? Dictionary<String, AnyObject> else { return }
-				self.process(json, error: nil)
-			case .Failure(let error):
-				self.process(nil, error: error)
+				self.process(JSON: json, error: nil)
+			case .failure(let error):
+				self.process(JSON: nil, error: error)
 			}
 		}
 	}

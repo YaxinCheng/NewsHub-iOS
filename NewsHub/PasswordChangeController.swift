@@ -20,22 +20,22 @@ class PasswordChangeController: UIViewController {
 		
 		confirmButton.layer.cornerRadius = 17
 		confirmButton.layer.masksToBounds = true
-		confirmButton.layer.borderColor = view.tintColor.CGColor
+		confirmButton.layer.borderColor = view.tintColor.cgColor
 		confirmButton.layer.borderWidth = 1
 		
 		activityIndicator.hidesWhenStopped = true
-		activityIndicator.hidden = true
+		activityIndicator.isHidden = true
 	}
 
-	@IBAction func touchToDismissKeyboard(sender: AnyObject) {
+	@IBAction func touchToDismissKeyboard(_ sender: AnyObject) {
 		view.endEditing(true)
 	}
 	
-	@IBAction func confirmButtonPressed(sender: AnyObject) {
+	@IBAction func confirmButtonPressed(_ sender: AnyObject) {
 		defer {
 			activityIndicator.stopAnimating()
 		}
-		activityIndicator.hidden = false
+		activityIndicator.isHidden = false
 		activityIndicator.startAnimating()
 		guard
 			let old = oldField.text,
@@ -44,27 +44,27 @@ class PasswordChangeController: UIViewController {
 		var service = ChangePasswordService()
 		service.changePassword(old, new: new) { [weak self] in
 			guard let errorInfo = $0 else {
-				let alert = UIAlertController(title: nil, message: "Password Changed Successfully, you will have to re-login", preferredStyle: .Alert)
-				let dismissAction = UIAlertAction(title: "OK", style: .Cancel) { [weak self] _ in
-					self?.dismissViewControllerAnimated(true, completion: nil)
+				let alert = UIAlertController(title: nil, message: "Password Changed Successfully, you will have to re-login", preferredStyle: .alert)
+				let dismissAction = UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
+					self?.dismiss(animated: true, completion: nil)
 				}
 				alert.addAction(dismissAction)
-				self?.presentViewController(alert, animated: true, completion: nil)
+				self?.present(alert, animated: true, completion: nil)
 				return
 			}
-			let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .Alert)
+			let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .alert)
 			alert.addAction(.Cancel)
-			self?.presentViewController(alert, animated: true, completion: nil)
+			self?.present(alert, animated: true, completion: nil)
 		}
 	}
 	
-	@IBAction func cancelButtonPressed(sender: AnyObject) {
-		self.dismissViewControllerAnimated(true, completion: nil)
+	@IBAction func cancelButtonPressed(_ sender: AnyObject) {
+		self.dismiss(animated: true, completion: nil)
 	}
 }
 
 extension PasswordChangeController: UITextFieldDelegate {
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		if textField === oldField {
 			newField.becomeFirstResponder()
 		} else {

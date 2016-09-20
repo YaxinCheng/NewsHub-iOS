@@ -427,12 +427,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3EC37E71D2AE803009714AF /* Build configuration list for PBXNativeTarget "NewsHub" */;
 			buildPhases = (
-				D92143EFDD21D3B1D62F6D2F /* 📦 Check Pods Manifest.lock */,
+				D92143EFDD21D3B1D62F6D2F /* [CP] Check Pods Manifest.lock */,
 				E3EC37BB1D2AE802009714AF /* Sources */,
 				E3EC37BC1D2AE802009714AF /* Frameworks */,
 				E3EC37BD1D2AE802009714AF /* Resources */,
-				47195345CF6B330E4EF339B0 /* 📦 Embed Pods Frameworks */,
-				E287DB3FF152F8A97C36DAEC /* 📦 Copy Pods Resources */,
+				47195345CF6B330E4EF339B0 /* [CP] Embed Pods Frameworks */,
+				E287DB3FF152F8A97C36DAEC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -486,18 +486,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Yaxin Cheng";
 				TargetAttributes = {
 					E3EC37BE1D2AE802009714AF = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 					E3EC37D21D2AE803009714AF = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = E3EC37BE1D2AE802009714AF;
 					};
 					E3EC37DD1D2AE803009714AF = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = E3EC37BE1D2AE802009714AF;
 					};
 				};
@@ -555,14 +558,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		47195345CF6B330E4EF339B0 /* 📦 Embed Pods Frameworks */ = {
+		47195345CF6B330E4EF339B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,29 +573,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewsHub/Pods-NewsHub-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D92143EFDD21D3B1D62F6D2F /* 📦 Check Pods Manifest.lock */ = {
+		D92143EFDD21D3B1D62F6D2F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E287DB3FF152F8A97C36DAEC /* 📦 Copy Pods Resources */ = {
+		E287DB3FF152F8A97C36DAEC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,8 +736,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -779,8 +784,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -799,6 +806,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -808,6 +816,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03CABD67ACB2376E05B219AC /* Pods-NewsHub.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NewsHub/Info.plist;
@@ -816,6 +825,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -823,6 +833,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6CB5BD9078349B96EE218F8D /* Pods-NewsHub.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NewsHub/Info.plist;
@@ -830,6 +841,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.NewsHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -841,6 +853,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.NewsHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsHub.app/NewsHub";
 			};
 			name = Debug;
@@ -853,6 +866,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.NewsHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsHub.app/NewsHub";
 			};
 			name = Release;
@@ -864,6 +878,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.NewsHubUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = NewsHub;
 			};
 			name = Debug;
@@ -875,6 +890,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.NewsHubUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = NewsHub;
 			};
 			name = Release;

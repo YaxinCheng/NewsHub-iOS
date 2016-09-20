@@ -16,35 +16,35 @@ class NewsSourceCell: UITableViewCell {
 }
 
 extension NewsSourceCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 	
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return NewsSource.available.count
 	}
 	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Common.sourceCollectionCellIdentifier, forIndexPath: indexPath) as? NewsSourceContentCell {
-			cell.imageView.image = NewsSource.available[indexPath.row].logo
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Common.sourceCollectionCellIdentifier, for: indexPath) as? NewsSourceContentCell {
+			cell.imageView.image = NewsSource.available[(indexPath as NSIndexPath).row].logo
 			return cell
 		}
 		return UICollectionViewCell()
 	}
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return CGSize(width: 231, height: 119)
 	}
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return 0
 	}
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 	}
 	
-	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		delegate?.showCategoryView(at: indexPath.row)
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		delegate?.showCategoryView(at: (indexPath as NSIndexPath).row)
 	}
 }
