@@ -38,13 +38,13 @@ class LoginViewCell: LoginCells {
 			let password = passwordField.text
 			else { return }
 		var login = LoginService()
-		login.login(email, password: password) { [weak self] (info) in
+		login.login(email: email, password: password) { [weak self] (info) in
 			guard let error = info , error != "SUCCESS" else {
 				self?.delegate?.dismiss()
 				return
 			}
 			let alert = UIAlertController(title: "Fail", message: error, preferredStyle: .alert)
-			alert.addAction(.Cancel)
+			alert.addAction(.cancel)
 			alert.view.tintColor = self?.tintColor
 			self?.delegate?.present(alert)
 		}

@@ -31,12 +31,12 @@ struct NewsLikeService: NewsLoaderProtocol {
 		}
 	}
 	
-	mutating func react(_ news: News, Emotion: emotion? = .liked) {
+	mutating func react(_ Emotion: emotion? = .liked, news: News) {
 		let emotionString = Emotion?.rawValue ?? "unreact"
 		sendRequest(method: .put, with: ["url": news.contentLink, "emotion": emotionString])
 	}
 	
-	mutating func checkReact(_ news: News, completion: @escaping (emotion?) -> Void) {
+	mutating func checkReact(news: News, completion: @escaping (emotion?) -> Void) {
 		guard let _ = UserManager.sharedManager.currentUser else {
 			completion(nil)
 			return

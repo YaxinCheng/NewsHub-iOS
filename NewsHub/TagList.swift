@@ -40,7 +40,7 @@ struct TagList<Element: TagProtocol> {
 		}
 	}
 	
-	mutating func append(_ list: Array<Element>) {
+	mutating func append(contentOf list: Array<Element>) {
 		for eachNews in list {
 			append(eachNews)
 		}
@@ -53,10 +53,10 @@ struct TagList<Element: TagProtocol> {
 
 func + (lhs: TagList<News>, rhs: Array<News>) -> TagList<News> {
 	var newList = lhs
-	newList.append(rhs)
+	newList.append(contentOf: rhs)
 	return newList
 }
 
 func += (lhs: inout TagList<News>, rhs: Array<News>) {
-	lhs.append(rhs)
+	lhs.append(contentOf: rhs)
 }

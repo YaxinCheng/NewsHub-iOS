@@ -1,5 +1,5 @@
 //
-//  NSDate+Localization.swift
+//  Date+Localization.swift
 //  NewsHub
 //
 //  Created by Yaxin Cheng on 2016-07-24.

@@ -24,7 +24,7 @@ final class NewsHub {
 		taggedNews = TagList()
 	}
 	
-	static func hub(for source: NewsSource = .All) -> NewsHub {
+	static func hub(for source: NewsSource = .all) -> NewsHub {
 		if let hub = allHubs[source] {
 			return hub
 		} else {

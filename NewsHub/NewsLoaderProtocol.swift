@@ -22,10 +22,10 @@ extension NewsLoaderProtocol {
 		return "https://hubnews.herokuapp.com"
 	}
 	
-	func sendRequest(method: HTTPMethod = .get, with parameters: [String: String] = [:], from source: NewsSource = .All, at page: Int = 1) {
+	func sendRequest(method: HTTPMethod = .get, with parameters: [String: String] = [:], from source: NewsSource = .all, at page: Int = 1) {
 		let request: DataRequest
 		if method == .get {
-			let url = source == .All ? api + endPoint : api + endPoint + "/" + source.rawValue
+			let url = source == .all ? api + endPoint : api + endPoint + "/" + source.rawValue
 			request = Alamofire.request(url, method: method, headers: ["page": "\(page)", "location": Common.location])
 		} else {
 			request = Alamofire.request(api + endPoint, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: ["page": "\(page)", "location": Common.location])

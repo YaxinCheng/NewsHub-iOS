@@ -61,7 +61,7 @@ class NewsContentViewController: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
 		
 		var likeService = NewsLikeService()
-		likeService.checkReact(dataSource) { [weak self] (result) in
+		likeService.checkReact(news: dataSource) { [weak self] (result) in
 			self?.reactedEmotion = result
 		}
 		
@@ -96,7 +96,7 @@ class NewsContentViewController: UIViewController {
 		navigationItem.rightBarButtonItem = nil
 		
 		var likesService = NewsLikeService()
-		likesService.react(dataSource, Emotion: reactedEmotion)
+		likesService.react(reactedEmotion, news: dataSource)
 	}
 	
 	func orientationDidChange(_ notification: Notification) {

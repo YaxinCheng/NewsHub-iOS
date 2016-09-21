@@ -10,15 +10,15 @@ import Foundation
 import UIKit.UIImage
 
 enum NewsSource: String {
-	case All = ""
-	case Metro = "metro"
-	case Chronicle = "chronicle"
+	case all = ""
+	case metro = "metro"
+	case chronicle = "chronicle"
 	
-	var URL: String {
+	var url: String {
 		switch self {
-		case .Metro:
+		case .metro:
 			return "http://www.metronews.ca/halifax.html"
-		case .Chronicle:
+		case .chronicle:
 			return "http://thechronicleherald.ca"
 		default:
 			return ""
@@ -26,11 +26,11 @@ enum NewsSource: String {
 	}
 	
 	static var available: [NewsSource] {
-		return [.Metro, .Chronicle]
+		return [.metro, .chronicle]
 	}
 	
 	var logo: UIImage {
-		if self == .All {
+		if self == .all {
 			return UIImage()
 		}
 		return UIImage(named: self.rawValue)!
@@ -42,9 +42,9 @@ enum NewsSource: String {
 	
 	var themeColour: UIColor {
 		switch self {
-		case .Metro:
+		case .metro:
 			return UIColor(red: 83/255, green: 159/255, blue: 40/255, alpha: 1)
-		case .Chronicle:
+		case .chronicle:
 			return UIColor(red: 159/255, green: 25/255, blue: 27/255, alpha: 1)
 		default:
 			return UIColor.clear
@@ -52,14 +52,14 @@ enum NewsSource: String {
 	}
 	
 	var sourceIcon: UIImage {
-		if self == .All {
+		if self == .all {
 			return UIImage()
 		}
 		return UIImage(named: self.rawValue + "Icon")!
 	}
 	
 	var normalPlaceholder: UIImage {
-		if self == .All {
+		if self == .all {
 			return UIImage()
 		}
 		return UIImage(named: self.rawValue + "NormalPlaceholder")!

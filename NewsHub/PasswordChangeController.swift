@@ -53,7 +53,7 @@ class PasswordChangeController: UIViewController {
 				return
 			}
 			let alert = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .alert)
-			alert.addAction(.Cancel)
+			alert.addAction(.cancel)
 			self?.present(alert, animated: true, completion: nil)
 		}
 	}

@@ -45,7 +45,7 @@ class LocationController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let location = locations[(indexPath as NSIndexPath).row]
-		delegate?.pick(location)
+		delegate?.pick(location: location)
 		dismiss(animated: true, completion: nil)
 	}
 }

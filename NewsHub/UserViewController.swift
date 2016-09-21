@@ -95,7 +95,7 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
 			let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 			actionSheet.addAction(changePasswordAction())
 			actionSheet.addAction(logoutAction())
-			actionSheet.addAction(.Cancel)
+			actionSheet.addAction(.cancel)
 			present(actionSheet, animated: true, completion: nil)
 		} else if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 0 {
 			performSegue(withIdentifier: Common.segueSettingViewIdentifier, sender: nil)

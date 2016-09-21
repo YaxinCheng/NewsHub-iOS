@@ -103,7 +103,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 			let identifier: String = identifiers[(indexPath as NSIndexPath).section - 1]
 			if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? NewsHeadlineCell {
 				cell.delegate = self
-				cell.source = .All
+				cell.source = .all
 				return cell
 			} else if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? NewsSourceCell {
 				cell.delegate = self
@@ -186,7 +186,7 @@ extension NewsViewController: NewsViewDelegate {
 		performSegue(withIdentifier: Common.segueNewsSourceIdentifier, sender: index)
 	}
 	
-	func pick(_ location: String) {
+	func pick(location: String) {
 		Common.location = location
 		NewsHub.hub().clear()
 		pageCounter = 1

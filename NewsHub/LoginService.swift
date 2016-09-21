@@ -30,7 +30,7 @@ struct LoginService: UserServiceProtocol, formatChecker {
 		}
 	}
 	
-	mutating func login(_ email: String, password: String, completion: @escaping (String?)->Void) {
+	mutating func login(email: String, password: String, completion: @escaping (String?)->Void) {
 		do {
 			try checkEmpty(email, fieldInfo: "Email")
 			try checkEmpty(password, fieldInfo: "Password")

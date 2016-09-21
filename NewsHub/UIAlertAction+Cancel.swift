@@ -10,7 +10,7 @@ import Foundation
 import UIKit.UIAlertController
 
 extension UIAlertAction {
-	static var Cancel: UIAlertAction {
+	static var cancel: UIAlertAction {
 		return UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 	}
 }

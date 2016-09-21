@@ -26,7 +26,7 @@ struct RegisterService: UserServiceProtocol, formatChecker {
 		}
 	}
 	
-	mutating func registerAccount(_ email: String, password: String, userName: String, completion: @escaping (String?)->()) {
+	mutating func registerAccount(email: String, password: String, userName: String, completion: @escaping (String?)->()) {
 		do {
 			try checkEmpty(email, fieldInfo: "Email")
 			try checkEmpty(password, fieldInfo: "Password")

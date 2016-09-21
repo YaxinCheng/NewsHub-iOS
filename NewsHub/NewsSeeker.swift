@@ -13,7 +13,7 @@ struct NewsSeeker: NewsLoaderProtocol	{
 		return "/api/news"
 	}
 	
-	var source: NewsSource = .All
+	var source: NewsSource = .all
 	
 	func process(json: NSDictionary, error: Error?) {
 		if error != nil {

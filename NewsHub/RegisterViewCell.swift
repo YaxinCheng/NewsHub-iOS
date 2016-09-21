@@ -34,7 +34,7 @@ class RegisterViewCell: LoginCells {
 			let userName = userNameField.text
 		else { return }
 		var register = RegisterService()
-		register.registerAccount(email, password: password, userName: userName) { [weak self] (info) in
+		register.registerAccount(email: email, password: password, userName: userName) { [weak self] (info) in
 			defer {
 				self?.activityIndicator.stopAnimating()
 			}
@@ -47,7 +47,7 @@ class RegisterViewCell: LoginCells {
 				return
 			}
 			let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .alert)
-			alert.addAction(.Cancel)
+			alert.addAction(.cancel)
 			alert.view.tintColor = self?.tintColor
 			self?.delegate?.present(alert)
 		}

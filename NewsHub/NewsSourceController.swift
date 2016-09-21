@@ -149,6 +149,6 @@ extension NewsSourceController: NewsViewDelegate {
 	}
 	
 	@available(*, deprecated : 1.0)
-	func pick(_ location: String) {
+	func pick(location: String) {
 	}
 }
